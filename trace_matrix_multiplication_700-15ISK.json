@@ -1,0 +1,297 @@
+{
+    "traceEvents": [
+        {
+            "ph": "M",
+            "pid": 0,
+            "args": {
+                "name": "Allocators"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 1,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/gpu:0 Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 2,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/gpu:0 Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 3,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 4,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 5,
+            "args": {
+                "name": "/gpu:0/stream:all Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 6,
+            "args": {
+                "name": "/gpu:0/stream:all Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 7,
+            "args": {
+                "name": "/gpu:0/stream:12 Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 8,
+            "args": {
+                "name": "/gpu:0/stream:12 Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 9,
+            "args": {
+                "name": "/gpu:0/memcpy Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 10,
+            "args": {
+                "name": "/gpu:0/memcpy Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 11,
+            "args": {
+                "name": "/gpu:0/stream:7 Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 12,
+            "args": {
+                "name": "/gpu:0/stream:7 Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 13,
+            "args": {
+                "name": "/gpu:0/stream:14 Compute"
+            },
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "pid": 14,
+            "args": {
+                "name": "/gpu:0/stream:14 Tensors"
+            },
+            "name": "process_name"
+        },
+        {
+            "pid": 1,
+            "cat": "Op",
+            "ts": 1494447775148125,
+            "name": "NoOp",
+            "ph": "X",
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "tid": 0,
+            "dur": 31
+        },
+        {
+            "pid": 1,
+            "cat": "Op",
+            "ts": 1494447775148162,
+            "name": "VariableV2",
+            "ph": "X",
+            "args": {
+                "op": "VariableV2",
+                "name": "Variable"
+            },
+            "tid": 0,
+            "dur": 9
+        },
+        {
+            "pid": 1,
+            "cat": "Op",
+            "ts": 1494447775148173,
+            "name": "VariableV2",
+            "ph": "X",
+            "args": {
+                "op": "VariableV2",
+                "name": "Variable_1"
+            },
+            "tid": 0,
+            "dur": 2
+        },
+        {
+            "pid": 1,
+            "cat": "Op",
+            "ts": 1494447775148176,
+            "name": "Identity",
+            "ph": "X",
+            "args": {
+                "input0": "Variable",
+                "op": "Identity",
+                "name": "Variable/read"
+            },
+            "tid": 0,
+            "dur": 3
+        },
+        {
+            "pid": 1,
+            "cat": "Op",
+            "ts": 1494447775148180,
+            "name": "Identity",
+            "ph": "X",
+            "args": {
+                "input0": "Variable_1",
+                "op": "Identity",
+                "name": "Variable_1/read"
+            },
+            "tid": 0,
+            "dur": 2
+        },
+        {
+            "pid": 1,
+            "cat": "Op",
+            "ts": 1494447775148183,
+            "name": "MatMul",
+            "ph": "X",
+            "args": {
+                "input0": "Variable/read",
+                "op": "MatMul",
+                "input1": "Variable_1/read",
+                "name": "MatMul"
+            },
+            "tid": 0,
+            "dur": 128652
+        },
+        {
+            "pid": 3,
+            "cat": "Op",
+            "ts": 1494447775148151,
+            "name": "NoOp",
+            "ph": "X",
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "tid": 0,
+            "dur": 10
+        },
+        {
+            "pid": 5,
+            "cat": "Op",
+            "ts": 1494447775276835,
+            "name": "MatMul",
+            "ph": "X",
+            "args": {
+                "op": "MatMul",
+                "name": "MatMul"
+            },
+            "tid": 0,
+            "dur": 15663
+        },
+        {
+            "pid": 7,
+            "cat": "Op",
+            "ts": 1494447775276835,
+            "name": "MatMul",
+            "ph": "X",
+            "args": {
+                "op": "MatMul",
+                "name": "MatMul"
+            },
+            "tid": 0,
+            "dur": 15663
+        },
+        {
+            "pid": 9,
+            "cat": "Op",
+            "ts": 1494447775276521,
+            "name": "MatMul",
+            "ph": "X",
+            "args": {
+                "op": "MatMul",
+                "name": "MatMul"
+            },
+            "tid": 0,
+            "dur": 1
+        },
+        {
+            "pid": 9,
+            "cat": "Op",
+            "ts": 1494447775292504,
+            "name": "MEMCPYDtoH",
+            "ph": "X",
+            "args": {
+                "op": "MEMCPYDtoH",
+                "name": "edge_10_MatMul"
+            },
+            "tid": 0,
+            "dur": 2620
+        },
+        {
+            "pid": 11,
+            "cat": "Op",
+            "ts": 1494447775276521,
+            "name": "MatMul",
+            "ph": "X",
+            "args": {
+                "op": "MatMul",
+                "name": "MatMul"
+            },
+            "tid": 0,
+            "dur": 1
+        },
+        {
+            "pid": 13,
+            "cat": "Op",
+            "ts": 1494447775292504,
+            "name": "MEMCPYDtoH",
+            "ph": "X",
+            "args": {
+                "op": "MEMCPYDtoH",
+                "name": "edge_10_MatMul"
+            },
+            "tid": 0,
+            "dur": 2620
+        }
+    ]
+}
