@@ -8,47 +8,64 @@ host = socket.gethostname()
 
 start_time = time.time()
 
+# Import MNIST data
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
-def init_weights(shape):
-    return tf.Variable(tf.random_normal(shape, stddev=0.01))
+# Parameters
+learning_rate = 0.01
+training_epochs = 25
+batch_size = 100
+display_step = 1
 
+# tf Graph Input
+x = tf.placeholder(tf.float32, [None, 784]) # mnist data image of shape 28*28=784
+y = tf.placeholder(tf.float32, [None, 10]) # 0-9 digits recognition => 10 classes
 
-def model(X, w):
-    return tf.matmul(X, w) # notice we use the same model as linear regression, this is because there is a baked in cost function which performs softmax and cross entropy
+# Set model weights
+W = tf.Variable(tf.zeros([784, 10]))
+b = tf.Variable(tf.zeros([10]))
 
+# Construct model
+pred = tf.nn.softmax(tf.matmul(x, W) + b) # Softmax
 
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-trX, trY, teX, teY = mnist.train.images, mnist.train.labels, mnist.test.images, mnist.test.labels
+# Minimize error using cross entropy
+cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(pred), reduction_indices=1))
+# Gradient Descent
+optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
 
-X = tf.placeholder("float", [None, 784]) # create symbolic variables
-Y = tf.placeholder("float", [None, 10])
+# Initializing the variables
+init = tf.global_variables_initializer()
 
-w = init_weights([784, 10]) # like in linear regression, we need a shared variable weight matrix for logistic regression
-
-py_x = model(X, w)
-
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=py_x, labels=Y)) # compute mean cross entropy (softmax is applied internally)
-train_op = tf.train.GradientDescentOptimizer(0.05).minimize(cost) # construct optimizer
-predict_op = tf.argmax(py_x, 1) # at predict time, evaluate the argmax of the logistic regression
-
-# Launch the graph in a session
+# Launch the graph
 with tf.Session() as sess:
-
+    sess.run(init)
     run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
     run_metadata = tf.RunMetadata()
 
-    # you need to initialize all variables
-    tf.global_variables_initializer().run()
+    # Training cycle
+    for epoch in range(training_epochs):
+        avg_cost = 0.
+        total_batch = int(mnist.train.num_examples/batch_size)
+        # Loop over all batches
+        for i in range(total_batch):
+            batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+            # Run optimization op (backprop) and cost op (to get loss value)
+            _, c = sess.run([optimizer, cost], feed_dict={x: batch_xs,
+                                                          y: batch_ys}, options=run_options, run_metadata=run_metadata)
+            # Compute average loss
+            avg_cost += c / total_batch
+        # Display logs per epoch step
+        if (epoch+1) % display_step == 0:
+            print("Epoch:", '%04d' % (epoch+1), "cost=", "{:.9f}".format(avg_cost))
 
-    for i in range(100):
-        for start, end in zip(range(0, len(trX), 128), range(128, len(trX)+1, 128)):
-            if i % 10 == 0:
-                sess.run(train_op, feed_dict={X: trX[start:end], Y: trY[start:end]}, options=run_options, run_metadata=run_metadata)
-            else:
-                sess.run(train_op, feed_dict={X: trX[start:end], Y: trY[start:end]})
-            break
-        break
+    print("Optimization Finished!")
 
+    # Test model
+    correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
+    # Calculate accuracy
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    print("Accuracy:", accuracy.eval({x: mnist.test.images, y: mnist.test.labels}))
 
 elapsed_time = time.time() - start_time
 print("Elapsed time :", elapsed_time)
