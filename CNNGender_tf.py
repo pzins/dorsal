@@ -1,9 +1,13 @@
+# devices available
+# ['/cpu:0', '/device:SYCL:0']
+
 from __future__ import print_function
 
 import tensorflow as tf
 import numpy as np
 import datetime
 import time
+from tensorflow.python.client import timeline
 
 start_time = time.time()
 
@@ -11,7 +15,7 @@ start_time = time.time()
 # import data
 x_set = np.array([]).reshape(0, 32, 32, 3)
 y_set = np.array([]).reshape(0, 2)
-for it in range(6):
+for it in range(1):
     x_tmp = np.load("/home/pierre/dev/32_large/xtrain_32_" + str(it) + ".dat")
     y_tmp = np.load("/home/pierre/dev/32_large/ytrain_32_" + str(it) + ".dat")
     x_set = np.append(x_set, x_tmp, axis=0)
@@ -39,10 +43,12 @@ img_size = 32
 n_classes = 2
 dropout = 1 # Dropout, probability to keep units
 
+
 # tf Graph input
 x = tf.placeholder(tf.float32, [None, img_size, img_size, 3])
 y = tf.placeholder(tf.float32, [None, n_classes])
 keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
+
 
 # Create some wrappers for simplicity
 def conv2d(x, W, b, strides=1):
@@ -106,10 +112,13 @@ accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 # Initializing the variables
 init = tf.global_variables_initializer()
 
+
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    tf.global_variables_initializer().run()
+
+    run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+    run_metadata = tf.RunMetadata()
 
     for epoch in range(training_epochs):
         for i in range(nb_batch):
@@ -117,7 +126,7 @@ with tf.Session() as sess:
             batch_y = y_train[i*batch_size:(i+1)*batch_size]
             # Run optimization op (backprop)
             _ = sess.run(optimizer, feed_dict={x: batch_x, y: batch_y,
-                                               keep_prob: dropout})
+                                               keep_prob: dropout}, options=run_options, run_metadata=run_metadata)
         # Calculate batch loss and accuracy
         loss, acc = sess.run([cost, accuracy], feed_dict={x: x_val,
                                                           y: y_val,
@@ -134,3 +143,8 @@ with tf.Session() as sess:
 
 elapsed_time = time.time() - start_time
 print("Elapsed time :", elapsed_time)
+    # Create the Timeline object, and write it to a json
+tl = timeline.Timeline(run_metadata.step_stats)
+ctf = tl.generate_chrome_trace_format()
+with open('trace_CNNGender_tf.json', 'w') as f:
+        f.write(ctf)
