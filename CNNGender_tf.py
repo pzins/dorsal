@@ -18,10 +18,10 @@ start_time = time.time()
 x_set = np.array([]).reshape(0, 32, 32, 3)
 y_set = np.array([]).reshape(0, 2)
 for it in range(1):
-    x_tmp = np.load("/home/pierre/dev/projet_inf8225/data/32_large/xtrain_32_" + str(it) + ".dat")
-    y_tmp = np.load("/home/pierre/dev/projet_inf8225/data/32_large/ytrain_32_" + str(it) + ".dat")
-    # x_tmp = np.load("/home/pierre/dev/32_large/xtrain_32_" + str(it) + ".dat")
-    # y_tmp = np.load("/home/pierre/dev/32_large/ytrain_32_" + str(it) + ".dat")
+    # x_tmp = np.load("/home/pierre/dev/projet_inf8225/data/32_large/xtrain_32_" + str(it) + ".dat")
+    # y_tmp = np.load("/home/pierre/dev/projet_inf8225/data/32_large/ytrain_32_" + str(it) + ".dat")
+    x_tmp = np.load("/home/pierre/dev/32_large/xtrain_32_" + str(it) + ".dat")
+    y_tmp = np.load("/home/pierre/dev/32_large/ytrain_32_" + str(it) + ".dat")
     x_set = np.append(x_set, x_tmp, axis=0)
     y_set = np.append(y_set, y_tmp, axis=0)
 
@@ -150,5 +150,5 @@ print("Elapsed time :", elapsed_time)
 # Create the Timeline object, and write it to a json
 tl = timeline.Timeline(run_metadata.step_stats)
 ctf = tl.generate_chrome_trace_format()
-with open('trace_CNNGender_tf' + "_" + host + '.json', 'w') as f:
+with open('trace_' + __file__[:-3] + "_" + host + '.json', 'w') as f:
         f.write(ctf)
