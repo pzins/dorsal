@@ -1,110 +1,110 @@
 {
     "traceEvents": [
         {
-            "name": "process_name",
             "pid": 0,
+            "ph": "M",
+            "name": "process_name",
             "args": {
                 "name": "Allocators"
-            },
-            "ph": "M"
+            }
         },
         {
-            "name": "process_name",
             "pid": 1,
+            "ph": "M",
+            "name": "process_name",
             "args": {
                 "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
-            },
-            "ph": "M"
+            }
         },
         {
-            "name": "process_name",
             "pid": 2,
+            "ph": "M",
+            "name": "process_name",
             "args": {
                 "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
-            },
-            "ph": "M"
+            }
         },
         {
-            "id": 0,
-            "pid": 2,
-            "ts": 1494528737814515,
-            "cat": "Tensor",
-            "name": "mul_1",
             "tid": 0,
-            "ph": "N"
+            "cat": "Tensor",
+            "pid": 2,
+            "ts": 1494533666779668,
+            "id": 0,
+            "ph": "N",
+            "name": "MatMul"
         },
         {
-            "id": 0,
-            "pid": 2,
-            "ts": 1494528737814654,
-            "cat": "Tensor",
-            "name": "mul_1",
             "tid": 0,
             "args": {
                 "snapshot": {
-                    "tensor_description": "dtype: DT_INT16\nshape {\n}\nallocation_description {\n  requested_bytes: 2\n  allocator_name: cpu\n  ptr: 140372493783040\n}\n"
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 1\n  }\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140182365982720\n}\n"
                 }
             },
-            "ph": "O"
-        },
-        {
-            "pid": 1,
-            "ts": 1494528737814482,
-            "cat": "Op",
-            "name": "NoOp",
-            "dur": 4,
-            "tid": 0,
-            "args": {
-                "name": "_SOURCE",
-                "op": "NoOp"
-            },
-            "ph": "X"
-        },
-        {
-            "pid": 1,
-            "ts": 1494528737814515,
-            "cat": "Op",
-            "name": "Mul",
-            "dur": 140,
-            "tid": 0,
-            "args": {
-                "name": "mul_1",
-                "input0": "_recv_Placeholder_0",
-                "op": "Mul",
-                "input1": "_recv_Placeholder_1_0"
-            },
-            "ph": "X"
-        },
-        {
-            "id": 0,
-            "pid": 2,
-            "ts": 1494528737814655,
             "cat": "Tensor",
-            "name": "mul_1",
-            "tid": 0,
-            "ph": "D"
+            "pid": 2,
+            "ts": 1494533666780878,
+            "id": 0,
+            "ph": "O",
+            "name": "MatMul"
         },
         {
-            "pid": 0,
-            "ts": 1494528737814515,
-            "cat": "Memory",
-            "name": "cpu",
+            "tid": 0,
+            "dur": 17,
+            "cat": "Op",
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "pid": 1,
+            "ts": 1494533666779606,
+            "ph": "X",
+            "name": "NoOp"
+        },
+        {
+            "tid": 0,
+            "dur": 1211,
+            "cat": "Op",
+            "args": {
+                "op": "MatMul",
+                "name": "MatMul",
+                "input0": "_recv_a_0",
+                "input1": "_recv_b_0"
+            },
+            "pid": 1,
+            "ts": 1494533666779668,
+            "ph": "X",
+            "name": "MatMul"
+        },
+        {
+            "tid": 0,
+            "cat": "Tensor",
+            "pid": 2,
+            "ts": 1494533666780879,
+            "id": 0,
+            "ph": "D",
+            "name": "MatMul"
+        },
+        {
             "tid": 0,
             "args": {
-                "cpu": 2
+                "cpu": 4
             },
-            "ph": "C"
+            "cat": "Memory",
+            "pid": 0,
+            "ts": 1494533666779668,
+            "ph": "C",
+            "name": "cpu"
         },
         {
-            "pid": 0,
-            "ts": 1494528737814655,
-            "cat": "Memory",
-            "name": "cpu",
             "tid": 0,
             "args": {
                 "cpu": 0
             },
-            "ph": "C"
+            "cat": "Memory",
+            "pid": 0,
+            "ts": 1494533666780879,
+            "ph": "C",
+            "name": "cpu"
         }
     ]
 }

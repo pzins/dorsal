@@ -5,15 +5,16 @@ from tensorflow.python.client import timeline
 import socket
 host = socket.gethostname()
 
+run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE, output_partition_graphs=True)
+run_metadata = tf.RunMetadata()
 
+"""
 # Basic constant operations
 # The value returned by the constructor represents the output
 # of the Constant op.
 a = tf.constant(2, name="a")
 b = tf.constant(3, name="b")
 
-run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE, output_partition_graphs=True)
-run_metadata = tf.RunMetadata()
 
 # Launch the default graph.
 with tf.Session() as sess:
@@ -25,8 +26,8 @@ with tf.Session() as sess:
 # The value returned by the constructor represents the output
 # of the Variable op. (define as input when running session)
 # tf Graph input
-a = tf.placeholder(tf.int16)
-b = tf.placeholder(tf.int16)
+a = tf.placeholder(tf.int16, name="a")
+b = tf.placeholder(tf.int16, name="b")
 
 # Define some operations
 add = tf.add(a, b, "add")
@@ -37,6 +38,37 @@ with tf.Session() as sess:
     # Run every operation with variable input
     print("Addition with variables: %i" % sess.run(add, feed_dict={a: 2, b: 3}, options=run_options, run_metadata=run_metadata))
     print("Multiplication with variables: %i" % sess.run(mul, feed_dict={a: 2, b: 3}, options=run_options, run_metadata=run_metadata))
+
+"""
+
+# ----------------
+# More in details:
+# Matrix Multiplication from TensorFlow official tutorial
+
+a = tf.placeholder(tf.int32, name="a", shape=(1,1))
+b = tf.placeholder(tf.int32, name="b", shape=(1,1))
+
+# Create a Matmul op that takes 'matrix1' and 'matrix2' as inputs.
+# The returned value, 'product', represents the result of the matrix
+# multiplication.
+product = tf.matmul(a, b)
+
+# To run the matmul op we call the session 'run()' method, passing 'product'
+# which represents the output of the matmul op.  This indicates to the call
+# that we want to get the output of the matmul op back.
+#
+# All inputs needed by the op are run automatically by the session.  They
+# typically are run in parallel.
+#
+# The call 'run(product)' thus causes the execution of threes ops in the
+# graph: the two constants and matmul.
+#
+# The output of the op is returned in 'result' as a numpy `ndarray` object.
+with tf.Session() as sess:
+    result = sess.run(product, feed_dict={a: [[1.]], b: [[10.]]}, options=run_options, run_metadata=run_metadata)
+    print(result)
+    # ==> [[ 12.]]
+
 
 """
 # ----------------

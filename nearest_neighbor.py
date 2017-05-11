@@ -1,16 +1,14 @@
-'''
-A nearest neighbor learning algorithm example using TensorFlow library.
-This example is using the MNIST database of handwritten digits
-(http://yann.lecun.com/exdb/mnist/)
-
-Author: Aymeric Damien
-Project: https://github.com/aymericdamien/TensorFlow-Examples/
-'''
-
 from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
+from tensorflow.python.client import timeline
+import socket
+host = socket.gethostname()
+
+
+run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE, output_partition_graphs=True)
+run_metadata = tf.RunMetadata()
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
@@ -42,7 +40,7 @@ with tf.Session() as sess:
     # loop over test data
     for i in range(len(Xte)):
         # Get nearest neighbor
-        nn_index = sess.run(pred, feed_dict={xtr: Xtr, xte: Xte[i, :]})
+        nn_index = sess.run(pred, feed_dict={xtr: Xtr, xte: Xte[i, :]}, options=run_options, run_metadata=run_metadata)
         # Get nearest neighbor class label and compare it to its true label
         print("Test", i, "Prediction:", np.argmax(Ytr[nn_index]), \
             "True Class:", np.argmax(Yte[i]))
@@ -51,3 +49,10 @@ with tf.Session() as sess:
             accuracy += 1./len(Xte)
     print("Done!")
     print("Accuracy:", accuracy)
+
+# Create the Timeline object, and write it to a json
+tl = timeline.Timeline(run_metadata.step_stats)
+ctf = tl.generate_chrome_trace_format(show_memory=True)
+sess.close()
+with open('trace_' + __file__[:-3] + "_" + host + '.json', 'w') as f:
+        f.write(ctf)

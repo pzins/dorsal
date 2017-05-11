@@ -1,0 +1,565 @@
+{
+    "traceEvents": [
+        {
+            "pid": 0,
+            "args": {
+                "name": "Allocators"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 1,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 2,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 3,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 4,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "id": 0,
+            "name": "ArgMin/dimension",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577416333,
+            "ph": "N",
+            "pid": 2
+        },
+        {
+            "id": 0,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140109651820544\n}\n"
+                }
+            },
+            "name": "ArgMin/dimension",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577416350,
+            "ph": "O",
+            "pid": 2
+        },
+        {
+            "id": 1,
+            "name": "ArgMin",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425675,
+            "ph": "N",
+            "pid": 2
+        },
+        {
+            "id": 1,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT64\nshape {\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140109232026176\n}\n"
+                }
+            },
+            "name": "ArgMin",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425701,
+            "ph": "O",
+            "pid": 2
+        },
+        {
+            "id": 2,
+            "name": "Sum/reduction_indices",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577416333,
+            "ph": "N",
+            "pid": 4
+        },
+        {
+            "id": 2,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140109651820576\n}\n"
+                }
+            },
+            "name": "Sum/reduction_indices",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577416350,
+            "ph": "O",
+            "pid": 4
+        },
+        {
+            "id": 3,
+            "name": "Neg",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577424286,
+            "ph": "N",
+            "pid": 4
+        },
+        {
+            "id": 3,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n}\nallocation_description {\n  requested_bytes: 3136\n  allocator_name: device:SYCL\n  ptr: 140108208546688\n}\n"
+                }
+            },
+            "name": "Neg",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577424401,
+            "ph": "O",
+            "pid": 4
+        },
+        {
+            "id": 4,
+            "name": "Add",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577424406,
+            "ph": "N",
+            "pid": 4
+        },
+        {
+            "id": 4,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 5000\n  }\n  dim {\n    size: 784\n  }\n}\nallocation_description {\n  requested_bytes: 15680000\n  allocator_name: device:SYCL\n  ptr: 140108291332224\n}\n"
+                }
+            },
+            "name": "Add",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577424827,
+            "ph": "O",
+            "pid": 4
+        },
+        {
+            "id": 5,
+            "name": "Abs",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577424831,
+            "ph": "N",
+            "pid": 4
+        },
+        {
+            "id": 5,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 5000\n  }\n  dim {\n    size: 784\n  }\n}\nallocation_description {\n  requested_bytes: 15680000\n  allocator_name: device:SYCL\n  ptr: 140108291332224\n}\n"
+                }
+            },
+            "name": "Abs",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425000,
+            "ph": "O",
+            "pid": 4
+        },
+        {
+            "id": 6,
+            "name": "Sum",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425005,
+            "ph": "N",
+            "pid": 4
+        },
+        {
+            "id": 6,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 5000\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140108147713264\n}\n"
+                }
+            },
+            "name": "Sum",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425510,
+            "ph": "O",
+            "pid": 4
+        },
+        {
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "name": "NoOp",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577416302,
+            "ph": "X",
+            "dur": 8,
+            "pid": 1
+        },
+        {
+            "args": {
+                "op": "Const",
+                "name": "ArgMin/dimension"
+            },
+            "name": "Const",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577416333,
+            "ph": "X",
+            "dur": 18,
+            "pid": 1
+        },
+        {
+            "args": {
+                "op": "ArgMin",
+                "input0": "Sum/_5",
+                "input1": "ArgMin/dimension",
+                "name": "ArgMin"
+            },
+            "name": "ArgMin",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577425675,
+            "ph": "X",
+            "dur": 27,
+            "pid": 1
+        },
+        {
+            "id": 0,
+            "name": "Sum",
+            "cat": "DataFlow",
+            "tid": 0,
+            "ts": 1494534577425511,
+            "ph": "s",
+            "pid": 3
+        },
+        {
+            "id": 0,
+            "name": "Sum",
+            "cat": "DataFlow",
+            "tid": 0,
+            "ts": 1494534577425675,
+            "ph": "t",
+            "pid": 1
+        },
+        {
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "name": "NoOp",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577416308,
+            "ph": "X",
+            "dur": 14,
+            "pid": 3
+        },
+        {
+            "args": {
+                "op": "Const",
+                "name": "Sum/reduction_indices"
+            },
+            "name": "Const",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577416333,
+            "ph": "X",
+            "dur": 18,
+            "pid": 3
+        },
+        {
+            "args": {
+                "op": "Neg",
+                "input0": "_recv_Placeholder_1_0/_1",
+                "name": "Neg"
+            },
+            "name": "Neg",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577424286,
+            "ph": "X",
+            "dur": 116,
+            "pid": 3
+        },
+        {
+            "args": {
+                "op": "Add",
+                "input0": "_recv_Placeholder_0/_3",
+                "input1": "Neg",
+                "name": "Add"
+            },
+            "name": "Add",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577424406,
+            "ph": "X",
+            "dur": 422,
+            "pid": 3
+        },
+        {
+            "args": {
+                "op": "Abs",
+                "input0": "Add",
+                "name": "Abs"
+            },
+            "name": "Abs",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577424831,
+            "ph": "X",
+            "dur": 170,
+            "pid": 3
+        },
+        {
+            "args": {
+                "op": "Sum",
+                "input0": "Abs",
+                "input1": "Sum/reduction_indices",
+                "name": "Sum"
+            },
+            "name": "Sum",
+            "cat": "Op",
+            "tid": 0,
+            "ts": 1494534577425005,
+            "ph": "X",
+            "dur": 506,
+            "pid": 3
+        },
+        {
+            "id": 0,
+            "name": "ArgMin/dimension",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425701,
+            "ph": "D",
+            "pid": 2
+        },
+        {
+            "id": 1,
+            "name": "ArgMin",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425702,
+            "ph": "D",
+            "pid": 2
+        },
+        {
+            "id": 4,
+            "name": "Add",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425000,
+            "ph": "D",
+            "pid": 4
+        },
+        {
+            "id": 5,
+            "name": "Abs",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425510,
+            "ph": "D",
+            "pid": 4
+        },
+        {
+            "id": 2,
+            "name": "Sum/reduction_indices",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425510,
+            "ph": "D",
+            "pid": 4
+        },
+        {
+            "id": 3,
+            "name": "Neg",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577424827,
+            "ph": "D",
+            "pid": 4
+        },
+        {
+            "id": 6,
+            "name": "Sum",
+            "cat": "Tensor",
+            "tid": 0,
+            "ts": 1494534577425701,
+            "ph": "D",
+            "pid": 4
+        },
+        {
+            "args": {
+                "device:SYCL": 3136
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577424286,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 15683136
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577424406,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 15680000
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577424827,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 31360000
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577424831,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 15680000
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425000,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 15700000
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425005,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 20000
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425510,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "device:SYCL": 0
+            },
+            "name": "device:SYCL",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425701,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "cpu": 4
+            },
+            "name": "cpu",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577416333,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "cpu": 8
+            },
+            "name": "cpu",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577416333,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "cpu": 4
+            },
+            "name": "cpu",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425510,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "cpu": 12
+            },
+            "name": "cpu",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425675,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "cpu": 8
+            },
+            "name": "cpu",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425701,
+            "ph": "C",
+            "pid": 0
+        },
+        {
+            "args": {
+                "cpu": 0
+            },
+            "name": "cpu",
+            "cat": "Memory",
+            "tid": 0,
+            "ts": 1494534577425702,
+            "ph": "C",
+            "pid": 0
+        }
+    ]
+}
