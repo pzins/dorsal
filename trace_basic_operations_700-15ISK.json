@@ -1,0 +1,323 @@
+{
+    "traceEvents": [
+        {
+            "pid": 0,
+            "args": {
+                "name": "Allocators"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 1,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/gpu:0 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 2,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/gpu:0 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 3,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 4,
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 5,
+            "args": {
+                "name": "/gpu:0/stream:all Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 6,
+            "args": {
+                "name": "/gpu:0/stream:all Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 7,
+            "args": {
+                "name": "/gpu:0/stream:17 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 8,
+            "args": {
+                "name": "/gpu:0/stream:17 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 9,
+            "args": {
+                "name": "/gpu:0/memcpy Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 10,
+            "args": {
+                "name": "/gpu:0/memcpy Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 11,
+            "args": {
+                "name": "/gpu:0/stream:18 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 12,
+            "args": {
+                "name": "/gpu:0/stream:18 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 13,
+            "args": {
+                "name": "/gpu:0/stream:19 Compute"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "pid": 14,
+            "args": {
+                "name": "/gpu:0/stream:19 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M"
+        },
+        {
+            "cat": "Tensor",
+            "pid": 2,
+            "ph": "N",
+            "tid": 0,
+            "ts": 1494528815912263,
+            "id": 0,
+            "name": "mul_1"
+        },
+        {
+            "cat": "Tensor",
+            "pid": 2,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT16\nshape {\n}\nallocation_description {\n  requested_bytes: 2\n  allocated_bytes: 256\n  allocator_name: gpu_bfc\n  allocation_id: 5\n  has_single_reference: true\n  ptr: 30112484352\n}\n"
+                }
+            },
+            "ph": "O",
+            "tid": 0,
+            "ts": 1494528816177170,
+            "id": 0,
+            "name": "mul_1"
+        },
+        {
+            "cat": "Op",
+            "pid": 1,
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815911852,
+            "dur": 7,
+            "name": "NoOp"
+        },
+        {
+            "cat": "Op",
+            "pid": 1,
+            "args": {
+                "input0": "_recv_Placeholder_0/_1",
+                "input1": "_recv_Placeholder_1_0/_3",
+                "name": "mul_1",
+                "op": "Mul"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815912263,
+            "dur": 264908,
+            "name": "Mul"
+        },
+        {
+            "cat": "Op",
+            "pid": 3,
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815911876,
+            "dur": 5,
+            "name": "NoOp"
+        },
+        {
+            "cat": "Op",
+            "pid": 5,
+            "args": {
+                "name": "mul_1",
+                "op": "Mul"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528816177153,
+            "dur": 4,
+            "name": "Mul"
+        },
+        {
+            "cat": "Op",
+            "pid": 7,
+            "args": {
+                "name": "mul_1",
+                "op": "Mul"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528816177153,
+            "dur": 4,
+            "name": "Mul"
+        },
+        {
+            "cat": "Op",
+            "pid": 9,
+            "args": {
+                "name": "edge_8__recv_Placeholder_1_0",
+                "op": "MEMCPYHtoD"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815912050,
+            "dur": 1,
+            "name": "MEMCPYHtoD"
+        },
+        {
+            "cat": "Op",
+            "pid": 9,
+            "args": {
+                "name": "edge_7__recv_Placeholder_0",
+                "op": "MEMCPYHtoD"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815912218,
+            "dur": 1,
+            "name": "MEMCPYHtoD"
+        },
+        {
+            "cat": "Op",
+            "pid": 9,
+            "args": {
+                "name": "edge_4_mul_1",
+                "op": "MEMCPYDtoH"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528816177234,
+            "dur": 2,
+            "name": "MEMCPYDtoH"
+        },
+        {
+            "cat": "Op",
+            "pid": 11,
+            "args": {
+                "name": "edge_8__recv_Placeholder_1_0",
+                "op": "MEMCPYHtoD"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815912050,
+            "dur": 1,
+            "name": "MEMCPYHtoD"
+        },
+        {
+            "cat": "Op",
+            "pid": 11,
+            "args": {
+                "name": "edge_7__recv_Placeholder_0",
+                "op": "MEMCPYHtoD"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528815912218,
+            "dur": 1,
+            "name": "MEMCPYHtoD"
+        },
+        {
+            "cat": "Op",
+            "pid": 13,
+            "args": {
+                "name": "edge_4_mul_1",
+                "op": "MEMCPYDtoH"
+            },
+            "ph": "X",
+            "tid": 0,
+            "ts": 1494528816177234,
+            "dur": 2,
+            "name": "MEMCPYDtoH"
+        },
+        {
+            "cat": "Tensor",
+            "pid": 2,
+            "ph": "D",
+            "tid": 0,
+            "ts": 1494528816177171,
+            "id": 0,
+            "name": "mul_1"
+        },
+        {
+            "cat": "Memory",
+            "pid": 0,
+            "args": {
+                "gpu_bfc": 2
+            },
+            "ph": "C",
+            "tid": 0,
+            "ts": 1494528815912263,
+            "name": "gpu_bfc"
+        },
+        {
+            "cat": "Memory",
+            "pid": 0,
+            "args": {
+                "gpu_bfc": 0
+            },
+            "ph": "C",
+            "tid": 0,
+            "ts": 1494528816177171,
+            "name": "gpu_bfc"
+        }
+    ]
+}
