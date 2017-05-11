@@ -1,83 +1,83 @@
 {
     "traceEvents": [
         {
+            "ph": "M",
             "name": "process_name",
             "args": {
                 "name": "Allocators"
             },
-            "ph": "M",
             "pid": 0
         },
         {
-            "name": "process_name",
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
-            },
             "ph": "M",
-            "pid": 1
-        },
-        {
-            "name": "process_name",
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
-            },
-            "ph": "M",
-            "pid": 2
-        },
-        {
             "name": "process_name",
             "args": {
                 "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Compute"
             },
-            "ph": "M",
-            "pid": 3
+            "pid": 1
         },
         {
+            "ph": "M",
             "name": "process_name",
             "args": {
                 "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Tensors"
             },
+            "pid": 2
+        },
+        {
             "ph": "M",
+            "name": "process_name",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "M",
+            "name": "process_name",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
             "pid": 4
         },
         {
-            "name": "NoOp",
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
             "tid": 0,
-            "dur": 6,
+            "ts": 1494526285415704,
+            "cat": "Op",
             "ph": "X",
+            "name": "NoOp",
             "pid": 1,
-            "args": {
-                "name": "_SOURCE",
-                "op": "NoOp"
-            },
-            "ts": 1494526064005168,
-            "cat": "Op"
+            "dur": 6
         },
         {
-            "name": "NoOp",
-            "tid": 0,
-            "dur": 4,
-            "ph": "X",
-            "pid": 3,
-            "args": {
-                "name": "_SOURCE",
-                "op": "NoOp"
-            },
-            "ts": 1494526064005187,
-            "cat": "Op"
-        },
-        {
-            "name": "Const",
-            "tid": 0,
-            "dur": 7,
-            "ph": "X",
-            "pid": 3,
             "args": {
                 "name": "MatMul/_0__cf__2",
                 "op": "Const"
             },
-            "ts": 1494526064005194,
-            "cat": "Op"
+            "tid": 0,
+            "ts": 1494526285415723,
+            "cat": "Op",
+            "ph": "X",
+            "name": "Const",
+            "pid": 1,
+            "dur": 7
+        },
+        {
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "tid": 0,
+            "ts": 1494526285415710,
+            "cat": "Op",
+            "ph": "X",
+            "name": "NoOp",
+            "pid": 3,
+            "dur": 13
         }
     ]
 }

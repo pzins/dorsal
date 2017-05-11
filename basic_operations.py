@@ -1,10 +1,3 @@
-'''
-Basic Operations example using TensorFlow library.
-
-Author: Aymeric Damien
-Project: https://github.com/aymericdamien/TensorFlow-Examples/
-'''
-
 from __future__ import print_function
 
 import tensorflow as tf
@@ -16,8 +9,8 @@ host = socket.gethostname()
 # Basic constant operations
 # The value returned by the constructor represents the output
 # of the Constant op.
-a = tf.constant(2)
-b = tf.constant(3)
+a = tf.constant(2, name="a")
+b = tf.constant(3, name="b")
 
 run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
 run_metadata = tf.RunMetadata()
