@@ -15,11 +15,16 @@ b = tf.constant(3, name="b")
 run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
 run_metadata = tf.RunMetadata()
 
+addition = tf.add(a, b, "add")
+mult = tf.multiply(a, b, "mul")
+
 # Launch the default graph.
 with tf.Session() as sess:
     print("a=2, b=3")
     print("Addition with constants: %i" % sess.run(a+b, options=run_options, run_metadata=run_metadata))
+    print("Addition with constants: %i" % sess.run(addition, options=run_options, run_metadata=run_metadata))
     print("Multiplication with constants: %i" % sess.run(a*b, options=run_options, run_metadata=run_metadata))
+    print("Multiplication with constants: %i" % sess.run(mult, options=run_options, run_metadata=run_metadata))
 
 # Basic Operations with variable as graph input
 # The value returned by the constructor represents the output

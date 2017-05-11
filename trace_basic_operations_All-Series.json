@@ -1,83 +1,12 @@
 {
     "traceEvents": [
         {
-            "ph": "M",
             "name": "process_name",
             "args": {
                 "name": "Allocators"
             },
+            "ph": "M",
             "pid": 0
-        },
-        {
-            "ph": "M",
-            "name": "process_name",
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Compute"
-            },
-            "pid": 1
-        },
-        {
-            "ph": "M",
-            "name": "process_name",
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Tensors"
-            },
-            "pid": 2
-        },
-        {
-            "ph": "M",
-            "name": "process_name",
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
-            },
-            "pid": 3
-        },
-        {
-            "ph": "M",
-            "name": "process_name",
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
-            },
-            "pid": 4
-        },
-        {
-            "args": {
-                "name": "_SOURCE",
-                "op": "NoOp"
-            },
-            "tid": 0,
-            "ts": 1494526285415704,
-            "cat": "Op",
-            "ph": "X",
-            "name": "NoOp",
-            "pid": 1,
-            "dur": 6
-        },
-        {
-            "args": {
-                "name": "MatMul/_0__cf__2",
-                "op": "Const"
-            },
-            "tid": 0,
-            "ts": 1494526285415723,
-            "cat": "Op",
-            "ph": "X",
-            "name": "Const",
-            "pid": 1,
-            "dur": 7
-        },
-        {
-            "args": {
-                "name": "_SOURCE",
-                "op": "NoOp"
-            },
-            "tid": 0,
-            "ts": 1494526285415710,
-            "cat": "Op",
-            "ph": "X",
-            "name": "NoOp",
-            "pid": 3,
-            "dur": 13
         }
     ]
 }
