@@ -27,7 +27,7 @@ with tf.Session() as sess:
 # tf Graph input
 a = tf.placeholder(tf.int16)
 b = tf.placeholder(tf.int16)
-
+"""
 # Define some operations
 add = tf.add(a, b)
 mul = tf.multiply(a, b)
@@ -73,6 +73,7 @@ with tf.Session() as sess:
     result = sess.run(product, options=run_options, run_metadata=run_metadata)
     print(result)
     # ==> [[ 12.]]
+"""
 
 # Create the Timeline object, and write it to a json
 tl = timeline.Timeline(run_metadata.step_stats)
