@@ -12,19 +12,14 @@ host = socket.gethostname()
 a = tf.constant(2, name="a")
 b = tf.constant(3, name="b")
 
-run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE, output_partition_graphs=True)
 run_metadata = tf.RunMetadata()
-
-addition = tf.add(a, b, "add")
-mult = tf.multiply(a, b, "mul")
 
 # Launch the default graph.
 with tf.Session() as sess:
     print("a=2, b=3")
     print("Addition with constants: %i" % sess.run(a+b, options=run_options, run_metadata=run_metadata))
-    print("Addition with constants: %i" % sess.run(addition, options=run_options, run_metadata=run_metadata))
     print("Multiplication with constants: %i" % sess.run(a*b, options=run_options, run_metadata=run_metadata))
-    print("Multiplication with constants: %i" % sess.run(mult, options=run_options, run_metadata=run_metadata))
 
 # Basic Operations with variable as graph input
 # The value returned by the constructor represents the output
@@ -32,10 +27,10 @@ with tf.Session() as sess:
 # tf Graph input
 a = tf.placeholder(tf.int16)
 b = tf.placeholder(tf.int16)
-"""
+
 # Define some operations
-add = tf.add(a, b)
-mul = tf.multiply(a, b)
+add = tf.add(a, b, "add")
+mul = tf.multiply(a, b, "mul")
 
 # Launch the default graph.
 with tf.Session() as sess:
@@ -43,7 +38,7 @@ with tf.Session() as sess:
     print("Addition with variables: %i" % sess.run(add, feed_dict={a: 2, b: 3}, options=run_options, run_metadata=run_metadata))
     print("Multiplication with variables: %i" % sess.run(mul, feed_dict={a: 2, b: 3}, options=run_options, run_metadata=run_metadata))
 
-
+"""
 # ----------------
 # More in details:
 # Matrix Multiplication from TensorFlow official tutorial
@@ -82,7 +77,7 @@ with tf.Session() as sess:
 
 # Create the Timeline object, and write it to a json
 tl = timeline.Timeline(run_metadata.step_stats)
-ctf = tl.generate_chrome_trace_format()
+ctf = tl.generate_chrome_trace_format(show_memory=True)
 sess.close()
 with open('trace_' + __file__[:-3] + "_" + host + '.json', 'w') as f:
         f.write(ctf)
