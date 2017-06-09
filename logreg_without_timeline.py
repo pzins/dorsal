@@ -1,13 +1,6 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
-from tensorflow.python.client import timeline
-import socket
-import time
-
-host = socket.gethostname()
-
-start_time = time.time()
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
@@ -45,9 +38,6 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
 
-    run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
-    run_metadata = tf.RunMetadata()
-
     # Training cycle
     for epoch in range(training_epochs):
         avg_cost = 0.
@@ -56,7 +46,7 @@ with tf.Session() as sess:
         for i in range(total_batch):
             batch_xs, batch_ys = mnist.train.next_batch(batch_size)
             # Run optimization op (backprop) and cost op (to get loss value)
-            _, c = sess.run([optimizer, cost], feed_dict={x: batch_xs, y: batch_ys}, options=run_options, run_metadata=run_metadata)
+            _, c = sess.run([optimizer, cost], feed_dict={x: batch_xs, y: batch_ys})
             # print(c)
 
             # Compute average loss
@@ -72,12 +62,3 @@ with tf.Session() as sess:
     # Calculate accuracy
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     print("Accuracy:", accuracy.eval({x: mnist.test.images, y: mnist.test.labels}))
-
-elapsed_time = time.time() - start_time
-print("Elapsed time :", elapsed_time)
-# Create the Timeline object, and write it to a json
-tl = timeline.Timeline(run_metadata.step_stats)
-ctf = tl.generate_chrome_trace_format()
-sess.close()
-with open('trace_' + __file__[:-3] + "_" + host + '.json', 'w') as f:
-        f.write(ctf)
