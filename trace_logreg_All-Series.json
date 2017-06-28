@@ -1,1234 +1,5711 @@
 {
     "traceEvents": [
         {
+            "ph": "M",
             "args": {
                 "name": "Allocators"
             },
-            "pid": 0,
-            "ph": "M",
-            "name": "process_name"
+            "name": "process_name",
+            "pid": 0
         },
         {
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Compute"
-            },
-            "pid": 1,
             "ph": "M",
-            "name": "process_name"
-        },
-        {
-            "args": {
-                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Tensors"
-            },
-            "pid": 2,
-            "ph": "M",
-            "name": "process_name"
-        },
-        {
             "args": {
                 "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
             },
-            "pid": 3,
-            "ph": "M",
-            "name": "process_name"
+            "name": "process_name",
+            "pid": 1
         },
         {
+            "ph": "M",
             "args": {
                 "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
             },
-            "pid": 4,
-            "ph": "M",
-            "name": "process_name"
+            "name": "process_name",
+            "pid": 2
         },
         {
-            "dur": 2,
+            "ph": "M",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Compute"
+            },
+            "name": "process_name",
+            "pid": 3
+        },
+        {
+            "ph": "M",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Tensors"
+            },
+            "name": "process_name",
+            "pid": 4
+        },
+        {
+            "ph": "N",
             "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860252,
+            "name": "optimizer/learning_rate",
+            "id": 0,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860255,
+            "name": "optimizer/learning_rate",
+            "id": 0,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367091776\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860257,
+            "name": "optimizer/decay",
+            "id": 1,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860258,
+            "name": "optimizer/decay",
+            "id": 1,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367091872\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860261,
+            "name": "optimizer/momentum",
+            "id": 2,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860261,
+            "name": "optimizer/momentum",
+            "id": 2,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367091904\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860263,
+            "name": "optimizer/epsilon",
+            "id": 3,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860264,
+            "name": "optimizer/epsilon",
+            "id": 3,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367091936\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860266,
+            "name": "b_bias/optimizer_1",
+            "id": 4,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860270,
+            "name": "b_bias/optimizer_1",
+            "id": 4,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: cpu\n  ptr: 140528148606976\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860272,
+            "name": "b_bias/optimizer",
+            "id": 5,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860274,
+            "name": "b_bias/optimizer",
+            "id": 5,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: cpu\n  ptr: 140528146501632\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860276,
+            "name": "W_weights/optimizer_1",
+            "id": 6,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860278,
+            "name": "W_weights/optimizer_1",
+            "id": 6,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: cpu\n  ptr: 140528140210176\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860280,
+            "name": "W_weights/optimizer",
+            "id": 7,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860282,
+            "name": "W_weights/optimizer",
+            "id": 7,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: cpu\n  ptr: 140528144404480\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860284,
+            "name": "b_bias",
+            "id": 8,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860285,
+            "name": "b_bias",
+            "id": 8,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: cpu\n  ptr: 140528142307328\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860288,
+            "name": "b_bias/read",
+            "id": 9,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860290,
+            "name": "b_bias/read",
+            "id": 9,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: cpu\n  ptr: 140528142307328\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 1,
+            "cat": "Tensor",
+            "ts": 1497479027860286,
+            "name": "W_weights",
+            "id": 10,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 1,
+            "cat": "Tensor",
+            "ts": 1497479027860291,
+            "name": "W_weights",
+            "id": 10,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: cpu\n  ptr: 140528138113024\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860295,
+            "name": "W_weights/read",
+            "id": 11,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860297,
+            "name": "W_weights/read",
+            "id": 11,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: cpu\n  ptr: 140528138113024\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866722,
+            "name": "optimizer/update_b_bias/ApplyRMSProp",
+            "id": 12,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866731,
+            "name": "optimizer/update_b_bias/ApplyRMSProp",
+            "id": 12,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: cpu\n  ptr: 140528142307328\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866735,
+            "name": "optimizer/update_b_bias/ApplyRMSProp/_50",
+            "id": 13,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866736,
+            "name": "optimizer/update_b_bias/ApplyRMSProp/_50",
+            "id": 13,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n  }\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866827,
+            "name": "optimizer/update_W_weights/ApplyRMSProp",
+            "id": 14,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "optimizer/update_W_weights/ApplyRMSProp",
+            "id": 14,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: cpu\n  ptr: 140528138113024\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866850,
+            "name": "optimizer/update_W_weights/ApplyRMSProp/_46",
+            "id": 15,
+            "pid": 2
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866850,
+            "name": "optimizer/update_W_weights/ApplyRMSProp/_46",
+            "id": 15,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n  }\n}\n"
+                }
+            },
+            "pid": 2
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860251,
+            "name": "Const",
+            "id": 16,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860256,
+            "name": "Const",
+            "id": 16,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367092544\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860258,
+            "name": "gradients/Mean_grad/Shape_2",
+            "id": 17,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860259,
+            "name": "gradients/Mean_grad/Shape_2",
+            "id": 17,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n  }\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860262,
+            "name": "gradients/softmax_x_W_b_grad/Sum/reduction_indices",
+            "id": 18,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860263,
+            "name": "gradients/softmax_x_W_b_grad/Sum/reduction_indices",
+            "id": 18,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367092672\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860265,
+            "name": "gradients/softmax_x_W_b_grad/Reshape/shape",
+            "id": 19,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860266,
+            "name": "gradients/softmax_x_W_b_grad/Reshape/shape",
+            "id": 19,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528367092448\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860268,
+            "name": "gradients/add_grad/Shape_1",
+            "id": 20,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860269,
+            "name": "gradients/add_grad/Shape_1",
+            "id": 20,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367092416\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860271,
+            "name": "gradients/Mean_grad/Reshape/_3__cf__3",
+            "id": 21,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860272,
+            "name": "gradients/Mean_grad/Reshape/_3__cf__3",
+            "id": 21,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: device:SYCL\n  ptr: 73074368\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860274,
+            "name": "gradients/reduce_sum_y_log_pred_grad/range/_2__cf__2",
+            "id": 22,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860275,
+            "name": "gradients/reduce_sum_y_log_pred_grad/range/_2__cf__2",
+            "id": 22,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528367092640\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860277,
+            "name": "gradients/reduce_sum_y_log_pred_grad/mod/_1__cf__1",
+            "id": 23,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860279,
+            "name": "gradients/reduce_sum_y_log_pred_grad/mod/_1__cf__1",
+            "id": 23,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528367092384\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860311,
+            "name": "gradients/Mean_grad/Prod_1",
+            "id": 24,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027861566,
+            "name": "gradients/Mean_grad/Prod_1",
+            "id": 24,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: device:SYCL\n  ptr: 140527236352272\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027861576,
+            "name": "gradients/mul_grad/Shape",
+            "id": 25,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027861581,
+            "name": "gradients/mul_grad/Shape",
+            "id": 25,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528144450752\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 1,
+            "cat": "Tensor",
+            "ts": 1497479027861578,
+            "name": "matmul_x_W",
+            "id": 26,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 1,
+            "cat": "Tensor",
+            "ts": 1497479027862679,
+            "name": "matmul_x_W",
+            "id": 26,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102111968\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862690,
+            "name": "gradients/Mean_grad/Maximum",
+            "id": 27,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862697,
+            "name": "gradients/Mean_grad/Maximum",
+            "id": 27,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528138152768\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 1,
+            "cat": "Tensor",
+            "ts": 1497479027862684,
+            "name": "add",
+            "id": 28,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 1,
+            "cat": "Tensor",
+            "ts": 1497479027862828,
+            "name": "add",
+            "id": 28,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102157696\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862831,
+            "name": "gradients/add_grad/Shape",
+            "id": 29,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862838,
+            "name": "gradients/add_grad/Shape",
+            "id": 29,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528146782304\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862840,
+            "name": "softmax_x_W_b",
+            "id": 30,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863148,
+            "name": "softmax_x_W_b",
+            "id": 30,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102157696\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863151,
+            "name": "gradients/add_grad/BroadcastGradientArgs",
+            "id": 31,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863155,
+            "name": "gradients/add_grad/BroadcastGradientArgs",
+            "id": 31,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n  }\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863151,
+            "name": "gradients/add_grad/BroadcastGradientArgs:1",
+            "id": 32,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863155,
+            "name": "gradients/add_grad/BroadcastGradientArgs:1",
+            "id": 32,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528144450720\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863158,
+            "name": "pred_log",
+            "id": 33,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863215,
+            "name": "pred_log",
+            "id": 33,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102111968\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863217,
+            "name": "gradients/mul_grad/Shape_1",
+            "id": 34,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863219,
+            "name": "gradients/mul_grad/Shape_1",
+            "id": 34,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528146782336\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863222,
+            "name": "mul",
+            "id": 35,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863279,
+            "name": "mul",
+            "id": 35,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102177712\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863282,
+            "name": "gradients/mul_grad/BroadcastGradientArgs",
+            "id": 36,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863284,
+            "name": "gradients/mul_grad/BroadcastGradientArgs",
+            "id": 36,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n  }\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863282,
+            "name": "gradients/mul_grad/BroadcastGradientArgs:1",
+            "id": 37,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863284,
+            "name": "gradients/mul_grad/BroadcastGradientArgs:1",
+            "id": 37,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n  }\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863286,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Shape",
+            "id": 38,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863288,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Shape",
+            "id": 38,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528146782368\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863290,
+            "name": "reduce_sum_y_log_pred",
+            "id": 39,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863361,
+            "name": "reduce_sum_y_log_pred",
+            "id": 39,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140527102153760\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863364,
+            "name": "gradients/reduce_sum_y_log_pred_grad/DynamicStitch",
+            "id": 40,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863369,
+            "name": "gradients/reduce_sum_y_log_pred_grad/DynamicStitch",
+            "id": 40,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528146782464\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863372,
+            "name": "Neg",
+            "id": 41,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863411,
+            "name": "Neg",
+            "id": 41,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140527102153760\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863413,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Maximum",
+            "id": 42,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863417,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Maximum",
+            "id": 42,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528146782496\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863419,
+            "name": "gradients/Mean_grad/Shape",
+            "id": 43,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863420,
+            "name": "gradients/Mean_grad/Shape",
+            "id": 43,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528146782528\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863422,
+            "name": "Mean",
+            "id": 44,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863680,
+            "name": "Mean",
+            "id": 44,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: device:SYCL\n  ptr: 140527102080992\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863683,
+            "name": "gradients/reduce_sum_y_log_pred_grad/floordiv",
+            "id": 45,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863687,
+            "name": "gradients/reduce_sum_y_log_pred_grad/floordiv",
+            "id": 45,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n  dim {\n    size: 2\n  }\n}\nallocation_description {\n  requested_bytes: 8\n  allocator_name: cpu\n  ptr: 140528146782368\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863697,
+            "name": "gradients/Mean_grad/Tile",
+            "id": 46,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863794,
+            "name": "gradients/Mean_grad/Tile",
+            "id": 46,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140527102153616\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863812,
+            "name": "gradients/Mean_grad/Prod",
+            "id": 47,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863823,
+            "name": "gradients/Mean_grad/Prod",
+            "id": 47,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: device:SYCL\n  ptr: 140527236363136\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863958,
+            "name": "gradients/Mean_grad/floordiv",
+            "id": 48,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863962,
+            "name": "gradients/Mean_grad/floordiv",
+            "id": 48,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_INT32\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: cpu\n  ptr: 140528140255456\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864059,
+            "name": "gradients/Mean_grad/Cast",
+            "id": 49,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864127,
+            "name": "gradients/Mean_grad/Cast",
+            "id": 49,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n}\nallocation_description {\n  requested_bytes: 4\n  allocator_name: device:SYCL\n  ptr: 140526768137216\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864130,
+            "name": "gradients/Mean_grad/truediv",
+            "id": 50,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864183,
+            "name": "gradients/Mean_grad/truediv",
+            "id": 50,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140527102153616\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864186,
+            "name": "gradients/Neg_grad/Neg",
+            "id": 51,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864225,
+            "name": "gradients/Neg_grad/Neg",
+            "id": 51,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140527102153616\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864227,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Reshape",
+            "id": 52,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864229,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Reshape",
+            "id": 52,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140527102153616\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864231,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Tile",
+            "id": 53,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864323,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Tile",
+            "id": 53,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526766550032\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864325,
+            "name": "gradients/mul_grad/mul",
+            "id": 54,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864364,
+            "name": "gradients/mul_grad/mul",
+            "id": 54,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102111968\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864367,
+            "name": "gradients/mul_grad/mul_1",
+            "id": 55,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864407,
+            "name": "gradients/mul_grad/mul_1",
+            "id": 55,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864410,
+            "name": "gradients/mul_grad/Sum",
+            "id": 56,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864415,
+            "name": "gradients/mul_grad/Sum",
+            "id": 56,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102111968\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864417,
+            "name": "gradients/mul_grad/Sum_1",
+            "id": 57,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864420,
+            "name": "gradients/mul_grad/Sum_1",
+            "id": 57,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864422,
+            "name": "gradients/mul_grad/Reshape",
+            "id": 58,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864426,
+            "name": "gradients/mul_grad/Reshape",
+            "id": 58,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140527102111968\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864429,
+            "name": "gradients/mul_grad/Reshape_1",
+            "id": 59,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864429,
+            "name": "gradients/mul_grad/Reshape_1",
+            "id": 59,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864434,
+            "name": "gradients/mul_grad/tuple/control_dependency_1",
+            "id": 60,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864434,
+            "name": "gradients/mul_grad/tuple/control_dependency_1",
+            "id": 60,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864436,
+            "name": "gradients/pred_log_grad/Reciprocal",
+            "id": 61,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864490,
+            "name": "gradients/pred_log_grad/Reciprocal",
+            "id": 61,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526766550032\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864492,
+            "name": "gradients/pred_log_grad/mul",
+            "id": 62,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864532,
+            "name": "gradients/pred_log_grad/mul",
+            "id": 62,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864535,
+            "name": "gradients/softmax_x_W_b_grad/mul",
+            "id": 63,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864589,
+            "name": "gradients/softmax_x_W_b_grad/mul",
+            "id": 63,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526766550032\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864591,
+            "name": "gradients/softmax_x_W_b_grad/Sum",
+            "id": 64,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864654,
+            "name": "gradients/softmax_x_W_b_grad/Sum",
+            "id": 64,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140526768172848\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864657,
+            "name": "gradients/softmax_x_W_b_grad/Reshape",
+            "id": 65,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864659,
+            "name": "gradients/softmax_x_W_b_grad/Reshape",
+            "id": 65,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 1\n  }\n}\nallocation_description {\n  requested_bytes: 2000\n  allocator_name: device:SYCL\n  ptr: 140526768172848\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864661,
+            "name": "gradients/softmax_x_W_b_grad/sub",
+            "id": 66,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864715,
+            "name": "gradients/softmax_x_W_b_grad/sub",
+            "id": 66,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864718,
+            "name": "gradients/softmax_x_W_b_grad/mul_1",
+            "id": 67,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864765,
+            "name": "gradients/softmax_x_W_b_grad/mul_1",
+            "id": 67,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864768,
+            "name": "gradients/add_grad/Sum",
+            "id": 68,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864773,
+            "name": "gradients/add_grad/Sum",
+            "id": 68,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864775,
+            "name": "gradients/add_grad/Sum_1",
+            "id": 69,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865068,
+            "name": "gradients/add_grad/Sum_1",
+            "id": 69,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: device:SYCL\n  ptr: 140526768184400\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865071,
+            "name": "gradients/add_grad/Reshape",
+            "id": 70,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865072,
+            "name": "gradients/add_grad/Reshape",
+            "id": 70,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865074,
+            "name": "gradients/add_grad/Reshape_1",
+            "id": 71,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865074,
+            "name": "gradients/add_grad/Reshape_1",
+            "id": 71,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: device:SYCL\n  ptr: 140526768184400\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865078,
+            "name": "gradients/add_grad/tuple/control_dependency",
+            "id": 72,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865079,
+            "name": "gradients/add_grad/tuple/control_dependency",
+            "id": 72,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 20000\n  allocator_name: device:SYCL\n  ptr: 140526971659232\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865081,
+            "name": "gradients/add_grad/tuple/control_dependency_1",
+            "id": 73,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865081,
+            "name": "gradients/add_grad/tuple/control_dependency_1",
+            "id": 73,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 40\n  allocator_name: device:SYCL\n  ptr: 140526768184400\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865083,
+            "name": "gradients/matmul_x_W_grad/MatMul",
+            "id": 74,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865742,
+            "name": "gradients/matmul_x_W_grad/MatMul",
+            "id": 74,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 500\n  }\n  dim {\n    size: 784\n  }\n}\nallocation_description {\n  requested_bytes: 1568000\n  allocator_name: device:SYCL\n  ptr: 140526766550032\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865748,
+            "name": "gradients/matmul_x_W_grad/MatMul_1",
+            "id": 75,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866595,
+            "name": "gradients/matmul_x_W_grad/MatMul_1",
+            "id": 75,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: device:SYCL\n  ptr: 140526766550032\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866727,
+            "name": "gradients/matmul_x_W_grad/tuple/control_dependency_1",
+            "id": 76,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866728,
+            "name": "gradients/matmul_x_W_grad/tuple/control_dependency_1",
+            "id": 76,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 784\n  }\n  dim {\n    size: 10\n  }\n}\nallocation_description {\n  requested_bytes: 31360\n  allocator_name: device:SYCL\n  ptr: 140526766550032\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866800,
+            "name": "optimizer/update_b_bias/ApplyRMSProp/_53",
+            "id": 77,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866804,
+            "name": "optimizer/update_b_bias/ApplyRMSProp/_53",
+            "id": 77,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n  }\n}\nallocation_description {\n  allocator_name: device:SYCL\n  ptr: 140526995338400\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "N",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866871,
+            "name": "optimizer/update_W_weights/ApplyRMSProp/_49",
+            "id": 78,
+            "pid": 4
+        },
+        {
+            "ph": "O",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866877,
+            "name": "optimizer/update_W_weights/ApplyRMSProp/_49",
+            "id": 78,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n  }\n}\nallocation_description {\n  allocator_name: device:SYCL\n  ptr: 140526967999184\n}\n"
+                }
+            },
+            "pid": 4
+        },
+        {
+            "ph": "X",
+            "dur": 4,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860233,
             "name": "NoOp",
-            "ts": 1494524576453609,
             "args": {
                 "op": "NoOp",
                 "name": "_SOURCE"
             },
-            "cat": "Op",
-            "ph": "X",
             "pid": 1
         },
         {
+            "ph": "X",
+            "dur": 4,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860252,
+            "name": "Const",
+            "args": {
+                "op": "Const",
+                "name": "optimizer/learning_rate"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
             "dur": 2,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860257,
             "name": "Const",
-            "ts": 1494524576453615,
             "args": {
                 "op": "Const",
-                "name": "gradients/Mean_grad/Reshape/_3__cf__3"
+                "name": "optimizer/decay"
             },
-            "cat": "Op",
-            "ph": "X",
             "pid": 1
         },
         {
+            "ph": "X",
             "dur": 1,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860261,
             "name": "Const",
-            "ts": 1494524576453618,
             "args": {
                 "op": "Const",
-                "name": "gradients/Sum_grad/range/_2__cf__2"
+                "name": "optimizer/momentum"
             },
-            "cat": "Op",
-            "ph": "X",
             "pid": 1
         },
         {
-            "dur": 1,
-            "tid": 0,
-            "name": "Const",
-            "ts": 1494524576453630,
-            "args": {
-                "op": "Const",
-                "name": "gradients/Sum_grad/mod/_1__cf__1"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "VariableV2",
-            "ts": 1494524576453632,
-            "args": {
-                "op": "VariableV2",
-                "name": "Variable"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "VariableV2",
-            "ts": 1494524576453636,
-            "args": {
-                "op": "VariableV2",
-                "name": "Variable_1"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
             "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860263,
+            "name": "Const",
+            "args": {
+                "op": "Const",
+                "name": "optimizer/epsilon"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 5,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860266,
+            "name": "VariableV2",
+            "args": {
+                "op": "VariableV2",
+                "name": "b_bias/optimizer_1"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860272,
+            "name": "VariableV2",
+            "args": {
+                "op": "VariableV2",
+                "name": "b_bias/optimizer"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860276,
+            "name": "VariableV2",
+            "args": {
+                "op": "VariableV2",
+                "name": "W_weights/optimizer_1"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860280,
+            "name": "VariableV2",
+            "args": {
+                "op": "VariableV2",
+                "name": "W_weights/optimizer"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860284,
+            "name": "VariableV2",
+            "args": {
+                "op": "VariableV2",
+                "name": "b_bias"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860288,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "b_bias",
+                "name": "b_bias/read"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 6,
             "tid": 1,
+            "cat": "Op",
+            "ts": 1497479027860286,
+            "name": "VariableV2",
+            "args": {
+                "op": "VariableV2",
+                "name": "W_weights"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860295,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "W_weights",
+                "name": "W_weights/read"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "s",
+            "tid": 1,
+            "cat": "DataFlow",
+            "ts": 1497479027860292,
+            "name": "W_weights",
+            "id": 0,
+            "pid": 1
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027860295,
+            "name": "W_weights",
+            "id": 0,
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 10,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866722,
+            "name": "ApplyRMSProp",
+            "args": {
+                "input4": "optimizer/decay",
+                "op": "ApplyRMSProp",
+                "input0": "b_bias",
+                "input7": "gradients/add_grad/tuple/control_dependency_1/_43",
+                "name": "optimizer/update_b_bias/ApplyRMSProp",
+                "input5": "optimizer/momentum",
+                "input6": "optimizer/epsilon",
+                "input3": "optimizer/learning_rate",
+                "input2": "b_bias/optimizer_1",
+                "input1": "b_bias/optimizer"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "s",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027865082,
+            "name": "gradients/add_grad/tuple/control_dependency_1",
+            "id": 1,
+            "pid": 3
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866722,
+            "name": "gradients/add_grad/tuple/control_dependency_1",
+            "id": 1,
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866735,
             "name": "Const",
-            "ts": 1494524576453639,
+            "args": {
+                "op": "Const",
+                "input0": "^optimizer/update_b_bias/ApplyRMSProp",
+                "name": "optimizer/update_b_bias/ApplyRMSProp/_50"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 20,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866827,
+            "name": "ApplyRMSProp",
+            "args": {
+                "input4": "optimizer/decay",
+                "op": "ApplyRMSProp",
+                "input0": "W_weights",
+                "input7": "gradients/matmul_x_W_grad/tuple/control_dependency_1/_45",
+                "name": "optimizer/update_W_weights/ApplyRMSProp",
+                "input5": "optimizer/momentum",
+                "input6": "optimizer/epsilon",
+                "input3": "optimizer/learning_rate",
+                "input2": "W_weights/optimizer_1",
+                "input1": "W_weights/optimizer"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "s",
+            "tid": 1,
+            "cat": "DataFlow",
+            "ts": 1497479027860292,
+            "name": "W_weights",
+            "id": 2,
+            "pid": 1
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866827,
+            "name": "W_weights",
+            "id": 2,
+            "pid": 1
+        },
+        {
+            "ph": "s",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866729,
+            "name": "gradients/matmul_x_W_grad/tuple/control_dependency_1",
+            "id": 3,
+            "pid": 3
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866827,
+            "name": "gradients/matmul_x_W_grad/tuple/control_dependency_1",
+            "id": 3,
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 1,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866850,
+            "name": "Const",
+            "args": {
+                "op": "Const",
+                "input0": "^optimizer/update_W_weights/ApplyRMSProp",
+                "name": "optimizer/update_W_weights/ApplyRMSProp/_46"
+            },
+            "pid": 1
+        },
+        {
+            "ph": "X",
+            "dur": 5,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860239,
+            "name": "NoOp",
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 6,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860251,
+            "name": "Const",
             "args": {
                 "op": "Const",
                 "name": "Const"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
+            "ph": "X",
             "dur": 2,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860258,
             "name": "Const",
-            "ts": 1494524576453642,
             "args": {
                 "op": "Const",
                 "name": "gradients/Mean_grad/Shape_2"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
+            "ph": "X",
             "dur": 2,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860262,
             "name": "Const",
-            "ts": 1494524576453645,
             "args": {
                 "op": "Const",
-                "name": "gradients/Softmax_grad/Sum/reduction_indices"
+                "name": "gradients/softmax_x_W_b_grad/Sum/reduction_indices"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 1,
-            "tid": 0,
-            "name": "Const",
-            "ts": 1494524576453648,
-            "args": {
-                "op": "Const",
-                "name": "gradients/Softmax_grad/Reshape/shape"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
-        },
-        {
             "dur": 2,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860265,
             "name": "Const",
-            "ts": 1494524576453650,
+            "args": {
+                "op": "Const",
+                "name": "gradients/softmax_x_W_b_grad/Reshape/shape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860268,
+            "name": "Const",
             "args": {
                 "op": "Const",
                 "name": "gradients/add_grad/Shape_1"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 1,
+            "ph": "X",
+            "dur": 2,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860271,
             "name": "Const",
-            "ts": 1494524576453653,
             "args": {
                 "op": "Const",
-                "name": "GradientDescent/learning_rate"
+                "name": "gradients/Mean_grad/Reshape/_3__cf__3"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
+            "ph": "X",
             "dur": 2,
             "tid": 0,
-            "name": "Identity",
-            "ts": 1494524576453655,
-            "args": {
-                "input0": "Variable",
-                "op": "Identity",
-                "name": "Variable/read"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "ts": 1497479027860274,
+            "name": "Const",
+            "args": {
+                "op": "Const",
+                "name": "gradients/reduce_sum_y_log_pred_grad/range/_2__cf__2"
+            },
+            "pid": 3
         },
         {
-            "dur": 2,
-            "tid": 0,
-            "name": "Identity",
-            "ts": 1494524576453658,
-            "args": {
-                "input0": "Variable_1",
-                "op": "Identity",
-                "name": "Variable_1/read"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860277,
+            "name": "Const",
+            "args": {
+                "op": "Const",
+                "name": "gradients/reduce_sum_y_log_pred_grad/mod/_1__cf__1"
+            },
+            "pid": 3
         },
         {
-            "dur": 284,
+            "ph": "X",
+            "dur": 1256,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027860311,
             "name": "Prod",
-            "ts": 1494524576453685,
             "args": {
-                "input1": "gradients/Mean_grad/Const_1",
-                "input0": "gradients/Mean_grad/Shape_2/_1",
                 "op": "Prod",
+                "input0": "gradients/Mean_grad/Shape_2/_25",
+                "input1": "gradients/Mean_grad/Const_1",
                 "name": "gradients/Mean_grad/Prod_1"
             },
-            "cat": "Op",
+            "pid": 3
+        },
+        {
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 7,
-            "tid": 0,
-            "name": "Shape",
-            "ts": 1494524576453979,
-            "args": {
-                "input0": "_recv_Placeholder_1_0/_5",
-                "op": "Shape",
-                "name": "gradients/mul_grad/Shape"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 1001,
-            "tid": 1,
-            "name": "MatMul",
-            "ts": 1494524576453980,
-            "args": {
-                "input1": "Variable/read",
-                "input0": "_recv_Placeholder_0/_7",
-                "op": "MatMul",
-                "name": "MatMul"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "tid": 0,
-            "name": "Variable/read",
-            "ts": 1494524576453657,
-            "id": 0,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "Variable/read",
-            "ts": 1494524576453980,
-            "id": 0,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
-            "dur": 4,
-            "tid": 0,
-            "name": "Shape",
-            "ts": 1494524576454983,
-            "args": {
-                "input0": "MatMul",
-                "op": "Shape",
-                "name": "gradients/add_grad/Shape"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "MatMul",
-            "ts": 1494524576454981,
-            "id": 1,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 0,
-            "name": "MatMul",
-            "ts": 1494524576454983,
-            "id": 1,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
             "dur": 6,
             "tid": 0,
-            "name": "Maximum",
-            "ts": 1494524576454990,
+            "cat": "Op",
+            "ts": 1497479027861576,
+            "name": "Shape",
             "args": {
-                "input1": "gradients/Mean_grad/Maximum/y",
-                "input0": "gradients/Mean_grad/Prod_1/_3",
+                "op": "Shape",
+                "input0": "_recv_y_labels_0/_29",
+                "name": "gradients/mul_grad/Shape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 1102,
+            "tid": 1,
+            "cat": "Op",
+            "ts": 1497479027861578,
+            "name": "MatMul",
+            "args": {
+                "op": "MatMul",
+                "input0": "_recv_x_images_0/_31",
+                "input1": "W_weights/read/_33",
+                "name": "matmul_x_W"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "s",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027860298,
+            "name": "W_weights/read",
+            "id": 4,
+            "pid": 1
+        },
+        {
+            "ph": "t",
+            "tid": 1,
+            "cat": "DataFlow",
+            "ts": 1497479027861578,
+            "name": "W_weights/read",
+            "id": 4,
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 8,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027862690,
+            "name": "Maximum",
+            "args": {
                 "op": "Maximum",
+                "input0": "gradients/Mean_grad/Prod_1/_27",
+                "input1": "gradients/Mean_grad/Maximum/y",
                 "name": "gradients/Mean_grad/Maximum"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 63,
+            "ph": "X",
+            "dur": 145,
             "tid": 1,
+            "cat": "Op",
+            "ts": 1497479027862684,
             "name": "Add",
-            "ts": 1494524576454988,
             "args": {
-                "input1": "Variable_1/read",
-                "input0": "MatMul",
                 "op": "Add",
+                "input0": "matmul_x_W",
+                "input1": "b_bias/read/_35",
                 "name": "add"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "tid": 0,
-            "name": "Variable_1/read",
-            "ts": 1494524576453660,
-            "id": 2,
-            "cat": "DataFlow",
             "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "Variable_1/read",
-            "ts": 1494524576454988,
-            "id": 2,
+            "tid": 0,
             "cat": "DataFlow",
-            "ph": "t",
+            "ts": 1497479027860291,
+            "name": "b_bias/read",
+            "id": 5,
             "pid": 1
         },
         {
+            "ph": "t",
+            "tid": 1,
+            "cat": "DataFlow",
+            "ts": 1497479027862684,
+            "name": "b_bias/read",
+            "id": 5,
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 8,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027862831,
+            "name": "Shape",
+            "args": {
+                "op": "Shape",
+                "input0": "matmul_x_W",
+                "name": "gradients/add_grad/Shape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "s",
+            "tid": 1,
+            "cat": "DataFlow",
+            "ts": 1497479027862680,
+            "name": "matmul_x_W",
+            "id": 6,
+            "pid": 3
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027862831,
+            "name": "matmul_x_W",
+            "id": 6,
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 309,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027862840,
+            "name": "Softmax",
+            "args": {
+                "op": "Softmax",
+                "input0": "add",
+                "name": "softmax_x_W_b"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "s",
+            "tid": 1,
+            "cat": "DataFlow",
+            "ts": 1497479027862829,
+            "name": "add",
+            "id": 7,
+            "pid": 3
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027862840,
+            "name": "add",
+            "id": 7,
+            "pid": 3
+        },
+        {
+            "ph": "X",
             "dur": 5,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863151,
             "name": "BroadcastGradientArgs",
-            "ts": 1494524576455053,
             "args": {
-                "input1": "gradients/add_grad/Shape_1",
-                "input0": "gradients/add_grad/Shape",
                 "op": "BroadcastGradientArgs",
+                "input0": "gradients/add_grad/Shape",
+                "input1": "gradients/add_grad/Shape_1",
                 "name": "gradients/add_grad/BroadcastGradientArgs"
             },
-            "cat": "Op",
+            "pid": 3
+        },
+        {
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 312,
+            "dur": 58,
             "tid": 0,
-            "name": "Softmax",
-            "ts": 1494524576455059,
-            "args": {
-                "input0": "add",
-                "op": "Softmax",
-                "name": "Softmax"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "add",
-            "ts": 1494524576455051,
-            "id": 3,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 0,
-            "name": "add",
-            "ts": 1494524576455059,
-            "id": 3,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
-            "dur": 56,
-            "tid": 0,
+            "ts": 1497479027863158,
             "name": "Log",
-            "ts": 1494524576455372,
             "args": {
-                "input0": "Softmax",
                 "op": "Log",
-                "name": "Log"
+                "input0": "softmax_x_W_b",
+                "name": "pred_log"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 54,
-            "tid": 0,
-            "name": "Mul",
-            "ts": 1494524576455430,
-            "args": {
-                "input1": "Log",
-                "input0": "_recv_Placeholder_1_0/_5",
-                "op": "Mul",
-                "name": "mul"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
-        },
-        {
             "dur": 3,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863217,
             "name": "Shape",
-            "ts": 1494524576455485,
             "args": {
-                "input0": "Log",
                 "op": "Shape",
+                "input0": "pred_log",
                 "name": "gradients/mul_grad/Shape_1"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 2,
+            "ph": "X",
+            "dur": 58,
             "tid": 0,
-            "name": "Shape",
-            "ts": 1494524576455489,
+            "cat": "Op",
+            "ts": 1497479027863222,
+            "name": "Mul",
             "args": {
-                "input0": "mul",
-                "op": "Shape",
-                "name": "gradients/Sum_grad/Shape"
+                "op": "Mul",
+                "input0": "_recv_y_labels_0/_29",
+                "input1": "pred_log",
+                "name": "mul"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 77,
-            "tid": 0,
-            "name": "Sum",
-            "ts": 1494524576455492,
-            "args": {
-                "input1": "Sum/reduction_indices",
-                "input0": "mul",
-                "op": "Sum",
-                "name": "Sum"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 4,
+            "dur": 3,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863282,
             "name": "BroadcastGradientArgs",
-            "ts": 1494524576455571,
             "args": {
-                "input1": "gradients/mul_grad/Shape_1",
-                "input0": "gradients/mul_grad/Shape",
                 "op": "BroadcastGradientArgs",
+                "input0": "gradients/mul_grad/Shape",
+                "input1": "gradients/mul_grad/Shape_1",
                 "name": "gradients/mul_grad/BroadcastGradientArgs"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 5,
-            "tid": 1,
-            "name": "DynamicStitch",
-            "ts": 1494524576455575,
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863286,
+            "name": "Shape",
             "args": {
-                "input2": "gradients/Sum_grad/Shape",
-                "input1": "gradients/Sum_grad/mod",
-                "input0": "gradients/Sum_grad/range",
-                "input3": "gradients/Sum_grad/Fill",
-                "name": "gradients/Sum_grad/DynamicStitch",
-                "op": "DynamicStitch"
+                "op": "Shape",
+                "input0": "mul",
+                "name": "gradients/reduce_sum_y_log_pred_grad/Shape"
             },
-            "cat": "Op",
+            "pid": 3
+        },
+        {
             "ph": "X",
-            "pid": 1
-        },
-        {
+            "dur": 72,
             "tid": 0,
-            "name": "gradients/Sum_grad/Shape",
-            "ts": 1494524576455491,
-            "id": 4,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "gradients/Sum_grad/Shape",
-            "ts": 1494524576455575,
-            "id": 4,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
-            "dur": 50,
-            "tid": 0,
-            "name": "Neg",
-            "ts": 1494524576455581,
+            "cat": "Op",
+            "ts": 1497479027863290,
+            "name": "Sum",
             "args": {
-                "input0": "Sum",
+                "op": "Sum",
+                "input0": "mul",
+                "input1": "reduce_sum_y_log_pred/reduction_indices",
+                "name": "reduce_sum_y_log_pred"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 6,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863364,
+            "name": "DynamicStitch",
+            "args": {
+                "op": "DynamicStitch",
+                "input0": "gradients/reduce_sum_y_log_pred_grad/range",
+                "name": "gradients/reduce_sum_y_log_pred_grad/DynamicStitch",
+                "input3": "gradients/reduce_sum_y_log_pred_grad/Fill",
+                "input2": "gradients/reduce_sum_y_log_pred_grad/Shape",
+                "input1": "gradients/reduce_sum_y_log_pred_grad/mod"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 40,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863372,
+            "name": "Neg",
+            "args": {
                 "op": "Neg",
+                "input0": "reduce_sum_y_log_pred",
                 "name": "Neg"
             },
-            "cat": "Op",
+            "pid": 3
+        },
+        {
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 4,
-            "tid": 0,
-            "name": "Maximum",
-            "ts": 1494524576455632,
-            "args": {
-                "input1": "gradients/Sum_grad/Maximum/y",
-                "input0": "gradients/Sum_grad/DynamicStitch",
-                "op": "Maximum",
-                "name": "gradients/Sum_grad/Maximum"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "gradients/Sum_grad/DynamicStitch",
-            "ts": 1494524576455580,
-            "id": 5,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 0,
-            "name": "gradients/Sum_grad/DynamicStitch",
-            "ts": 1494524576455632,
-            "id": 5,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "Shape",
-            "ts": 1494524576455637,
-            "args": {
-                "input0": "Neg",
-                "op": "Shape",
-                "name": "gradients/Mean_grad/Shape"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 138,
-            "tid": 1,
-            "name": "Mean",
-            "ts": 1494524576455640,
-            "args": {
-                "input1": "Const",
-                "input0": "Neg",
-                "op": "Mean",
-                "name": "Mean"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "tid": 0,
-            "name": "Neg",
-            "ts": 1494524576455631,
-            "id": 6,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "Neg",
-            "ts": 1494524576455640,
-            "id": 6,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
-            "dur": 4,
-            "tid": 0,
-            "name": "FloorDiv",
-            "ts": 1494524576455780,
-            "args": {
-                "input1": "gradients/Sum_grad/Maximum",
-                "input0": "gradients/Sum_grad/Shape",
-                "op": "FloorDiv",
-                "name": "gradients/Sum_grad/floordiv"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 103,
-            "tid": 0,
-            "name": "Tile",
-            "ts": 1494524576455792,
-            "args": {
-                "input1": "gradients/Mean_grad/Shape",
-                "input0": "gradients/Mean_grad/Reshape",
-                "op": "Tile",
-                "name": "gradients/Mean_grad/Tile"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 8,
-            "tid": 0,
-            "name": "Prod",
-            "ts": 1494524576455989,
-            "args": {
-                "input1": "gradients/Mean_grad/Const",
-                "input0": "gradients/Mean_grad/Shape_1/_9",
-                "op": "Prod",
-                "name": "gradients/Mean_grad/Prod"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 7,
-            "tid": 0,
-            "name": "FloorDiv",
-            "ts": 1494524576456154,
-            "args": {
-                "input1": "gradients/Mean_grad/Maximum",
-                "input0": "gradients/Mean_grad/Prod/_11",
-                "op": "FloorDiv",
-                "name": "gradients/Mean_grad/floordiv"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 83,
-            "tid": 0,
-            "name": "Cast",
-            "ts": 1494524576456273,
-            "args": {
-                "input0": "gradients/Mean_grad/floordiv/_13",
-                "op": "Cast",
-                "name": "gradients/Mean_grad/Cast"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 65,
-            "tid": 0,
-            "name": "RealDiv",
-            "ts": 1494524576456358,
-            "args": {
-                "input1": "gradients/Mean_grad/Cast",
-                "input0": "gradients/Mean_grad/Tile",
-                "op": "RealDiv",
-                "name": "gradients/Mean_grad/truediv"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 47,
-            "tid": 0,
-            "name": "Neg",
-            "ts": 1494524576456425,
-            "args": {
-                "input0": "gradients/Mean_grad/truediv",
-                "op": "Neg",
-                "name": "gradients/Neg_grad/Neg"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "Reshape",
-            "ts": 1494524576456474,
-            "args": {
-                "input1": "gradients/Sum_grad/DynamicStitch",
-                "input0": "gradients/Neg_grad/Neg",
-                "op": "Reshape",
-                "name": "gradients/Sum_grad/Reshape"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "tid": 1,
-            "name": "gradients/Sum_grad/DynamicStitch",
-            "ts": 1494524576455580,
-            "id": 7,
-            "cat": "DataFlow",
-            "ph": "s",
-            "pid": 1
-        },
-        {
-            "tid": 0,
-            "name": "gradients/Sum_grad/DynamicStitch",
-            "ts": 1494524576456474,
-            "id": 7,
-            "cat": "DataFlow",
-            "ph": "t",
-            "pid": 1
-        },
-        {
-            "dur": 89,
-            "tid": 0,
-            "name": "Tile",
-            "ts": 1494524576456479,
-            "args": {
-                "input1": "gradients/Sum_grad/floordiv",
-                "input0": "gradients/Sum_grad/Reshape",
-                "op": "Tile",
-                "name": "gradients/Sum_grad/Tile"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 49,
-            "tid": 0,
-            "name": "Mul",
-            "ts": 1494524576456570,
-            "args": {
-                "input1": "Log",
-                "input0": "gradients/Sum_grad/Tile",
-                "op": "Mul",
-                "name": "gradients/mul_grad/mul"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 50,
-            "tid": 0,
-            "name": "Mul",
-            "ts": 1494524576456622,
-            "args": {
-                "input1": "gradients/Sum_grad/Tile",
-                "input0": "_recv_Placeholder_1_0/_5",
-                "op": "Mul",
-                "name": "gradients/mul_grad/mul_1"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 8,
-            "tid": 0,
-            "name": "Sum",
-            "ts": 1494524576456674,
-            "args": {
-                "input1": "gradients/mul_grad/BroadcastGradientArgs",
-                "input0": "gradients/mul_grad/mul",
-                "op": "Sum",
-                "name": "gradients/mul_grad/Sum"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
             "dur": 5,
             "tid": 0,
-            "name": "Sum",
-            "ts": 1494524576456683,
+            "cat": "Op",
+            "ts": 1497479027863413,
+            "name": "Maximum",
             "args": {
-                "input1": "gradients/mul_grad/BroadcastGradientArgs:1",
-                "input0": "gradients/mul_grad/mul_1",
+                "op": "Maximum",
+                "input0": "gradients/reduce_sum_y_log_pred_grad/DynamicStitch",
+                "input1": "gradients/reduce_sum_y_log_pred_grad/Maximum/y",
+                "name": "gradients/reduce_sum_y_log_pred_grad/Maximum"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863419,
+            "name": "Shape",
+            "args": {
+                "op": "Shape",
+                "input0": "Neg",
+                "name": "gradients/Mean_grad/Shape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 259,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863422,
+            "name": "Mean",
+            "args": {
+                "op": "Mean",
+                "input0": "Neg",
+                "input1": "Const",
+                "name": "Mean"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 5,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863683,
+            "name": "FloorDiv",
+            "args": {
+                "op": "FloorDiv",
+                "input0": "gradients/reduce_sum_y_log_pred_grad/Shape",
+                "input1": "gradients/reduce_sum_y_log_pred_grad/Maximum",
+                "name": "gradients/reduce_sum_y_log_pred_grad/floordiv"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 98,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863697,
+            "name": "Tile",
+            "args": {
+                "op": "Tile",
+                "input0": "gradients/Mean_grad/Reshape",
+                "input1": "gradients/Mean_grad/Shape",
+                "name": "gradients/Mean_grad/Tile"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 12,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863812,
+            "name": "Prod",
+            "args": {
+                "op": "Prod",
+                "input0": "gradients/Mean_grad/Shape_1/_37",
+                "input1": "gradients/Mean_grad/Const",
+                "name": "gradients/Mean_grad/Prod"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 5,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027863958,
+            "name": "FloorDiv",
+            "args": {
+                "op": "FloorDiv",
+                "input0": "gradients/Mean_grad/Prod/_39",
+                "input1": "gradients/Mean_grad/Maximum",
+                "name": "gradients/Mean_grad/floordiv"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 69,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864059,
+            "name": "Cast",
+            "args": {
+                "op": "Cast",
+                "input0": "gradients/Mean_grad/floordiv/_41",
+                "name": "gradients/Mean_grad/Cast"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 54,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864130,
+            "name": "RealDiv",
+            "args": {
+                "op": "RealDiv",
+                "input0": "gradients/Mean_grad/Tile",
+                "input1": "gradients/Mean_grad/Cast",
+                "name": "gradients/Mean_grad/truediv"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 40,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864186,
+            "name": "Neg",
+            "args": {
+                "op": "Neg",
+                "input0": "gradients/Mean_grad/truediv",
+                "name": "gradients/Neg_grad/Neg"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 3,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864227,
+            "name": "Reshape",
+            "args": {
+                "op": "Reshape",
+                "input0": "gradients/Neg_grad/Neg",
+                "input1": "gradients/reduce_sum_y_log_pred_grad/DynamicStitch",
+                "name": "gradients/reduce_sum_y_log_pred_grad/Reshape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 93,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864231,
+            "name": "Tile",
+            "args": {
+                "op": "Tile",
+                "input0": "gradients/reduce_sum_y_log_pred_grad/Reshape",
+                "input1": "gradients/reduce_sum_y_log_pred_grad/floordiv",
+                "name": "gradients/reduce_sum_y_log_pred_grad/Tile"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 40,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864325,
+            "name": "Mul",
+            "args": {
+                "op": "Mul",
+                "input0": "gradients/reduce_sum_y_log_pred_grad/Tile",
+                "input1": "pred_log",
+                "name": "gradients/mul_grad/mul"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 41,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864367,
+            "name": "Mul",
+            "args": {
+                "op": "Mul",
+                "input0": "_recv_y_labels_0/_29",
+                "input1": "gradients/reduce_sum_y_log_pred_grad/Tile",
+                "name": "gradients/mul_grad/mul_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 6,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864410,
+            "name": "Sum",
+            "args": {
                 "op": "Sum",
+                "input0": "gradients/mul_grad/mul",
+                "input1": "gradients/mul_grad/BroadcastGradientArgs",
+                "name": "gradients/mul_grad/Sum"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 4,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864417,
+            "name": "Sum",
+            "args": {
+                "op": "Sum",
+                "input0": "gradients/mul_grad/mul_1",
+                "input1": "gradients/mul_grad/BroadcastGradientArgs:1",
                 "name": "gradients/mul_grad/Sum_1"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 7,
+            "ph": "X",
+            "dur": 5,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864422,
             "name": "Reshape",
-            "ts": 1494524576456690,
             "args": {
-                "input1": "gradients/mul_grad/Shape",
-                "input0": "gradients/mul_grad/Sum",
                 "op": "Reshape",
+                "input0": "gradients/mul_grad/Sum",
+                "input1": "gradients/mul_grad/Shape",
                 "name": "gradients/mul_grad/Reshape"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 2,
+            "ph": "X",
+            "dur": 1,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864429,
             "name": "Reshape",
-            "ts": 1494524576456699,
             "args": {
-                "input1": "gradients/mul_grad/Shape_1",
-                "input0": "gradients/mul_grad/Sum_1",
                 "op": "Reshape",
+                "input0": "gradients/mul_grad/Sum_1",
+                "input1": "gradients/mul_grad/Shape_1",
                 "name": "gradients/mul_grad/Reshape_1"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
+            "ph": "X",
             "dur": 1,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864431,
             "name": "NoOp",
-            "ts": 1494524576456703,
             "args": {
-                "input1": "^gradients/mul_grad/Reshape_1",
-                "input0": "^gradients/mul_grad/Reshape",
                 "op": "NoOp",
+                "input0": "^gradients/mul_grad/Reshape",
+                "input1": "^gradients/mul_grad/Reshape_1",
                 "name": "gradients/mul_grad/tuple/group_deps"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 3,
-            "tid": 0,
-            "name": "Identity",
-            "ts": 1494524576456705,
-            "args": {
-                "input1": "^gradients/mul_grad/tuple/group_deps",
-                "input0": "gradients/mul_grad/Reshape_1",
-                "op": "Identity",
-                "name": "gradients/mul_grad/tuple/control_dependency_1"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 59,
-            "tid": 0,
-            "name": "Reciprocal",
-            "ts": 1494524576456709,
-            "args": {
-                "input1": "^gradients/mul_grad/tuple/control_dependency_1",
-                "input0": "Softmax",
-                "op": "Reciprocal",
-                "name": "gradients/Log_grad/Reciprocal"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 52,
-            "tid": 0,
-            "name": "Mul",
-            "ts": 1494524576456770,
-            "args": {
-                "input1": "gradients/Log_grad/Reciprocal",
-                "input0": "gradients/mul_grad/tuple/control_dependency_1",
-                "op": "Mul",
-                "name": "gradients/Log_grad/mul"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 63,
-            "tid": 0,
-            "name": "Mul",
-            "ts": 1494524576456825,
-            "args": {
-                "input1": "Softmax",
-                "input0": "gradients/Log_grad/mul",
-                "op": "Mul",
-                "name": "gradients/Softmax_grad/mul"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 76,
-            "tid": 0,
-            "name": "Sum",
-            "ts": 1494524576456890,
-            "args": {
-                "input1": "gradients/Softmax_grad/Sum/reduction_indices",
-                "input0": "gradients/Softmax_grad/mul",
-                "op": "Sum",
-                "name": "gradients/Softmax_grad/Sum"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "Reshape",
-            "ts": 1494524576456968,
-            "args": {
-                "input1": "gradients/Softmax_grad/Reshape/shape",
-                "input0": "gradients/Softmax_grad/Sum",
-                "op": "Reshape",
-                "name": "gradients/Softmax_grad/Reshape"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 63,
-            "tid": 0,
-            "name": "Sub",
-            "ts": 1494524576456973,
-            "args": {
-                "input1": "gradients/Softmax_grad/Reshape",
-                "input0": "gradients/Log_grad/mul",
-                "op": "Sub",
-                "name": "gradients/Softmax_grad/sub"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 51,
-            "tid": 0,
-            "name": "Mul",
-            "ts": 1494524576457038,
-            "args": {
-                "input1": "Softmax",
-                "input0": "gradients/Softmax_grad/sub",
-                "op": "Mul",
-                "name": "gradients/Softmax_grad/mul_1"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 8,
-            "tid": 0,
-            "name": "Sum",
-            "ts": 1494524576457091,
-            "args": {
-                "input1": "gradients/add_grad/BroadcastGradientArgs",
-                "input0": "gradients/Softmax_grad/mul_1",
-                "op": "Sum",
-                "name": "gradients/add_grad/Sum"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 113,
-            "tid": 0,
-            "name": "Sum",
-            "ts": 1494524576457100,
-            "args": {
-                "input1": "gradients/add_grad/BroadcastGradientArgs:1",
-                "input0": "gradients/Softmax_grad/mul_1",
-                "op": "Sum",
-                "name": "gradients/add_grad/Sum_1"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "Reshape",
-            "ts": 1494524576457215,
-            "args": {
-                "input1": "gradients/add_grad/Shape",
-                "input0": "gradients/add_grad/Sum",
-                "op": "Reshape",
-                "name": "gradients/add_grad/Reshape"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 3,
-            "tid": 0,
-            "name": "Reshape",
-            "ts": 1494524576457219,
-            "args": {
-                "input1": "gradients/add_grad/Shape_1",
-                "input0": "gradients/add_grad/Sum_1",
-                "op": "Reshape",
-                "name": "gradients/add_grad/Reshape_1"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
             "dur": 1,
             "tid": 0,
-            "name": "NoOp",
-            "ts": 1494524576457223,
-            "args": {
-                "input1": "^gradients/add_grad/Reshape_1",
-                "input0": "^gradients/add_grad/Reshape",
-                "op": "NoOp",
-                "name": "gradients/add_grad/tuple/group_deps"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 2,
-            "tid": 0,
+            "ts": 1497479027864434,
             "name": "Identity",
-            "ts": 1494524576457226,
             "args": {
-                "input1": "^gradients/add_grad/tuple/group_deps",
-                "input0": "gradients/add_grad/Reshape",
                 "op": "Identity",
-                "name": "gradients/add_grad/tuple/control_dependency"
+                "input0": "gradients/mul_grad/Reshape_1",
+                "input1": "^gradients/mul_grad/tuple/group_deps",
+                "name": "gradients/mul_grad/tuple/control_dependency_1"
             },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "pid": 3
         },
         {
-            "dur": 2,
+            "ph": "X",
+            "dur": 55,
             "tid": 0,
-            "name": "Identity",
-            "ts": 1494524576457229,
-            "args": {
-                "input1": "^gradients/add_grad/tuple/group_deps",
-                "input0": "gradients/add_grad/Reshape_1",
-                "op": "Identity",
-                "name": "gradients/add_grad/tuple/control_dependency_1"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "ts": 1497479027864436,
+            "name": "Reciprocal",
+            "args": {
+                "op": "Reciprocal",
+                "input0": "softmax_x_W_b",
+                "input1": "^gradients/mul_grad/tuple/control_dependency_1",
+                "name": "gradients/pred_log_grad/Reciprocal"
+            },
+            "pid": 3
         },
         {
-            "dur": 313,
+            "ph": "X",
+            "dur": 41,
             "tid": 0,
-            "name": "MatMul",
-            "ts": 1494524576457233,
-            "args": {
-                "input1": "Variable/read",
-                "input0": "gradients/add_grad/tuple/control_dependency",
-                "op": "MatMul",
-                "name": "gradients/MatMul_grad/MatMul"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "ts": 1497479027864492,
+            "name": "Mul",
+            "args": {
+                "op": "Mul",
+                "input0": "gradients/mul_grad/tuple/control_dependency_1",
+                "input1": "gradients/pred_log_grad/Reciprocal",
+                "name": "gradients/pred_log_grad/mul"
+            },
+            "pid": 3
         },
         {
-            "dur": 366,
+            "ph": "X",
+            "dur": 55,
             "tid": 0,
-            "name": "MatMul",
-            "ts": 1494524576457552,
-            "args": {
-                "input1": "gradients/add_grad/tuple/control_dependency",
-                "input0": "_recv_Placeholder_0/_7",
-                "op": "MatMul",
-                "name": "gradients/MatMul_grad/MatMul_1"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "ts": 1497479027864535,
+            "name": "Mul",
+            "args": {
+                "op": "Mul",
+                "input0": "gradients/pred_log_grad/mul",
+                "input1": "softmax_x_W_b",
+                "name": "gradients/softmax_x_W_b_grad/mul"
+            },
+            "pid": 3
         },
         {
-            "dur": 67,
+            "ph": "X",
+            "dur": 64,
             "tid": 0,
-            "name": "ApplyGradientDescent",
-            "ts": 1494524576457921,
-            "args": {
-                "input2": "gradients/add_grad/tuple/control_dependency_1",
-                "input1": "GradientDescent/learning_rate",
-                "input0": "Variable_1",
-                "op": "ApplyGradientDescent",
-                "name": "GradientDescent/update_Variable_1/ApplyGradientDescent"
-            },
             "cat": "Op",
-            "ph": "X",
-            "pid": 1
+            "ts": 1497479027864591,
+            "name": "Sum",
+            "args": {
+                "op": "Sum",
+                "input0": "gradients/softmax_x_W_b_grad/mul",
+                "input1": "gradients/softmax_x_W_b_grad/Sum/reduction_indices",
+                "name": "gradients/softmax_x_W_b_grad/Sum"
+            },
+            "pid": 3
         },
         {
-            "dur": 2,
-            "tid": 0,
-            "name": "NoOp",
-            "ts": 1494524576457990,
-            "args": {
-                "input1": "^gradients/MatMul_grad/MatMul_1",
-                "input0": "^gradients/MatMul_grad/MatMul",
-                "op": "NoOp",
-                "name": "gradients/MatMul_grad/tuple/group_deps"
-            },
-            "cat": "Op",
             "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 2,
-            "tid": 0,
-            "name": "Identity",
-            "ts": 1494524576457993,
-            "args": {
-                "input1": "^gradients/MatMul_grad/tuple/group_deps",
-                "input0": "gradients/MatMul_grad/MatMul_1",
-                "op": "Identity",
-                "name": "gradients/MatMul_grad/tuple/control_dependency_1"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 56,
-            "tid": 0,
-            "name": "ApplyGradientDescent",
-            "ts": 1494524576457997,
-            "args": {
-                "input2": "gradients/MatMul_grad/tuple/control_dependency_1",
-                "input1": "GradientDescent/learning_rate",
-                "input0": "Variable",
-                "op": "ApplyGradientDescent",
-                "name": "GradientDescent/update_Variable/ApplyGradientDescent"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
-            "dur": 2,
-            "tid": 0,
-            "name": "NoOp",
-            "ts": 1494524576458056,
-            "args": {
-                "input1": "^GradientDescent/update_Variable_1/ApplyGradientDescent",
-                "input0": "^GradientDescent/update_Variable/ApplyGradientDescent",
-                "op": "NoOp",
-                "name": "GradientDescent"
-            },
-            "cat": "Op",
-            "ph": "X",
-            "pid": 1
-        },
-        {
             "dur": 3,
             "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864657,
+            "name": "Reshape",
+            "args": {
+                "op": "Reshape",
+                "input0": "gradients/softmax_x_W_b_grad/Sum",
+                "input1": "gradients/softmax_x_W_b_grad/Reshape/shape",
+                "name": "gradients/softmax_x_W_b_grad/Reshape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 55,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864661,
+            "name": "Sub",
+            "args": {
+                "op": "Sub",
+                "input0": "gradients/pred_log_grad/mul",
+                "input1": "gradients/softmax_x_W_b_grad/Reshape",
+                "name": "gradients/softmax_x_W_b_grad/sub"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 48,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864718,
+            "name": "Mul",
+            "args": {
+                "op": "Mul",
+                "input0": "gradients/softmax_x_W_b_grad/sub",
+                "input1": "softmax_x_W_b",
+                "name": "gradients/softmax_x_W_b_grad/mul_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 6,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864768,
+            "name": "Sum",
+            "args": {
+                "op": "Sum",
+                "input0": "gradients/softmax_x_W_b_grad/mul_1",
+                "input1": "gradients/add_grad/BroadcastGradientArgs",
+                "name": "gradients/add_grad/Sum"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 294,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027864775,
+            "name": "Sum",
+            "args": {
+                "op": "Sum",
+                "input0": "gradients/softmax_x_W_b_grad/mul_1",
+                "input1": "gradients/add_grad/BroadcastGradientArgs:1",
+                "name": "gradients/add_grad/Sum_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865071,
+            "name": "Reshape",
+            "args": {
+                "op": "Reshape",
+                "input0": "gradients/add_grad/Sum",
+                "input1": "gradients/add_grad/Shape",
+                "name": "gradients/add_grad/Reshape"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 1,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865074,
+            "name": "Reshape",
+            "args": {
+                "op": "Reshape",
+                "input0": "gradients/add_grad/Sum_1",
+                "input1": "gradients/add_grad/Shape_1",
+                "name": "gradients/add_grad/Reshape_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 1,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865076,
             "name": "NoOp",
-            "ts": 1494524576453612,
             "args": {
                 "op": "NoOp",
-                "name": "_SOURCE"
+                "input0": "^gradients/add_grad/Reshape",
+                "input1": "^gradients/add_grad/Reshape_1",
+                "name": "gradients/add_grad/tuple/group_deps"
             },
-            "cat": "Op",
-            "ph": "X",
             "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865078,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "gradients/add_grad/Reshape",
+                "input1": "^gradients/add_grad/tuple/group_deps",
+                "name": "gradients/add_grad/tuple/control_dependency"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 1,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865081,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "gradients/add_grad/Reshape_1",
+                "input1": "^gradients/add_grad/tuple/group_deps",
+                "name": "gradients/add_grad/tuple/control_dependency_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 660,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865083,
+            "name": "MatMul",
+            "args": {
+                "op": "MatMul",
+                "input0": "gradients/add_grad/tuple/control_dependency",
+                "input1": "W_weights/read/_33",
+                "name": "gradients/matmul_x_W_grad/MatMul"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "s",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027860298,
+            "name": "W_weights/read",
+            "id": 8,
+            "pid": 1
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027865083,
+            "name": "W_weights/read",
+            "id": 8,
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 848,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027865748,
+            "name": "MatMul",
+            "args": {
+                "op": "MatMul",
+                "input0": "_recv_x_images_0/_31",
+                "input1": "gradients/add_grad/tuple/control_dependency",
+                "name": "gradients/matmul_x_W_grad/MatMul_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 1,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866725,
+            "name": "NoOp",
+            "args": {
+                "op": "NoOp",
+                "input0": "^gradients/matmul_x_W_grad/MatMul",
+                "input1": "^gradients/matmul_x_W_grad/MatMul_1",
+                "name": "gradients/matmul_x_W_grad/tuple/group_deps"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866727,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "gradients/matmul_x_W_grad/MatMul_1",
+                "input1": "^gradients/matmul_x_W_grad/tuple/group_deps",
+                "name": "gradients/matmul_x_W_grad/tuple/control_dependency_1"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 5,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866800,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "optimizer/update_b_bias/ApplyRMSProp/_52",
+                "name": "optimizer/update_b_bias/ApplyRMSProp/_53"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "s",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866732,
+            "name": "optimizer/update_b_bias/ApplyRMSProp",
+            "id": 9,
+            "pid": 1
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866800,
+            "name": "optimizer/update_b_bias/ApplyRMSProp",
+            "id": 9,
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 7,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866871,
+            "name": "Identity",
+            "args": {
+                "op": "Identity",
+                "input0": "optimizer/update_W_weights/ApplyRMSProp/_48",
+                "name": "optimizer/update_W_weights/ApplyRMSProp/_49"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "s",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866847,
+            "name": "optimizer/update_W_weights/ApplyRMSProp",
+            "id": 10,
+            "pid": 1
+        },
+        {
+            "ph": "t",
+            "tid": 0,
+            "cat": "DataFlow",
+            "ts": 1497479027866871,
+            "name": "optimizer/update_W_weights/ApplyRMSProp",
+            "id": 10,
+            "pid": 3
+        },
+        {
+            "ph": "X",
+            "dur": 2,
+            "tid": 0,
+            "cat": "Op",
+            "ts": 1497479027866881,
+            "name": "NoOp",
+            "args": {
+                "op": "NoOp",
+                "input0": "^optimizer/update_W_weights/ApplyRMSProp/_49",
+                "input1": "^optimizer/update_b_bias/ApplyRMSProp/_53",
+                "name": "optimizer"
+            },
+            "pid": 3
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864415,
+            "name": "gradients/mul_grad/BroadcastGradientArgs",
+            "id": 36,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864659,
+            "name": "gradients/softmax_x_W_b_grad/Reshape/shape",
+            "id": 19,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863962,
+            "name": "gradients/Mean_grad/Maximum",
+            "id": 27,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864229,
+            "name": "gradients/Neg_grad/Neg",
+            "id": 51,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866731,
+            "name": "gradients/add_grad/tuple/control_dependency_1",
+            "id": 73,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864323,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Reshape",
+            "id": 52,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864654,
+            "name": "gradients/softmax_x_W_b_grad/mul",
+            "id": 63,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866805,
+            "name": "optimizer/update_b_bias/ApplyRMSProp/_53",
+            "id": 77,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864183,
+            "name": "gradients/Mean_grad/Tile",
+            "id": 46,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866595,
+            "name": "gradients/add_grad/tuple/control_dependency",
+            "id": 72,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865742,
+            "name": "W_weights/read",
+            "id": 11,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865068,
+            "name": "gradients/add_grad/BroadcastGradientArgs:1",
+            "id": 32,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864407,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Tile",
+            "id": 53,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865072,
+            "name": "gradients/add_grad/Shape",
+            "id": 29,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864773,
+            "name": "gradients/add_grad/BroadcastGradientArgs",
+            "id": 31,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865072,
+            "name": "gradients/add_grad/Sum",
+            "id": 68,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866731,
+            "name": "b_bias",
+            "id": 8,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864426,
+            "name": "gradients/mul_grad/Sum",
+            "id": 56,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860280,
+            "name": "gradients/reduce_sum_y_log_pred_grad/mod/_1__cf__1",
+            "id": 23,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863687,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Shape",
+            "id": 38,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863681,
+            "name": "Mean",
+            "id": 44,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862697,
+            "name": "gradients/Mean_grad/Prod_1",
+            "id": 24,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864429,
+            "name": "gradients/mul_grad/Sum_1",
+            "id": 57,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864429,
+            "name": "gradients/mul_grad/Shape_1",
+            "id": 34,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "W_weights/optimizer_1",
+            "id": 6,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864434,
+            "name": "gradients/mul_grad/Reshape_1",
+            "id": 59,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864427,
+            "name": "gradients/mul_grad/Reshape",
+            "id": 58,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865068,
+            "name": "gradients/softmax_x_W_b_grad/mul_1",
+            "id": 67,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864765,
+            "name": "gradients/softmax_x_W_b_grad/sub",
+            "id": 66,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863361,
+            "name": "mul",
+            "id": 35,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864127,
+            "name": "gradients/Mean_grad/floordiv",
+            "id": 48,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864323,
+            "name": "gradients/reduce_sum_y_log_pred_grad/floordiv",
+            "id": 45,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864229,
+            "name": "gradients/reduce_sum_y_log_pred_grad/DynamicStitch",
+            "id": 40,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866804,
+            "name": "optimizer/update_b_bias/ApplyRMSProp",
+            "id": 12,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860273,
+            "name": "gradients/Mean_grad/Reshape/_3__cf__3",
+            "id": 21,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863680,
+            "name": "Neg",
+            "id": 41,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863680,
+            "name": "Const",
+            "id": 16,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866728,
+            "name": "gradients/matmul_x_W_grad/MatMul_1",
+            "id": 75,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "gradients/matmul_x_W_grad/tuple/control_dependency_1",
+            "id": 76,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866737,
+            "name": "optimizer/update_b_bias/ApplyRMSProp/_50",
+            "id": 13,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864715,
+            "name": "gradients/softmax_x_W_b_grad/Reshape",
+            "id": 65,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863962,
+            "name": "gradients/Mean_grad/Prod",
+            "id": 47,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863148,
+            "name": "add",
+            "id": 28,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865074,
+            "name": "gradients/add_grad/Shape_1",
+            "id": 20,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "optimizer/decay",
+            "id": 1,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "W_weights",
+            "id": 10,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864765,
+            "name": "softmax_x_W_b",
+            "id": 30,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862828,
+            "name": "b_bias/read",
+            "id": 9,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "W_weights/optimizer",
+            "id": 7,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "optimizer/epsilon",
+            "id": 3,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864532,
+            "name": "gradients/pred_log_grad/Reciprocal",
+            "id": 61,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866878,
+            "name": "optimizer/update_W_weights/ApplyRMSProp/_49",
+            "id": 78,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864225,
+            "name": "gradients/Mean_grad/truediv",
+            "id": 50,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864715,
+            "name": "gradients/pred_log_grad/mul",
+            "id": 62,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "optimizer/learning_rate",
+            "id": 0,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864415,
+            "name": "gradients/mul_grad/mul",
+            "id": 54,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865081,
+            "name": "gradients/add_grad/Reshape_1",
+            "id": 71,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864659,
+            "name": "gradients/softmax_x_W_b_grad/Sum",
+            "id": 64,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864654,
+            "name": "gradients/softmax_x_W_b_grad/Sum/reduction_indices",
+            "id": 18,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864364,
+            "name": "pred_log",
+            "id": 33,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863411,
+            "name": "reduce_sum_y_log_pred",
+            "id": 39,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864426,
+            "name": "gradients/mul_grad/Shape",
+            "id": 25,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866877,
+            "name": "optimizer/update_W_weights/ApplyRMSProp",
+            "id": 14,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866731,
+            "name": "b_bias/optimizer",
+            "id": 5,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866851,
+            "name": "optimizer/update_W_weights/ApplyRMSProp/_46",
+            "id": 15,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864183,
+            "name": "gradients/Mean_grad/Cast",
+            "id": 49,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865079,
+            "name": "gradients/add_grad/Reshape",
+            "id": 70,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863794,
+            "name": "gradients/Mean_grad/Shape",
+            "id": 43,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027861566,
+            "name": "gradients/Mean_grad/Shape_2",
+            "id": 17,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027862838,
+            "name": "matmul_x_W",
+            "id": 26,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864420,
+            "name": "gradients/mul_grad/BroadcastGradientArgs:1",
+            "id": 37,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866846,
+            "name": "optimizer/momentum",
+            "id": 2,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865743,
+            "name": "gradients/matmul_x_W_grad/MatMul",
+            "id": 74,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027865074,
+            "name": "gradients/add_grad/Sum_1",
+            "id": 69,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027860276,
+            "name": "gradients/reduce_sum_y_log_pred_grad/range/_2__cf__2",
+            "id": 22,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864420,
+            "name": "gradients/mul_grad/mul_1",
+            "id": 55,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027866731,
+            "name": "b_bias/optimizer_1",
+            "id": 4,
+            "pid": 2
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027864532,
+            "name": "gradients/mul_grad/tuple/control_dependency_1",
+            "id": 60,
+            "pid": 4
+        },
+        {
+            "ph": "D",
+            "tid": 0,
+            "cat": "Tensor",
+            "ts": 1497479027863687,
+            "name": "gradients/reduce_sum_y_log_pred_grad/Maximum",
+            "id": 42,
+            "pid": 4
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860258,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027861566,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863151,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863282,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863282,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864415,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864420,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864773,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866735,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866737,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866850,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866851,
+            "name": "",
+            "args": {
+                "": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860251,
+            "name": "cpu",
+            "args": {
+                "cpu": 4
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860252,
+            "name": "cpu",
+            "args": {
+                "cpu": 8
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860257,
+            "name": "cpu",
+            "args": {
+                "cpu": 12
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860261,
+            "name": "cpu",
+            "args": {
+                "cpu": 16
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860262,
+            "name": "cpu",
+            "args": {
+                "cpu": 20
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860263,
+            "name": "cpu",
+            "args": {
+                "cpu": 24
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860265,
+            "name": "cpu",
+            "args": {
+                "cpu": 32
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860266,
+            "name": "cpu",
+            "args": {
+                "cpu": 72
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860268,
+            "name": "cpu",
+            "args": {
+                "cpu": 76
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860272,
+            "name": "cpu",
+            "args": {
+                "cpu": 116
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860274,
+            "name": "cpu",
+            "args": {
+                "cpu": 124
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860276,
+            "name": "cpu",
+            "args": {
+                "cpu": 116
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860276,
+            "name": "cpu",
+            "args": {
+                "cpu": 31476
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860277,
+            "name": "cpu",
+            "args": {
+                "cpu": 31480
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860280,
+            "name": "cpu",
+            "args": {
+                "cpu": 31476
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860280,
+            "name": "cpu",
+            "args": {
+                "cpu": 62836
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860284,
+            "name": "cpu",
+            "args": {
+                "cpu": 62876
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860286,
+            "name": "cpu",
+            "args": {
+                "cpu": 94236
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860288,
+            "name": "cpu",
+            "args": {
+                "cpu": 94276
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860295,
+            "name": "cpu",
+            "args": {
+                "cpu": 125636
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027861576,
+            "name": "cpu",
+            "args": {
+                "cpu": 125644
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862690,
+            "name": "cpu",
+            "args": {
+                "cpu": 125648
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862828,
+            "name": "cpu",
+            "args": {
+                "cpu": 125608
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862831,
+            "name": "cpu",
+            "args": {
+                "cpu": 125616
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863151,
+            "name": "cpu",
+            "args": {
+                "cpu": 125620
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863217,
+            "name": "cpu",
+            "args": {
+                "cpu": 125628
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863286,
+            "name": "cpu",
+            "args": {
+                "cpu": 125636
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863364,
+            "name": "cpu",
+            "args": {
+                "cpu": 125644
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863413,
+            "name": "cpu",
+            "args": {
+                "cpu": 125652
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863419,
+            "name": "cpu",
+            "args": {
+                "cpu": 125656
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863680,
+            "name": "cpu",
+            "args": {
+                "cpu": 125652
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863683,
+            "name": "cpu",
+            "args": {
+                "cpu": 125660
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863687,
+            "name": "cpu",
+            "args": {
+                "cpu": 125652
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863687,
+            "name": "cpu",
+            "args": {
+                "cpu": 125644
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863794,
+            "name": "cpu",
+            "args": {
+                "cpu": 125640
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863958,
+            "name": "cpu",
+            "args": {
+                "cpu": 125644
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863962,
+            "name": "cpu",
+            "args": {
+                "cpu": 125640
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864127,
+            "name": "cpu",
+            "args": {
+                "cpu": 125636
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864229,
+            "name": "cpu",
+            "args": {
+                "cpu": 125628
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864323,
+            "name": "cpu",
+            "args": {
+                "cpu": 125620
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864426,
+            "name": "cpu",
+            "args": {
+                "cpu": 125612
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864429,
+            "name": "cpu",
+            "args": {
+                "cpu": 125604
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864654,
+            "name": "cpu",
+            "args": {
+                "cpu": 125600
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864659,
+            "name": "cpu",
+            "args": {
+                "cpu": 125592
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865068,
+            "name": "cpu",
+            "args": {
+                "cpu": 125588
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865072,
+            "name": "cpu",
+            "args": {
+                "cpu": 125580
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865074,
+            "name": "cpu",
+            "args": {
+                "cpu": 125576
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865742,
+            "name": "cpu",
+            "args": {
+                "cpu": 94216
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866722,
+            "name": "cpu",
+            "args": {
+                "cpu": 94256
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866731,
+            "name": "cpu",
+            "args": {
+                "cpu": 94216
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866731,
+            "name": "cpu",
+            "args": {
+                "cpu": 94176
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866731,
+            "name": "cpu",
+            "args": {
+                "cpu": 94136
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866804,
+            "name": "cpu",
+            "args": {
+                "cpu": 94096
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866827,
+            "name": "cpu",
+            "args": {
+                "cpu": 125456
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 94096
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 62736
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 31376
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 31372
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 31368
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 31364
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "cpu",
+            "args": {
+                "cpu": 31360
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866877,
+            "name": "cpu",
+            "args": {
+                "cpu": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860271,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 4
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860273,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027860311,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 4
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027861578,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862684,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862697,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862838,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027862840,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863148,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863158,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863222,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863290,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 62000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863361,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863372,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 44000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863411,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863422,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863680,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863681,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863697,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863812,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027863962,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864059,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864130,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 44004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864183,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42004
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864183,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864186,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 44000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864225,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864227,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 44000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864229,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864231,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 62000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864323,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864325,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 80000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864364,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864367,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 80000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864407,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864410,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 80000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864415,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864417,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 80000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864420,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864422,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 80000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864426,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864427,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864429,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864429,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864434,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864434,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864436,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864492,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 80000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864532,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864532,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864535,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864591,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 62000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864654,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864657,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 44000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864659,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864661,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 62000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864715,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 42000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864715,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864718,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 60000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864765,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864765,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864768,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027864775,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865068,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865071,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865072,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865074,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865074,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865078,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 40040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865079,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865081,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20000
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865081,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865083,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 1588040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865743,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 20040
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027865748,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 51400
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866595,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 31400
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866727,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 62760
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866728,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 31400
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866731,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 31360
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866800,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 31360
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866805,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 31360
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866846,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866871,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 0
+            },
+            "pid": 0
+        },
+        {
+            "ph": "C",
+            "tid": 0,
+            "cat": "Memory",
+            "ts": 1497479027866878,
+            "name": "device:SYCL",
+            "args": {
+                "device:SYCL": 0
+            },
+            "pid": 0
         }
     ]
 }

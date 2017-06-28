@@ -1,0 +1,30 @@
+result with op->printName() in Process() => execution
+with Z unused
+add1 = w+x
+add2 = y+w
+
+***   _SOURCE
+***   _SOURCE
+***   _SOURCE
+
+***   init
+***   Const
+
+***   _recv_w_placeholder_0
+***   _recv_x_placeholder_0
+***   _recv_y_placeholder_0
+***   _recv_y_placeholder_0/_0
+***   _recv_y_placeholder_0/_1
+***   _recv_w_placeholder_0/_2
+***   _recv_w_placeholder_0/_3
+***   _recv_x_placeholder_0/_4
+***   _recv_x_placeholder_0/_5
+
+***   red_mean
+***   red_mean/_6
+***   red_mean/_7
+
+***   add1
+***   add2
+***   add
+***   _send_red_mean_0

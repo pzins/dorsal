@@ -29,8 +29,7 @@ run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE, output_partiti
 run_metadata = tf.RunMetadata()
 d = x+y+z
 print(s.run(d, feed_dict={x: a, y: b, z: c}, options=run_options, run_metadata=run_metadata))
-tl = timeline.Timeline(run_metadata.step_stats)
-ctf = tl.generate_chrome_trace_format(show_memory=True)
+
 # Create the Timeline object, and write it to a json
 tl = timeline.Timeline(run_metadata.step_stats)
 ctf = tl.generate_chrome_trace_format(show_memory=True)
