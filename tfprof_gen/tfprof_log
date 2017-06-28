@@ -1,9 +1,0 @@
-
-.
-layer1/biases/Variable_trainable_variables
-/
-layer2/weights/Variable_trainable_variables
-.
-layer2/biases/Variable_trainable_variables
-/
-layer1/weights/Variable_trainable_variables
