@@ -1,0 +1,335 @@
+{
+    "traceEvents": [
+        {
+            "ph": "M",
+            "args": {
+                "name": "Allocators"
+            },
+            "pid": 0,
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "pid": 1,
+            "name": "process_name"
+        },
+        {
+            "ph": "M",
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "pid": 2,
+            "name": "process_name"
+        },
+        {
+            "id": 0,
+            "ph": "N",
+            "ts": 1498765298392982,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "add2"
+        },
+        {
+            "id": 0,
+            "ph": "O",
+            "ts": 1498765298393168,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 100\n  }\n  dim {\n    size: 100\n  }\n}\nallocation_description {\n  requested_bytes: 40000\n  allocator_name: cpu\n  ptr: 140552270041088\n}\n"
+                }
+            },
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "add2"
+        },
+        {
+            "id": 1,
+            "ph": "N",
+            "ts": 1498765298392978,
+            "tid": 1,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "add1"
+        },
+        {
+            "id": 1,
+            "ph": "O",
+            "ts": 1498765298393252,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 100\n  }\n  dim {\n    size: 100\n  }\n}\nallocation_description {\n  requested_bytes: 40000\n  allocator_name: cpu\n  ptr: 140552267943936\n}\n"
+                }
+            },
+            "tid": 1,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "add1"
+        },
+        {
+            "id": 2,
+            "ph": "N",
+            "ts": 1498765298393255,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "res1"
+        },
+        {
+            "id": 2,
+            "ph": "O",
+            "ts": 1498765298393261,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 100\n  }\n  dim {\n    size: 100\n  }\n}\nallocation_description {\n  requested_bytes: 40000\n  allocator_name: cpu\n  ptr: 140552267943936\n}\n"
+                }
+            },
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "res1"
+        },
+        {
+            "id": 3,
+            "ph": "N",
+            "ts": 1498765298393264,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "res"
+        },
+        {
+            "id": 3,
+            "ph": "O",
+            "ts": 1498765298393268,
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 100\n  }\n  dim {\n    size: 100\n  }\n}\nallocation_description {\n  requested_bytes: 40000\n  allocator_name: cpu\n  ptr: 140552267988992\n}\n"
+                }
+            },
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "res"
+        },
+        {
+            "ph": "X",
+            "ts": 1498765298392895,
+            "args": {
+                "op": "NoOp",
+                "name": "_SOURCE"
+            },
+            "tid": 0,
+            "pid": 1,
+            "dur": 17,
+            "cat": "Op",
+            "name": "NoOp"
+        },
+        {
+            "ph": "X",
+            "ts": 1498765298392982,
+            "args": {
+                "op": "Add",
+                "input0": "_recv_y_placeholder_0",
+                "input1": "_recv_z_placeholder_0",
+                "name": "add2"
+            },
+            "tid": 0,
+            "pid": 1,
+            "dur": 187,
+            "cat": "Op",
+            "name": "Add"
+        },
+        {
+            "ph": "X",
+            "ts": 1498765298392978,
+            "args": {
+                "op": "Add",
+                "input0": "_recv_w_placeholder_0",
+                "input1": "_recv_x_placeholder_0",
+                "name": "add1"
+            },
+            "tid": 1,
+            "pid": 1,
+            "dur": 275,
+            "cat": "Op",
+            "name": "Add"
+        },
+        {
+            "ph": "X",
+            "ts": 1498765298393255,
+            "args": {
+                "op": "Add",
+                "input0": "add1",
+                "input1": "add2",
+                "name": "res1"
+            },
+            "tid": 0,
+            "pid": 1,
+            "dur": 7,
+            "cat": "Op",
+            "name": "Add"
+        },
+        {
+            "id": 0,
+            "ph": "s",
+            "ts": 1498765298393253,
+            "tid": 1,
+            "pid": 1,
+            "cat": "DataFlow",
+            "name": "add1"
+        },
+        {
+            "id": 0,
+            "ph": "t",
+            "ts": 1498765298393255,
+            "tid": 0,
+            "pid": 1,
+            "cat": "DataFlow",
+            "name": "add1"
+        },
+        {
+            "ph": "X",
+            "ts": 1498765298393264,
+            "args": {
+                "op": "Add",
+                "input0": "res1",
+                "input1": "res2",
+                "name": "res"
+            },
+            "tid": 0,
+            "pid": 1,
+            "dur": 5,
+            "cat": "Op",
+            "name": "Add"
+        },
+        {
+            "id": 0,
+            "ph": "D",
+            "ts": 1498765298393261,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "add2"
+        },
+        {
+            "id": 2,
+            "ph": "D",
+            "ts": 1498765298393268,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "res1"
+        },
+        {
+            "id": 3,
+            "ph": "D",
+            "ts": 1498765298393269,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "res"
+        },
+        {
+            "id": 1,
+            "ph": "D",
+            "ts": 1498765298393261,
+            "tid": 0,
+            "pid": 2,
+            "cat": "Tensor",
+            "name": "add1"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298392978,
+            "args": {
+                "cpu": 40000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298392982,
+            "args": {
+                "cpu": 80000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298393255,
+            "args": {
+                "cpu": 120000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298393261,
+            "args": {
+                "cpu": 80000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298393261,
+            "args": {
+                "cpu": 40000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298393264,
+            "args": {
+                "cpu": 80000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298393268,
+            "args": {
+                "cpu": 40000
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        },
+        {
+            "ph": "C",
+            "ts": 1498765298393269,
+            "args": {
+                "cpu": 0
+            },
+            "tid": 0,
+            "pid": 0,
+            "cat": "Memory",
+            "name": "cpu"
+        }
+    ]
+}
