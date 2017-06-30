@@ -27,16 +27,21 @@ w = tf.placeholder(tf.float32, [height, width], name="w_placeholder")
 x = tf.placeholder(tf.float32, [height, width], name="x_placeholder")
 y = tf.placeholder(tf.float32, [height, width], name="y_placeholder")
 z = tf.placeholder(tf.float32, [height, width], name="z_placeholder")
+
 ww = tf.placeholder(tf.float32, [height, width], name="w_placeholder")
 xx = tf.placeholder(tf.float32, [height, width], name="x_placeholder")
 yy = tf.placeholder(tf.float32, [height, width], name="y_placeholder")
 zz = tf.placeholder(tf.float32, [height, width], name="z_placeholder")
+
 add1 = tf.add(w, x, "add1")
 add2 = tf.add(y, z, "add2")
+res1 = tf.add(add1, add2, "res1")
+
+# with tf.control_dependencies([res1]):
 add3 = tf.add(ww, xx, "add3")
 add4 = tf.add(yy, zz, "add4")
 res2 = tf.add(add3, add4, "res2")
-res1 = tf.add(add1, add2, "res1")
+
 res = tf.matmul(res1, res2, name="res")
 
 

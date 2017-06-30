@@ -1,0 +1,589 @@
+{
+    "traceEvents": [
+        {
+            "args": {
+                "name": "Allocators"
+            },
+            "name": "process_name",
+            "ph": "M",
+            "pid": 0
+        },
+        {
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Compute"
+            },
+            "name": "process_name",
+            "ph": "M",
+            "pid": 1
+        },
+        {
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/device:SYCL:0 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M",
+            "pid": 2
+        },
+        {
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Compute"
+            },
+            "name": "process_name",
+            "ph": "M",
+            "pid": 3
+        },
+        {
+            "args": {
+                "name": "/job:localhost/replica:0/task:0/cpu:0 Tensors"
+            },
+            "name": "process_name",
+            "ph": "M",
+            "pid": 4
+        },
+        {
+            "ts": 1498833799347105,
+            "tid": 0,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "add4",
+            "id": 0,
+            "pid": 2
+        },
+        {
+            "ts": 1498833800211641,
+            "tid": 0,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140500354551824\n}\n"
+                }
+            },
+            "name": "add4",
+            "id": 0,
+            "pid": 2
+        },
+        {
+            "ts": 1498833799341757,
+            "tid": 1,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "add2",
+            "id": 1,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801014184,
+            "tid": 1,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140499954548752\n}\n"
+                }
+            },
+            "name": "add2",
+            "id": 1,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801332321,
+            "tid": 0,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "add3",
+            "id": 2,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801341864,
+            "tid": 0,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140498754539536\n}\n"
+                }
+            },
+            "name": "add3",
+            "id": 2,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801341877,
+            "tid": 0,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "res2",
+            "id": 3,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801508123,
+            "tid": 0,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140498754539536\n}\n"
+                }
+            },
+            "name": "res2",
+            "id": 3,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801502465,
+            "tid": 1,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "add1",
+            "id": 4,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801517761,
+            "tid": 1,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140499154542608\n}\n"
+                }
+            },
+            "name": "add1",
+            "id": 4,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801517770,
+            "tid": 0,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "res1",
+            "id": 5,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801527072,
+            "tid": 0,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140499154542608\n}\n"
+                }
+            },
+            "name": "res1",
+            "id": 5,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801527079,
+            "tid": 0,
+            "ph": "N",
+            "cat": "Tensor",
+            "name": "res",
+            "id": 6,
+            "pid": 2
+        },
+        {
+            "ts": 1498833807958158,
+            "tid": 0,
+            "ph": "O",
+            "cat": "Tensor",
+            "args": {
+                "snapshot": {
+                    "tensor_description": "dtype: DT_FLOAT\nshape {\n  dim {\n    size: 10000\n  }\n  dim {\n    size: 10000\n  }\n}\nallocation_description {\n  requested_bytes: 400000000\n  allocator_name: device:SYCL\n  ptr: 140501154557968\n}\n"
+                }
+            },
+            "name": "res",
+            "id": 6,
+            "pid": 2
+        },
+        {
+            "ts": 1498833798337231,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "dur": 9,
+            "name": "NoOp",
+            "pid": 1
+        },
+        {
+            "ts": 1498833799347105,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "_recv_z_placeholder_1_0/_3",
+                "input0": "_recv_y_placeholder_1_0/_1",
+                "name": "add4",
+                "op": "Add"
+            },
+            "dur": 864537,
+            "name": "Add",
+            "pid": 1
+        },
+        {
+            "ts": 1498833799341757,
+            "tid": 1,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "_recv_z_placeholder_0/_11",
+                "input0": "_recv_y_placeholder_0/_9",
+                "name": "add2",
+                "op": "Add"
+            },
+            "dur": 1672428,
+            "name": "Add",
+            "pid": 1
+        },
+        {
+            "ts": 1498833801332321,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "_recv_x_placeholder_1_0/_7",
+                "input0": "_recv_w_placeholder_1_0/_5",
+                "name": "add3",
+                "op": "Add"
+            },
+            "dur": 9544,
+            "name": "Add",
+            "pid": 1
+        },
+        {
+            "ts": 1498833801341877,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "add4",
+                "input0": "add3",
+                "name": "res2",
+                "op": "Add"
+            },
+            "dur": 166247,
+            "name": "Add",
+            "pid": 1
+        },
+        {
+            "ts": 1498833801502465,
+            "tid": 1,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "_recv_x_placeholder_0/_15",
+                "input0": "_recv_w_placeholder_0/_13",
+                "name": "add1",
+                "op": "Add"
+            },
+            "dur": 15297,
+            "name": "Add",
+            "pid": 1
+        },
+        {
+            "ts": 1498833801517770,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "add2",
+                "input0": "add1",
+                "name": "res1",
+                "op": "Add"
+            },
+            "dur": 9303,
+            "name": "Add",
+            "pid": 1
+        },
+        {
+            "ts": 1498833801517762,
+            "tid": 1,
+            "ph": "s",
+            "cat": "DataFlow",
+            "name": "add1",
+            "id": 0,
+            "pid": 1
+        },
+        {
+            "ts": 1498833801517770,
+            "tid": 0,
+            "ph": "t",
+            "cat": "DataFlow",
+            "name": "add1",
+            "id": 0,
+            "pid": 1
+        },
+        {
+            "ts": 1498833801014185,
+            "tid": 1,
+            "ph": "s",
+            "cat": "DataFlow",
+            "name": "add2",
+            "id": 1,
+            "pid": 1
+        },
+        {
+            "ts": 1498833801517770,
+            "tid": 0,
+            "ph": "t",
+            "cat": "DataFlow",
+            "name": "add2",
+            "id": 1,
+            "pid": 1
+        },
+        {
+            "ts": 1498833801527079,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "input1": "res2",
+                "input0": "res1",
+                "name": "res",
+                "op": "MatMul"
+            },
+            "dur": 6431080,
+            "name": "MatMul",
+            "pid": 1
+        },
+        {
+            "ts": 1498833798337227,
+            "tid": 0,
+            "ph": "X",
+            "cat": "Op",
+            "args": {
+                "name": "_SOURCE",
+                "op": "NoOp"
+            },
+            "dur": 196,
+            "name": "NoOp",
+            "pid": 3
+        },
+        {
+            "ts": 1498833807958158,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "res1",
+            "id": 5,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801527072,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "add2",
+            "id": 1,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801508123,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "add3",
+            "id": 2,
+            "pid": 2
+        },
+        {
+            "ts": 1498833807958159,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "res",
+            "id": 6,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801527072,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "add1",
+            "id": 4,
+            "pid": 2
+        },
+        {
+            "ts": 1498833801508123,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "add4",
+            "id": 0,
+            "pid": 2
+        },
+        {
+            "ts": 1498833807958158,
+            "tid": 0,
+            "ph": "D",
+            "cat": "Tensor",
+            "name": "res2",
+            "id": 3,
+            "pid": 2
+        },
+        {
+            "ts": 1498833799341757,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 400000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833799347105,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 800000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801332321,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1200000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801341877,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1600000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801502465,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 2000000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801508123,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1600000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801508123,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1200000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801517770,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1600000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801527072,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1200000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801527072,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 800000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833801527079,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 1200000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833807958158,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 800000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833807958158,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 400000000
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        },
+        {
+            "ts": 1498833807958159,
+            "tid": 0,
+            "ph": "C",
+            "cat": "Memory",
+            "args": {
+                "device:SYCL": 0
+            },
+            "name": "device:SYCL",
+            "pid": 0
+        }
+    ]
+}
