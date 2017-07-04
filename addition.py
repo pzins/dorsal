@@ -4,6 +4,13 @@ import datetime
 from tensorflow.python.client import timeline
 import socket
 import time
+import os
+
+os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '10'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '10'
+from tensorflow import logging
+logging.set_verbosity(logging.INFO)
+
 
 host = socket.gethostname()
 now = datetime.datetime.now()
