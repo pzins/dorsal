@@ -34,15 +34,14 @@
 
 			<fsm id="call_stack" multiple="false" initial="loop">
 				<state id="loop">
-					<transition event="hsaTracer:function_entry" target="loop" action="entry" />
-					<transition event="hsaTracer:function_exit" target="loop" action="exit" />
-					
-					<transition event="hipTracer:begin" target="loop" action="entry" />
-					<transition event="hipTracer:end" target="loop" action="exit" />
-					
-					<transition event="hccTracer:*begin" target="loop" action="entry" />
-					<transition event="hccTracer:*end" target="loop" action="exit" />
-					
+					<transition event="hsa_event:entry" target="loop" action="entry" />
+					<transition event="hsa_event:exit" target="loop" action="exit" />
+					<transition event="perfmarker:begin" target="loop" action="entry" />
+					<transition event="perfmarker:end" target="loop" action="exit" />
+					<transition event="hsa_kernel:begin" target="loop" action="entry" />
+					<transition event="hsa_kernel:end" target="loop" action="exit" />
+					<transition event="data_transfer:begin" target="loop" action="entry" />
+					<transition event="data_transfer:end" target="loop" action="exit" />
 					<transition event="tensorflowTracer:process_entry" target="loop" action="entry" />
 					<transition event="tensorflowTracer:process_exit" target="loop" action="exit" />
 					<transition event="tensorflowTracer:inline_ready_entry" target="loop" action="entry" />
@@ -69,7 +68,10 @@
 					<transition event="tensorflowTracer:gpu_bfc_alloc_exit" target="loop" action="exit" />
 					<transition event="tensorflowTracer:gpu_device_compute_entry" target="loop" action="entry" />
 					<transition event="tensorflowTracer:gpu_device_compute_exit" target="loop" action="exit" />
-
+					<transition event="hipTracer:begin" target="loop" action="entry" />
+					<transition event="hipTracer:end" target="loop" action="exit" />
+					<transition event="hccTracer:*begin" target="loop" action="entry" />
+					<transition event="hccTracer:*end" target="loop" action="exit" />
 
 				</state>
 			</fsm>
