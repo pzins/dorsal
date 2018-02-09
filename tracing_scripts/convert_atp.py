@@ -576,7 +576,9 @@ st = writer.create_stream(stream_class)
 # write the ctf
 counter = 0
 for i in all_events:
+    
     ev, tp, tid = i.getEvent()
+    print(tp)
     ev.tid(tid)
     clock.time = tp
     st.append_event(ev)
