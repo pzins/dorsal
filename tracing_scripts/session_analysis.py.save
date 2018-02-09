@@ -1,0 +1,115 @@
+prefix = "/home/pierre/"
+
+class Session():
+    def __init__(self, start, end):
+        self.start = int(start)
+        self.end = int(end)
+        self.kernels = []
+
+    def __str__(self):
+        return "Session: " + str(self.start) + " " + str(self.end)
+    
+    def gpu_usage(self):
+        duration = self.end - self.start
+        gpu_time = 0
+        for i in self.kernels:
+            gpu_time += i.end - i.start
+        return float(gpu_time / duration) * 100
+
+class Kernel():
+    def __init__(self, name, handle, start, end, agentName, agentHandle, index, queueHandle):
+        self.name = name
+        self.handle = handle
+        self.start = int(start)
+        self.end = int(end)
+        self.agentName = agentName
+        self.agentHandle = agentHandle
+        self.index = index
+        self.queueHandle = queueHandle
+
+    def __str__(self):
+        return self.name + " " + str(self.start) + " " + str(self.end) + " " + self.index
+    def output(self):
+        return self.name + " " + self.handle + " " + str(self.start) + " " + str(self.end) + " " + self.agentName + " " + self.agentHandle + " " + self.index + " " + self.queueHandle + "\n"
+
+def check_sessions(sessions):
+    for i in SESSIONS:
+        if i.end == -1:
+            return False
+    return True
+
+SESSIONS = []
+KERNELS = []
+
+
+
+session_begin_cnt = 0
+session_end_cnt = 0
+
+kernel_reading = False
+perfmarker_reading = False
+
+with open(prefix + "apitrace.atp", "r", encoding="ISO-8859-1") as f:
+    lines = f.readlines()
+    counter = 0
+    for line in lines:
+        if "hsa Kernel Timestamp Output" in line or kernel_reading:
+            if kernel_reading:
+                elements = line.strip().split()
+                if len(elements) > 2:
+                    KERNELS.append(Kernel(elements[0], elements[1], elements[2], elements[3], elements[4], elements[5], elements[6], elements[7]))
+            else:
+                kernel_reading = True
+        if "Perfmarker Output" in line or perfmarker_reading:
+            kernel_reading = False
+            if perfmarker_reading and "DirectSession::Run" in line:
+                elements = line.strip().split()
+                if len(elements) > 2:
+                    if elements[0] == "clBeginPerfMarker":
+                        session_begin_cnt += 1
+                        SESSIONS.append(Session(elements[2], "0"))
+                    elif elements[0] == "clEndPerfMarkerEx":
+                        session_end_cnt += 1
+                        SESSIONS[-1].end = int(elements[1])
+            else:
+                perfmarker_reading = True
+                
+
+
+
+print(len(SESSIONS))
+print(len(KERNELS))
+print(check_sessions(SESSIONS))
+print(session_begin_cnt, session_end_cnt)
+
+# sort
+KERNELS.sort(key=lambda x: x.start, reverse=False)
+SESSIONS.sort(key=lambda x: x.start, reverse=False)
+
+
+session_idx = 0
+for i in KERNELS:
+    sess = SESSIONS[session_idx]
+    if i.start <= sess.end:
+        sess.kernels.append(i)
+    else:
+        session_idx += 1
+        sess = SESSIONS[session_idx]
+        sess.kernels.append(i)
+
+mean = 0
+counter = 0
+for i in range(1,len(SESSIONS)-1):
+    tmp = SESSIONS[i].gpu_usage()
+    if tmp == 0:
+        break
+    mean += tmp
+    print(tmp)
+    counter += 1
+
+# remove first and last iteration, but if trace long => tracing stop => no last
+if counter == len(SESSIONS):
+    counter -= 2
+else:
+    counter -= 1
+print(counter, "MEAN:", mean/counter)

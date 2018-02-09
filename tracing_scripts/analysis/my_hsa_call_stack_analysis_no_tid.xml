@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+<!-- ***************************************************************************
+* Copyright (c) 2016 Ericsson
+*
+* All rights reserved. This program and the accompanying materials are
+* made available under the terms of the Eclipse Public License v1.0 which
+* accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*************************************************************************** -->
+	<pattern version="0" id="hsa_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="HSA API" />
+		</head>
+
+		<patternHandler initial="call_stack">
+			<action id="func_entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateValue type="eventField" value="name" stack="push" />
+				</stateChange>
+			</action>
+
+			<action id="func_exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateValue type="eventField" value="name" stack="pop" />
+				</stateChange>
+			</action>
+
+			<fsm id="call_stack" multiple="false" initial="loop">
+				<state id="loop">
+					<transition event="hsa_event:entry" target="loop" action="func_entry" />
+					<transition event="hsa_event:exit" target="loop" action="func_exit" />
+				</state>
+			</fsm>
+
+		</patternHandler>
+	</pattern>
+
+	<timeGraphView id="hsa_cs_view">
+		<head>
+			<analysis id="hsa_cs_pattern" />
+			<label value="HSA API call stack view" />
+		</head>
+
+		<entry path="call_stack/*">
+			<display type="self" />
+			<entry path="*">
+				<display type="self" />
+			</entry>
+		</entry>
+	</timeGraphView>
+</tmfxml>

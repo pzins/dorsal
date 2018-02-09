@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="hsa callstack">
+        <level path="call_stack/*" />
+		<thread level="0"/>
+    </callstackGroup>
+	<pattern version="0" id="hsa_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="HSA API" />
+		</head>
+
+		<patternHandler initial="call_stack">
+			<action id="entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="push" />
+				</stateChange>
+			</action>
+
+			<action id="exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="pop" />
+				</stateChange>
+			</action>
+			
+			<fsm id="call_stack" multiple="false" initial="loop">
+				<state id="loop">
+					<transition event="hsa_event:entry" target="loop" action="entry" />
+					<transition event="hsa_event:exit" target="loop" action="exit" />
+					<transition event="perfmarker:begin" target="loop" action="entry" />
+					<transition event="perfmarker:end" target="loop" action="exit" />
+					<transition event="hsa_kernel:begin" target="loop" action="entry" />
+					<transition event="hsa_kernel:end" target="loop" action="exit" />
+					<transition event="data_transfer:begin" target="loop" action="entry" />
+					<transition event="data_transfer:end" target="loop" action="exit" />
+				</state>
+			</fsm>
+
+		</patternHandler>
+		
+	</pattern>
+</callstack>
+
+	<timeGraphView id="hsa_cs_view">
+		<head>
+			<analysis id="hsa_cs_pattern" />
+			<label value="HSA API call stack view" />
+		</head>
+
+		<entry path="call_stack/*">
+			<display type="self" />
+			<entry path="*">
+				<display type="self" />
+			</entry>
+		</entry>
+	</timeGraphView>
+</tmfxml>

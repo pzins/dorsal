@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+ * Copyright (c) 2017 Ericsson
+ *
+ * All rights reserved. This program and the accompanying materials are
+ * made available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Jean-Christian Kouame - Initial API and implementation
+ *************************************************************************** -->
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+    <!--Timegraph view that show the scenario execution state in time -->
+    <timeGraphView id="tensorflow.view">
+        <head>
+            <analysis id="tensorflow.analysis" />
+            <label value="Tensor flow kernels" />
+        </head>
+        <!-- FFA040 -->
+        <definedValue name="PENDING" value="0" color="#CCCCCC" />
+        <definedValue name="IN_PROGRESS" value="1" color="#00CCFF" />
+
+        <!-- Scenario view -->
+        <entry path="Current_thread">
+            <display type="self" />
+        </entry>
+    </timeGraphView>
+
+    <pattern version="0" id="tensorflow.analysis">
+        <head>
+            <traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+            <label value="Tensor Flow Kernels"/>
+        </head>
+
+        <patternHandler>
+            
+            <action id="set_running">
+                <stateChange>
+                    <stateAttribute type="constant" value="Current_thread" />
+                    <stateValue type="int" value="1" />
+                </stateChange>
+            </action>
+           <action id="set_stop">
+                <stateChange>
+                    <stateAttribute type="constant" value="Current_thread" />
+                    <stateValue type="int" value="0" />
+                </stateChange>
+                <segment>
+                    <segType>
+                        <segName>
+                            <stateValue type="string" value="kernel"/>
+                        </segName>
+                    </segType>
+                </segment>
+            </action>
+
+            <fsm id="kernels" initial="wait">
+                <state id="wait">
+                    <transition event="lttng_ust_cyg_profile:func_entry" target="state"
+                        action="set_running" />
+                </state>
+                <state id="state">
+        		    <transition event="lttng_ust_cyg_profile:func_exit" target="done"
+                        action="set_stop" />
+                </state>
+                <final id="done"/>
+            </fsm>
+        </patternHandler>
+    </pattern>
+</tmfxml>

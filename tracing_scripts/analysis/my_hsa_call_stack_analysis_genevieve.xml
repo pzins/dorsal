@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="hsa callstack">
+        <level path="call_stack/*" />
+		<thread level="0"/>
+    </callstackGroup>
+	<pattern version="0" id="hsa_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="HSA API" />
+		</head>
+
+		<patternHandler initial="call_stack">
+			<action id="func_entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="push" />
+				</stateChange>
+			</action>
+
+			<action id="func_exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="pop" />
+				</stateChange>
+			</action>
+			<action id="perf_entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="push" />
+				</stateChange>
+			</action>
+
+			<action id="perf_exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="pop" />
+				</stateChange>
+			</action>
+			<action id="kernel_entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="push"/>
+				</stateChange>
+			</action>
+
+			<action id="kernel_exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="pop"/>
+				</stateChange>
+			</action>
+			<fsm id="call_stack" multiple="false" initial="loop">
+				<state id="loop">
+					<transition event="hsa_event:entry" target="loop" action="func_entry" />
+					<transition event="hsa_event:exit" target="loop" action="func_exit" />
+					<transition event="perfmarker:begin" target="loop" action="perf_entry" />
+					<transition event="perfmarker:end" target="loop" action="perf_exit" />
+					<transition event="hsa_kernel:begin" target="loop" action="kernel_entry" />
+					<transition event="hsa_kernel:end" target="loop" action="kernel_exit" />
+				</state>
+			</fsm>
+
+		</patternHandler>
+
+	</pattern>
+</callstack>
+
+	<timeGraphView id="hsa_cs_view">
+		<head>
+			<analysis id="hsa_cs_pattern" />
+			<label value="HSA API call stack view" />
+		</head>
+
+		<entry path="call_stack/*">
+			<display type="self" />
+			<entry path="*">
+				<display type="self" />
+			</entry>
+		</entry>
+	</timeGraphView>
+</tmfxml>
