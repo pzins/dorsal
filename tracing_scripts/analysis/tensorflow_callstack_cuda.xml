@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="hsa callstack">
+        <level path="call_stack/*" />
+		<thread level="0"/>
+    </callstackGroup>
+	<pattern version="0" id="hsa_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="HSA API" />
+		</head>
+
+		<patternHandler initial="call_stack">
+			<action id="entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="push" />
+				</stateChange>
+			</action>
+
+			<action id="exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="pop" />
+				</stateChange>
+			</action>
+
+			<fsm id="call_stack" multiple="false" initial="loop">
+				<state id="loop">
+					<transition event="cuptiTracer:runtime_api_entry" target="loop" action="entry" />
+					<transition event="cuptiTracer:runtime_api_exit" target="loop" action="exit" />
+					<transition event="cuptiTracer:driver_api_entry" target="loop" action="entry" />
+					<transition event="cuptiTracer:driver_api_exit" target="loop" action="exit" />
+					<transition event="cuptiTracer:kernel_begin" target="loop" action="entry" />
+					<transition event="cuptiTracer:kernel_end" target="loop" action="exit" />
+					<transition event="cuptiTracer:memcpy_begin" target="loop" action="entry" />
+					<transition event="cuptiTracer:memcpy_end" target="loop" action="exit" />
+
+					<transition event="tensorflowTracer:process_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:process_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:inline_ready_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:inline_ready_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:push_succ_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:push_succ_exit" target="loop" action="exit" />
+					<transition event="eigenTracer:schedule_entry" target="loop" action="entry" />
+					<transition event="eigenTracer:schedule_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:session_start" target="loop" action="entry" />
+					<transition event="tensorflowTracer:session_end" target="loop" action="exit" />
+					<transition event="tensorflowTracer:operation_start" target="loop" action="entry" />
+					<transition event="tensorflowTracer:operation_end" target="loop" action="exit" />
+					<transition event="tensorflowTracer:allocate_chunk_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:allocate_chunk_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:allocate_raw_intenal_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:allocate_raw_internal_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:deallocate_raw_intenal_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:deallocate_raw_internal_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:do_create_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:do_create_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:cleanup_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:cleanup_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:gpu_bfc_alloc_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:gpu_bfc_alloc_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:gpu_device_compute_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:gpu_device_compute_exit" target="loop" action="exit" />
+
+
+				</state>
+			</fsm>
+
+		</patternHandler>
+
+	</pattern>
+</callstack>
+
+	<timeGraphView id="hsa_cs_view">
+		<head>
+			<analysis id="hsa_cs_pattern" />
+			<label value="HSA API call stack view" />
+		</head>
+
+		<entry path="call_stack/*">
+			<display type="self" />
+			<entry path="*">
+				<display type="self" />
+			</entry>
+		</entry>
+	</timeGraphView>
+</tmfxml>
