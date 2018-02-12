@@ -149,7 +149,8 @@ event_classes['tensorflowTracer:gpu_device_compute_exit'].add_field(uint64_fd, '
 
 # Add the input trace to the collection
 collection = btr.TraceCollection()
-collection.add_trace("/home/pierre/lttng-traces/tensorflow-20180209-175722/ust/uid/1000/64-bit", 'ctf')
+path = "/home/pierre/lttng-traces/allll-20180212-183112"
+collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
 
 # Set the output trace
 out_path = "/home/pierre/out_traces"
@@ -157,7 +158,6 @@ writer = btw.Writer(out_path)
 
 clock = btw.Clock('monotonic')
 clock.description = 'Monotonic clock from AMD RCP'
-# clock.offset = 1511453049028864041
 writer.add_clock(clock)
 
 writer.add_environment_field("hostname", "pierre-tensorflow")
@@ -212,9 +212,12 @@ for r_event in collection.events:
             w_event = btw.Event(event_classes[name])
             w_event.payload('name').value = r_event['name']
             w_event.payload('timestamp').value = r_event['timestamp']
-            event_time =  1518106715746647446 + r_event['timestamp']
+            event_time =  1518471699743021158 + r_event['timestamp']
                 
-    events[event_time] = [w_event, r_event.field_with_scope("vtid", 3)]
+    if "tensorflowTracer:operation" in name:
+        events[event_time] = [w_event, 9999]
+    else:
+        events[event_time] = [w_event, r_event.field_with_scope("vtid", 3)]
         
     # else:
         # w_event.payload('name').value = name
