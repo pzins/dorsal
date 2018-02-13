@@ -263,7 +263,6 @@ events = {}
 
 for r_event in collection.events:
     name = r_event.name
-
     event_time = r_event.timestamp
     w_event = btw.Event(event_classes[name])
 
@@ -279,24 +278,25 @@ for r_event in collection.events:
     
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
-    if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name:
-        threadId = 10000
+    if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
+        threadId = 9991
     elif "operation" in name:
-        threadId = 9999
-    elif "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
-        threadId = 9998
-    elif "allocate" in name:
-        threadId = 9997
-    elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
-        threadId = 9996
-    elif "tensorflowTracer:gpu_" in name:
-        threadId = 9995
+        if "gpu" in r_event["placement"]:
+            threadId = 9993
+        else:
+            threadId = 9992
     elif "hsaTracer" in name:
         threadId = 9994
     elif "hipTracer" in name:
-        threadId = 9993
+        threadId = 9995
     elif "hccTracer" in name:
-        threadId = 9992
+        threadId = 9996
+    elif "tensorflowTracer:gpu_" in name:
+        threadId = 9997
+    elif "allocate" in name:
+        threadId = 9998
+    elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
+        threadId = 9999
     else:
         print("Warning, no tid set to the event", name)
     
