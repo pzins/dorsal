@@ -11,22 +11,22 @@
 
 TRACEPOINT_EVENT(
     hipTracer,
-    begin,
+    function_entry,
     TP_ARGS(
-        const char*, my_string_arg
+        const char*, name_arg
     ),
     TP_FIELDS(
-        ctf_string(name, my_string_arg)
+        ctf_string(name, name_arg)
     )
 )
 TRACEPOINT_EVENT(
     hipTracer,
-    end,
+    function_exit,
     TP_ARGS(
-        const char*, my_string_arg
+        const char*, name_arg
     ),
     TP_FIELDS(
-        ctf_string(name, my_string_arg)
+        ctf_string(name, name_arg)
     )
 )
 
