@@ -227,10 +227,19 @@ event_classes['tensorflowTracer:gpu_device_compute_exit'].add_field(uint64_fd, '
 event_classes['tensorflowTracer:gpu_device_compute_exit'].add_field(uint64_fd, 'num_alloc')
 
 
+event_classes['tensorflowTracer:record_tensor_allocation'] = btw.EventClass('tensorflowTracer:record_tensor_allocation')
+event_classes['tensorflowTracer:record_tensor_allocation'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:record_tensor_allocation'].add_field(uint64_fd, 'num_bytes')
+event_classes['tensorflowTracer:record_raw_allocation'] = btw.EventClass('tensorflowTracer:record_raw_allocation')
+event_classes['tensorflowTracer:record_raw_allocation'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:record_raw_allocation'].add_field(uint64_fd, 'num_bytes')
+event_classes['tensorflowTracer:record_tensor_output'] = btw.EventClass('tensorflowTracer:record_tensor_output')
+event_classes['tensorflowTracer:record_tensor_output'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:record_tensor_output'].add_field(uint64_fd, 'num_bytes')
 
 # Add the input trace to the collection
 collection = btr.TraceCollection()
-path = "/home/pierre/lttng-traces/tensorflow-20180213-145605"
+path = "/home/pierre/lttng-traces/tensorflow-20180213-174223"
 collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
 
 # Set the output trace
@@ -299,6 +308,7 @@ for r_event in collection.events:
         threadId = 9999
     else:
         print("Warning, no tid set to the event", name)
+        threadId = 8888
     
     events[event_time] = [w_event, threadId]
         

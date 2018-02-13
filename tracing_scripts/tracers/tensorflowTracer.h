@@ -360,6 +360,70 @@ TRACEPOINT_EVENT(
     )
 )
 
+
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    record_raw_allocation,
+    TP_ARGS(
+        const char*, name_arg,
+        uint64_t, num_bytes_arg
+
+    ),
+    TP_FIELDS(
+        ctf_string(name, name_arg)
+        ctf_integer(uint64_t, num_bytes, num_bytes_arg)
+    )
+)
+
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    record_tensor_allocation,
+    TP_ARGS(
+        const char*, name_arg,
+        uint64_t, num_bytes_arg
+
+    ),
+    TP_FIELDS(
+        ctf_string(name, name_arg)
+        ctf_integer(uint64_t, num_bytes, num_bytes_arg)
+    )
+)
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    record_tensor_output,
+    TP_ARGS(
+        const char*, name_arg,
+        uint64_t, num_bytes_arg
+
+    ),
+    TP_FIELDS(
+        ctf_string(name, name_arg)
+        ctf_integer(uint64_t, num_bytes, num_bytes_arg)
+    )
+)
+
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    record_tensor_deallocation,
+    TP_ARGS(
+        const char*, name_arg,
+        int64_t, num_bytes_arg
+
+    ),
+    TP_FIELDS(
+        ctf_string(name, name_arg)
+        ctf_integer(int64_t, num_bytes, num_bytes_arg)
+    )
+)
+
+// RecordTensorAllocation
+// RecordTensorOutput
+// RecordRawAllocation
+
+// RecordRawDeallocation
+// RecordTensorDeallocation
+
+
 #endif
 
 #include <lttng/tracepoint-event.h>
