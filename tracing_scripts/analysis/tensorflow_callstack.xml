@@ -37,11 +37,14 @@
 					<transition event="hsaTracer:function_entry" target="loop" action="entry" />
 					<transition event="hsaTracer:function_exit" target="loop" action="exit" />
 					
-					<transition event="hipTracer:begin" target="loop" action="entry" />
-					<transition event="hipTracer:end" target="loop" action="exit" />
+					<transition event="hipTracer:function_entry" target="loop" action="entry" />
+					<transition event="hipTracer:function_exit" target="loop" action="exit" />
 					
 					<transition event="hccTracer:*begin" target="loop" action="entry" />
 					<transition event="hccTracer:*end" target="loop" action="exit" />
+					
+					<transition event="eigenTracer:schedule_entry" target="loop" action="entry" />
+					<transition event="eigenTracer:schedule_exit" target="loop" action="exit" />
 					
 					<transition event="tensorflowTracer:process_entry" target="loop" action="entry" />
 					<transition event="tensorflowTracer:process_exit" target="loop" action="exit" />
@@ -49,12 +52,12 @@
 					<transition event="tensorflowTracer:inline_ready_exit" target="loop" action="exit" />
 					<transition event="tensorflowTracer:push_succ_entry" target="loop" action="entry" />
 					<transition event="tensorflowTracer:push_succ_exit" target="loop" action="exit" />
-					<transition event="eigenTracer:schedule_entry" target="loop" action="entry" />
-					<transition event="eigenTracer:schedule_exit" target="loop" action="exit" />
 					<transition event="tensorflowTracer:session_start" target="loop" action="entry" />
 					<transition event="tensorflowTracer:session_end" target="loop" action="exit" />
 					<transition event="tensorflowTracer:operation_start" target="loop" action="entry" />
 					<transition event="tensorflowTracer:operation_end" target="loop" action="exit" />
+					<transition event="tensorflowTracer:async_operation_start" target="loop" action="entry" />
+					<transition event="tensorflowTracer:async_operation_end" target="loop" action="exit" />
 					<transition event="tensorflowTracer:allocate_chunk_entry" target="loop" action="entry" />
 					<transition event="tensorflowTracer:allocate_chunk_exit" target="loop" action="exit" />
 					<transition event="tensorflowTracer:allocate_raw_intenal_entry" target="loop" action="entry" />

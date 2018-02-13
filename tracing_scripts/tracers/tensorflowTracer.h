@@ -18,8 +18,7 @@ TRACEPOINT_EVENT(
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
-        ctf_integer(uint64_t, schedule_arg, name_arg)
-
+        ctf_integer(uint64_t, schedule, schedule_arg)
     )
 )
 
@@ -32,8 +31,7 @@ TRACEPOINT_EVENT(
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
-        ctf_integer(uint64_t, schedule_arg, name_arg)
-
+        ctf_integer(uint64_t, schedule, schedule_arg)
     )
 )
 
@@ -304,12 +302,12 @@ TRACEPOINT_EVENT(
     gpu_bfc_alloc_entry,
     TP_ARGS(
         const char*, name_arg,
-        int, num_bytes_arg,
+        uint64_t, num_bytes_arg,
         int, alignment_arg
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
-        ctf_integer(int, num_bytes, num_bytes_arg)
+        ctf_integer(uint64_t, num_bytes, num_bytes_arg)
         ctf_integer(int, alignment, alignment_arg)
     )
 )
@@ -318,12 +316,12 @@ TRACEPOINT_EVENT(
     gpu_bfc_alloc_exit,
     TP_ARGS(
         const char*, name_arg,
-        int, num_bytes_arg,
+        uint64_t, num_bytes_arg,
         int, alignment_arg
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
-        ctf_integer(int, num_bytes, num_bytes_arg)
+        ctf_integer(uint64_t, num_bytes, num_bytes_arg)
         ctf_integer(int, alignment, alignment_arg)
     )
 )
