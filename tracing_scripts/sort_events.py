@@ -11,8 +11,12 @@ import time
 uint64_fd = btw.IntegerFieldDeclaration(64)
 uint64_fd.signed = False
 
+
 uint32_fd = btw.IntegerFieldDeclaration(32)
 uint32_fd.signed = False
+
+int32_fd = btw.IntegerFieldDeclaration(32)
+int32_fd.signed = True
 
 float_fd = btw.FloatingPointFieldDeclaration()
 
@@ -185,12 +189,25 @@ event_classes['tensorflowTracer:allocate_raw_internal_exit'].add_field(uint32_fd
 event_classes['tensorflowTracer:allocate_raw_internal_exit'].add_field(uint32_fd, 'need_extend')
 event_classes['tensorflowTracer:allocate_raw_internal_exit'].add_field(uint32_fd, 'success')
 
+
+event_classes['tensorflowTracer:find_chunk_ptr'] = btw.EventClass('tensorflowTracer:find_chunk_ptr')
+event_classes['tensorflowTracer:find_chunk_ptr'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:find_chunk_ptr'].add_field(string_fd, 'allocator_name')
+event_classes['tensorflowTracer:find_chunk_ptr'].add_field(uint64_fd, 'num_allocs')
+event_classes['tensorflowTracer:find_chunk_ptr'].add_field(uint64_fd, 'bytes_in_use')
+event_classes['tensorflowTracer:find_chunk_ptr'].add_field(uint64_fd, 'max_bytes_in_use')
+event_classes['tensorflowTracer:find_chunk_ptr'].add_field(uint64_fd, 'max_alloc_size')
+
+
 event_classes['tensorflowTracer:deallocate_raw_internal_entry'] = btw.EventClass('tensorflowTracer:deallocate_raw_internal_entry')
 event_classes['tensorflowTracer:deallocate_raw_internal_entry'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:deallocate_raw_internal_entry'].add_field(string_fd, 'ptr')
+event_classes['tensorflowTracer:deallocate_raw_internal_entry'].add_field(int32_fd, 'num_bytes')
+
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'] = btw.EventClass('tensorflowTracer:deallocate_raw_internal_exit')
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(string_fd, 'ptr')
+event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(int32_fd, 'num_bytes')
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(uint32_fd, 'success')
 
 event_classes['tensorflowTracer:do_create_entry'] = btw.EventClass('tensorflowTracer:do_create_entry')
@@ -207,39 +224,28 @@ event_classes['tensorflowTracer:cleanup_entry'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:cleanup_exit'] = btw.EventClass('tensorflowTracer:cleanup_exit')
 event_classes['tensorflowTracer:cleanup_exit'].add_field(string_fd, 'name')
 
+
+# GPU BFC Memory Allocator : allocate
 event_classes['tensorflowTracer:gpu_bfc_alloc_entry'] = btw.EventClass('tensorflowTracer:gpu_bfc_alloc_entry')
 event_classes['tensorflowTracer:gpu_bfc_alloc_entry'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:gpu_bfc_alloc_entry'].add_field(uint32_fd, 'num_bytes')
 event_classes['tensorflowTracer:gpu_bfc_alloc_entry'].add_field(uint32_fd, 'alignment')
-
 event_classes['tensorflowTracer:gpu_bfc_alloc_exit'] = btw.EventClass('tensorflowTracer:gpu_bfc_alloc_exit')
 event_classes['tensorflowTracer:gpu_bfc_alloc_exit'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:gpu_bfc_alloc_exit'].add_field(uint32_fd, 'num_bytes')
 event_classes['tensorflowTracer:gpu_bfc_alloc_exit'].add_field(uint32_fd, 'alignment')
+# GPU BFC Memory Allocator : free
+event_classes['tensorflowTracer:gpu_bfc_free_entry'] = btw.EventClass('tensorflowTracer:gpu_bfc_free_entry')
+event_classes['tensorflowTracer:gpu_bfc_free_entry'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:gpu_bfc_free_entry'].add_field(int32_fd, 'num_bytes')
+event_classes['tensorflowTracer:gpu_bfc_free_exit'] = btw.EventClass('tensorflowTracer:gpu_bfc_free_exit')
+event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(int32_fd, 'num_bytes')
 
-event_classes['tensorflowTracer:gpu_device_compute_entry'] = btw.EventClass('tensorflowTracer:gpu_device_compute_entry')
-event_classes['tensorflowTracer:gpu_device_compute_entry'].add_field(string_fd, 'name')
-event_classes['tensorflowTracer:gpu_device_compute_entry'].add_field(uint64_fd, 'bytes_in_use')
-event_classes['tensorflowTracer:gpu_device_compute_entry'].add_field(uint64_fd, 'num_alloc')
-event_classes['tensorflowTracer:gpu_device_compute_exit'] = btw.EventClass('tensorflowTracer:gpu_device_compute_exit')
-event_classes['tensorflowTracer:gpu_device_compute_exit'].add_field(string_fd, 'name')
-event_classes['tensorflowTracer:gpu_device_compute_exit'].add_field(uint64_fd, 'bytes_in_use')
-event_classes['tensorflowTracer:gpu_device_compute_exit'].add_field(uint64_fd, 'num_alloc')
-
-
-event_classes['tensorflowTracer:record_tensor_allocation'] = btw.EventClass('tensorflowTracer:record_tensor_allocation')
-event_classes['tensorflowTracer:record_tensor_allocation'].add_field(string_fd, 'name')
-event_classes['tensorflowTracer:record_tensor_allocation'].add_field(uint64_fd, 'num_bytes')
-event_classes['tensorflowTracer:record_raw_allocation'] = btw.EventClass('tensorflowTracer:record_raw_allocation')
-event_classes['tensorflowTracer:record_raw_allocation'].add_field(string_fd, 'name')
-event_classes['tensorflowTracer:record_raw_allocation'].add_field(uint64_fd, 'num_bytes')
-event_classes['tensorflowTracer:record_tensor_output'] = btw.EventClass('tensorflowTracer:record_tensor_output')
-event_classes['tensorflowTracer:record_tensor_output'].add_field(string_fd, 'name')
-event_classes['tensorflowTracer:record_tensor_output'].add_field(uint64_fd, 'num_bytes')
 
 # Add the input trace to the collection
 collection = btr.TraceCollection()
-path = "/home/pierre/lttng-traces/tensorflow-20180213-174223"
+path = "/home/pierre/lttng-traces/tensorflow-20180214-164516"
 collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
 
 # Set the output trace
