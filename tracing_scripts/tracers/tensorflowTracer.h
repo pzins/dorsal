@@ -90,7 +90,7 @@ TRACEPOINT_EVENT(
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
-        ctf_integer(int, count, count_arg)        
+        ctf_integer(int, count, count_arg)
     )
 )
 TRACEPOINT_EVENT(
@@ -102,7 +102,7 @@ TRACEPOINT_EVENT(
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
-        ctf_integer(int, count, count_arg)        
+        ctf_integer(int, count, count_arg)
     )
 )
 
@@ -270,14 +270,12 @@ TRACEPOINT_EVENT(
     TP_ARGS(
         const char*, name_arg,
         const char*, ptr_arg,
-        int, num_bytes_arg,
-        int, success_arg
+        int, num_bytes_arg
     ),
     TP_FIELDS(
         ctf_string(name, name_arg)
         ctf_string(ptr, ptr_arg)
         ctf_integer(int, num_bytes, num_bytes_arg)
-        ctf_integer(int, success, success_arg)
     )
 )
 TRACEPOINT_EVENT(
