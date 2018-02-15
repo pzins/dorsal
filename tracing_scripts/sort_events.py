@@ -208,7 +208,6 @@ event_classes['tensorflowTracer:deallocate_raw_internal_exit'] = btw.EventClass(
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(string_fd, 'ptr')
 event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(int32_fd, 'num_bytes')
-event_classes['tensorflowTracer:deallocate_raw_internal_exit'].add_field(uint32_fd, 'success')
 
 event_classes['tensorflowTracer:do_create_entry'] = btw.EventClass('tensorflowTracer:do_create_entry')
 event_classes['tensorflowTracer:do_create_entry'].add_field(string_fd, 'name')
@@ -243,9 +242,30 @@ event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(int32_fd, 'num_bytes')
 
 
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'] = btw.EventClass('tensorflowTracer:gpu_bfc_allocator_stats')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(string_fd, 'allocator_name')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_bytes_in_use')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_requested_bytes_in_use')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_bytes')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_requested_bytes')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'chunks')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'in_use_chunks')
+event_classes['tensorflowTracer:gpu_bfc_allocator_stats'].add_field(uint64_fd, 'free_chunks')
+
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'] = btw.EventClass('tensorflowTracer:cpu_bfc_allocator_stats')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(string_fd, 'allocator_name')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_bytes_in_use')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_requested_bytes_in_use')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_bytes')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'total_requested_bytes')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'chunks')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'in_use_chunks')
+event_classes['tensorflowTracer:cpu_bfc_allocator_stats'].add_field(uint64_fd, 'free_chunks')
+
+
 # Add the input trace to the collection
 collection = btr.TraceCollection()
-path = "/home/pierre/lttng-traces/tensorflow-20180214-164516"
+path = "/home/pierre/lttng-traces/tensorflow-20180215-164527"
 collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
 
 # Set the output trace

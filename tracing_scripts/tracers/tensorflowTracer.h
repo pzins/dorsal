@@ -386,6 +386,56 @@ TRACEPOINT_EVENT(
 
 
 
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    gpu_bfc_allocator_stats,
+    TP_ARGS(
+        const char*, allocator_name_arg,
+        uint64_t, total_bytes_in_use_arg,
+        uint64_t, total_requested_bytes_in_use_arg,
+        uint64_t, total_bytes_arg,
+        uint64_t, total_requested_bytes_arg,
+        uint64_t, chunks_arg,
+        uint64_t, in_use_chunks_arg,
+        uint64_t, free_chunks_arg
+    ),
+    TP_FIELDS(
+        ctf_string(allocator_name, allocator_name_arg)
+        ctf_integer(int64_t, total_bytes_in_use, total_bytes_in_use_arg)
+        ctf_integer(int64_t, total_requested_bytes_in_use, total_requested_bytes_in_use_arg)
+        ctf_integer(int64_t, total_bytes, total_bytes_arg)
+        ctf_integer(int64_t, total_requested_bytes, total_requested_bytes_arg)
+        ctf_integer(int64_t, chunks, chunks_arg)
+        ctf_integer(int64_t, in_use_chunks, in_use_chunks_arg)
+        ctf_integer(int64_t, free_chunks, free_chunks_arg)
+    )
+)
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    cpu_bfc_allocator_stats,
+    TP_ARGS(
+        const char*, allocator_name_arg,
+        uint64_t, total_bytes_in_use_arg,
+        uint64_t, total_requested_bytes_in_use_arg,
+        uint64_t, total_bytes_arg,
+        uint64_t, total_requested_bytes_arg,
+        uint64_t, chunks_arg,
+        uint64_t, in_use_chunks_arg,
+        uint64_t, free_chunks_arg
+    ),
+    TP_FIELDS(
+        ctf_string(allocator_name, allocator_name_arg)
+        ctf_integer(int64_t, total_bytes_in_use, total_bytes_in_use_arg)
+        ctf_integer(int64_t, total_requested_bytes_in_use, total_requested_bytes_in_use_arg)
+        ctf_integer(int64_t, total_bytes, total_bytes_arg)
+        ctf_integer(int64_t, total_requested_bytes, total_requested_bytes_arg)
+        ctf_integer(int64_t, chunks, chunks_arg)
+        ctf_integer(int64_t, in_use_chunks, in_use_chunks_arg)
+        ctf_integer(int64_t, free_chunks, free_chunks_arg)
+    )
+)
+
+
 
 #endif
 
