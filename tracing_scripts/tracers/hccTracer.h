@@ -57,14 +57,14 @@ TRACEPOINT_EVENT(
     TP_ARGS(
         uint64_t, timestamp_arg,
         const char*, name_arg,
-        int, size_bytes_arg,
+        int64_t, size_bytes_arg,
         float, size_megabytes_arg,
         float, throughput_arg
     ),
     TP_FIELDS(
         ctf_integer(uint64_t, timestamp, timestamp_arg)
         ctf_string(name, name_arg)
-        ctf_integer(int, size_bytes, size_bytes_arg)
+        ctf_integer(int64_t, size_bytes, size_bytes_arg)
         ctf_float(float, size_megabytes, size_megabytes_arg)
         ctf_float(double, throughput, throughput_arg)
     )
@@ -75,14 +75,14 @@ TRACEPOINT_EVENT(
     TP_ARGS(
         uint64_t, timestamp_arg,
         const char*, name_arg,
-        int, size_bytes_arg,
+        int64_t, size_bytes_arg,
         float, size_megabytes_arg,
         float, throughput_arg
     ),
     TP_FIELDS(
         ctf_integer(uint64_t, timestamp, timestamp_arg)
         ctf_string(name, name_arg)
-        ctf_integer(int, size_bytes, size_bytes_arg)
+        ctf_integer(int64_t, size_bytes, size_bytes_arg)
         ctf_float(float, size_megabytes, size_megabytes_arg)
         ctf_float(double, throughput, throughput_arg)
     )
@@ -163,6 +163,32 @@ TRACEPOINT_EVENT(
         ctf_integer(uint64_t, release, release_arg)
     )
 )
+
+TRACEPOINT_EVENT(
+    hccTracer,
+    unpinned_memory_engine_copy_entry,
+    TP_ARGS(
+        const char*, name_arg,
+        uint64_t, size_bytes_arg
+    ),
+    TP_FIELDS(
+        ctf_string(name, name_arg)
+        ctf_integer(uint64_t, size_bytes, size_bytes_arg)
+    )
+)
+TRACEPOINT_EVENT(
+    hccTracer,
+    unpinned_memory_engine_copy_exit,
+    TP_ARGS(
+        const char*, name_arg,
+        uint64_t, size_bytes_arg
+    ),
+    TP_FIELDS(
+        ctf_string(name, name_arg)
+        ctf_integer(uint64_t, size_bytes, size_bytes_arg)
+    )
+)
+
 
 
 // no more used, because profiling methods crash

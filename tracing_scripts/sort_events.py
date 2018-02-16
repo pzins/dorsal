@@ -12,6 +12,8 @@ import os
 uint64_fd = btw.IntegerFieldDeclaration(64)
 uint64_fd.signed = False
 
+int64_fd = btw.IntegerFieldDeclaration(64)
+int64_fd.signed = True
 
 uint32_fd = btw.IntegerFieldDeclaration(32)
 uint32_fd.signed = False
@@ -67,32 +69,38 @@ event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'static_group_segment
 event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'private_segment_size')
 event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'workitem_vgpr_count')
 
+event_classes['hccTracer:unpinned_memory_engine_copy_entry'] = btw.EventClass('hccTracer:unpinned_memory_engine_copy_entry')
+event_classes['hccTracer:unpinned_memory_engine_copy_entry'].add_field(string_fd, 'name')
+event_classes['hccTracer:unpinned_memory_engine_copy_entry'].add_field(int64_fd, 'size_bytes')
+event_classes['hccTracer:unpinned_memory_engine_copy_exit'] = btw.EventClass('hccTracer:unpinned_memory_engine_copy_exit')
+event_classes['hccTracer:unpinned_memory_engine_copy_exit'].add_field(string_fd, 'name')
+event_classes['hccTracer:unpinned_memory_engine_copy_exit'].add_field(int64_fd, 'size_bytes')
 
 event_classes['hccTracer:async_memcpy_begin'] = btw.EventClass('hccTracer:async_memcpy_begin')
 event_classes['hccTracer:async_memcpy_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpy_begin'].add_field(string_fd, 'name')
-event_classes['hccTracer:async_memcpy_begin'].add_field(uint32_fd, 'size_bytes')
+event_classes['hccTracer:async_memcpy_begin'].add_field(int64_fd, 'size_bytes')
 event_classes['hccTracer:async_memcpy_begin'].add_field(float_fd, 'size_megabytes')
 event_classes['hccTracer:async_memcpy_begin'].add_field(float_fd, 'throughput')
 
 event_classes['hccTracer:async_memcpy_end'] = btw.EventClass('hccTracer:async_memcpy_end')
 event_classes['hccTracer:async_memcpy_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpy_end'].add_field(string_fd, 'name')
-event_classes['hccTracer:async_memcpy_end'].add_field(uint32_fd, 'size_bytes')
+event_classes['hccTracer:async_memcpy_end'].add_field(int64_fd, 'size_bytes')
 event_classes['hccTracer:async_memcpy_end'].add_field(float_fd, 'size_megabytes')
 event_classes['hccTracer:async_memcpy_end'].add_field(float_fd, 'throughput')
 
 event_classes['hccTracer:async_memcpyslo_begin'] = btw.EventClass('hccTracer:async_memcpy_begin')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(string_fd, 'name')
-event_classes['hccTracer:async_memcpyslo_begin'].add_field(uint32_fd, 'size_bytes')
+event_classes['hccTracer:async_memcpyslo_begin'].add_field(int64_fd, 'size_bytes')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(float_fd, 'size_megabytes')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(float_fd, 'throughput')
 
 event_classes['hccTracer:async_memcpyslo_end'] = btw.EventClass('hccTracer:async_memcpy_end')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(string_fd, 'name')
-event_classes['hccTracer:async_memcpyslo_end'].add_field(uint32_fd, 'size_bytes')
+event_classes['hccTracer:async_memcpyslo_end'].add_field(int64_fd, 'size_bytes')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(float_fd, 'size_megabytes')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(float_fd, 'throughput')
 
@@ -327,7 +335,7 @@ for r_event in collection.events:
         # print(name, f, r_event[f])
         w_event.payload(f).value = r_event[f]
     
-    if "hccTracer" in name:
+    if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + 1518471699743021158
     
     # organize threads
@@ -350,16 +358,17 @@ for r_event in collection.events:
     elif "hipTracer" in name:
         threadId = 9995
     elif "hccTracer" in name:
-        threadId = 9996
-    elif "tensorflowTracer:gpu_" in name:
-        threadId = 9997
-    elif "allocate" in name:
+        if "unpinned_memory_engine_copy" in name:
+            threadId = 9996
+        else:
+            threadId = 9997
+    elif "alloc" in name:
         threadId = 9998
     elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
         threadId = 9999
     else:
-        print("Warning, no tid set to the event", name)
-        threadId = 8888
+        # print("Warning, no tid set to the event", name)
+        threadId = 999999999
     
     events[event_time] = [w_event, threadId]
         
