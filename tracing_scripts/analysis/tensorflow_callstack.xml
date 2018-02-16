@@ -3,14 +3,14 @@
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
 <callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
-    <callstackGroup name="hsa callstack">
+    <callstackGroup name="Tensorflow Callstack">
         <level path="call_stack/*" />
 		<thread level="0"/>
     </callstackGroup>
-	<pattern version="0" id="hsa_cs_pattern">
+	<pattern version="0" id="tensorflow_cs_pattern">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
-			<label value="HSA API" />
+			<label value="Tensorflow" />
 		</head>
 
 		<patternHandler initial="call_stack">
@@ -46,33 +46,10 @@
 					<transition event="eigenTracer:schedule_entry" target="loop" action="entry" />
 					<transition event="eigenTracer:schedule_exit" target="loop" action="exit" />
 					
-					<transition event="tensorflowTracer:process_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:process_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:inline_ready_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:inline_ready_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:push_succ_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:push_succ_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:session_start" target="loop" action="entry" />
-					<transition event="tensorflowTracer:session_end" target="loop" action="exit" />
-					<transition event="tensorflowTracer:operation_start" target="loop" action="entry" />
-					<transition event="tensorflowTracer:operation_end" target="loop" action="exit" />
-					<transition event="tensorflowTracer:async_operation_start" target="loop" action="entry" />
-					<transition event="tensorflowTracer:async_operation_end" target="loop" action="exit" />
-					<transition event="tensorflowTracer:allocate_chunk_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:allocate_chunk_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:allocate_raw_intenal_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:allocate_raw_internal_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:deallocate_raw_intenal_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:deallocate_raw_internal_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:do_create_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:do_create_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:cleanup_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:cleanup_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:gpu_bfc_alloc_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:gpu_bfc_alloc_exit" target="loop" action="exit" />
-					<transition event="tensorflowTracer:gpu_device_compute_entry" target="loop" action="entry" />
-					<transition event="tensorflowTracer:gpu_device_compute_exit" target="loop" action="exit" />
-
+					<transition event="tensorflowTracer:*_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:*_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:*_start" target="loop" action="entry" />
+					<transition event="tensorflowTracer:*_end" target="loop" action="exit" />
 
 				</state>
 			</fsm>
@@ -82,10 +59,10 @@
 	</pattern>
 </callstack>
 
-	<timeGraphView id="hsa_cs_view">
+	<timeGraphView id="tensorflow_cs_view">
 		<head>
-			<analysis id="hsa_cs_pattern" />
-			<label value="HSA API call stack view" />
+			<analysis id="tensorflow_cs_pattern" />
+			<label value="tensorflow call stack view" />
 		</head>
 
 		<entry path="call_stack/*">

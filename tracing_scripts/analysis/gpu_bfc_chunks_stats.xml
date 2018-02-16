@@ -13,10 +13,10 @@
 <tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
-	<xyView id="tensorflow.gpu_bfc_allocations">
+	<xyView id="tensorflow.gpu_bfc_chunks_stats">
 		<head>
-			<analysis id="gpu_bfc_allocations" />
-			<label value="GPU BFC Allocations" />
+			<analysis id="gpu_bfc_chunks_stats" />
+			<label value="GPU BFC Chunks Stats" />
 		</head>
 
 		<entry path="Allocations/*" displayType="absolute"> 
@@ -24,14 +24,14 @@
 		</entry>
 	</xyView>
 
-	<stateProvider id="gpu_bfc_allocations" version="1">
+	<stateProvider id="gpu_bfc_chunks_stats" version="1">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
-			<label value="GPU BFC Allocations" />
+			<label value="GPU BFC Chunks Stats" />
 		</head>
 
 		<!-- case 1 : exit_syscall : Fields: int64 ret -->
-		<eventHandler eventName="tensorflowTracer:cpu_bfc_allocator_stats">
+		<eventHandler eventName="tensorflowTracer:gpu_bfc_chunks_stats">
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_bytes_in_use" />

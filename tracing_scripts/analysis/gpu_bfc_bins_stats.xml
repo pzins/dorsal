@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+* Copyright (c) 2014 École Polytechnique de Montréal
+*
+* All rights reserved. This program and the accompanying materials are
+* made available under the terms of the Eclipse Public License v1.0 which
+* accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* 	Geneviève Bastien - Initial API and implementation
+*************************************************************************** -->
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+	<xyView id="tensorflow.gpu_bfc_bins_stats">
+		<head>
+			<analysis id="gpu_bfc_bins_stats" />
+			<label value="GPU BFC Bins Stats" />
+		</head>
+
+		<entry path="Allocations/*/*" displayType="absolute"> 
+			<display type="self" />
+		</entry>
+	</xyView>
+
+	<stateProvider id="gpu_bfc_bins_stats" version="1">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="GPU BFC Bins Stats" />
+		</head>
+
+		<eventHandler eventName="tensorflowTracer:gpu_bfc_bins_stats">
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="eventField" value="bin_numero" />
+				<stateAttribute type="constant" value="total_chunks_in_bin" />
+				<stateValue type="eventField" value="total_chunks_in_bin" increment="false" />
+			</stateChange>
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="eventField" value="bin_numero" />
+				<stateAttribute type="constant" value="total_chunks_in_use" />
+				<stateValue type="eventField" value="total_chunks_in_use" increment="false" />
+			</stateChange>
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="eventField" value="bin_numero" />
+				<stateAttribute type="constant" value="total_bytes_in_bin" />
+				<stateValue type="eventField" value="total_bytes_in_bin" increment="false" />
+			</stateChange>
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="eventField" value="bin_numero" />
+				<stateAttribute type="constant" value="total_bytes_in_use" />
+				<stateValue type="eventField" value="total_bytes_in_use" increment="false" />
+			</stateChange>
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="eventField" value="bin_numero" />
+				<stateAttribute type="constant" value="total_requested_bytes_in_use" />
+				<stateValue type="eventField" value="total_requested_bytes_in_use" increment="false" />
+			</stateChange>
+		</eventHandler>
+	</stateProvider>
+</tmfxml>
