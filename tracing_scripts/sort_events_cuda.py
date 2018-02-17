@@ -263,7 +263,6 @@ main_stream = writer.create_stream(main_stream_class)
 
 init_time = None
 events = {}
-
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -280,33 +279,39 @@ for r_event in collection.events:
 
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
+    if "tensorflowTracer:session" in name:
+        threadId = 1000
+    elif "tensorflowTracer:process" in name:
+        threadId = 1001
+    elif "tensorflowTracer:inline_ready" in name:
+        threadId = 1002
+    elif "tensorflowTracer:push_succ" in name:
+        threadId = 1003
 
-    if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
-        threadId = 9991
     elif "operation" in name:
         if "gpu" in r_event["placement"]:
             if "async" not in name:
-                threadId = 99931
+                threadId = 2000
             else:
-                threadId = 99932
+                threadId = 2001
         else:
             if "async" not in name:
-                threadId = 99921
+                threadId = 2003
             else:
-                threadId = 99922
+                threadId = 2002
     elif "cuptiTracer" in name:
         if "driver" in name:
-            threadId = 9994
+            threadId = 3000
         elif "runtime" in name:
-            threadId = 9995
+            threadId = 3001
         elif "kernel" in name:
-            threadId = 9996
+            threadId = 3002
         else: #memcpy
-            threadId = 9997
+            threadId = 3003
     elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
-        threadId = 9998
+        threadId = 4000
     else:
-        threadId = 9999
+        threadId = 5000
 
     events[event_time] = [w_event, threadId]
 
