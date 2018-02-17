@@ -124,7 +124,7 @@ event_classes['hccTracer:barrier_end'].add_field(uint32_fd, 'release')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(string_fd, 'packet_type')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'agent_handle')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
-# 
+#
 # event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'] = btw.EventClass('hccTracer:aql_packet_submitted')
 # event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'packet_id')
 # event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'agent_handle')
@@ -334,10 +334,10 @@ for r_event in collection.events:
     for f in fields:
         # print(name, f, r_event[f])
         w_event.payload(f).value = r_event[f]
-    
+
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + 1518471699743021158
-    
+
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
     if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
@@ -369,9 +369,9 @@ for r_event in collection.events:
     else:
         # print("Warning, no tid set to the event", name)
         threadId = 999999999
-    
+
     events[event_time] = [w_event, threadId]
-        
+
 # Append events to the stream
 timestamps = list(events.keys())
 timestamps.sort()
