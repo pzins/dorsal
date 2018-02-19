@@ -50,6 +50,12 @@ event_classes['hipTracer:function_entry'].add_field(string_fd, 'name')
 event_classes['hipTracer:function_exit'] = btw.EventClass('hipTracer:function_exit')
 event_classes['hipTracer:function_exit'].add_field(string_fd, 'name')
 
+# grpcTracer
+event_classes['grpcTracer:receive_request'] = btw.EventClass('grpcTracer:receive_request')
+event_classes['grpcTracer:receive_request'].add_field(string_fd, 'name')
+event_classes['grpcTracer:send_request'] = btw.EventClass('grpcTracer:send_request')
+event_classes['grpcTracer:send_request'].add_field(string_fd, 'name')
+
 
 
 # hccTracer
@@ -322,7 +328,7 @@ main_stream = writer.create_stream(main_stream_class)
 
 init_time = None
 events = {}
-
+clock_offset = 1518196357777395130
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -336,7 +342,7 @@ for r_event in collection.events:
         w_event.payload(f).value = r_event[f]
 
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
-        event_time = r_event["timestamp"] + 1518471699743021158
+        event_time = r_event["timestamp"] + clock_offset
 
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
@@ -369,7 +375,7 @@ for r_event in collection.events:
     else:
         # print("Warning, no tid set to the event", name)
         threadId = 999999999
-
+    threadId += int("7" + str(threadId)[1:])
     events[event_time] = [w_event, threadId]
 
 # Append events to the stream
