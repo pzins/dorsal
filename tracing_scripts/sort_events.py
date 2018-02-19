@@ -328,7 +328,9 @@ main_stream = writer.create_stream(main_stream_class)
 
 init_time = None
 events = {}
-clock_offset = 1518196357777395130
+clock_offset = 1518196357777395130 # second computer
+clock_offset = 1519068172317468359 #first computer
+
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -375,7 +377,8 @@ for r_event in collection.events:
     else:
         # print("Warning, no tid set to the event", name)
         threadId = 999999999
-    threadId += int("7" + str(threadId)[1:])
+
+    # threadId += int("7" + str(threadId)[1:]) # only on the second computer to make the difference
     events[event_time] = [w_event, threadId]
 
 # Append events to the stream
