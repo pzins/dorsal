@@ -378,26 +378,26 @@ for r_event in collection.events:
         if "GetStatusAsync" in name:
             threadId = 90
         elif "RegisterGraphAsync" in name:
-            threadId = 91 
+            threadId = 91
         elif "DeregisterGraphAsync" in name:
-            threadId = 92 
+            threadId = 92
         elif "RunGraphAsync" in name:
-            threadId = 93 
+            threadId = 93
         elif "CleanupGraphAsync" in name:
-            threadId = 94 
+            threadId = 94
         elif "CleanupAllAsync" in name:
-            threadId = 95 
+            threadId = 95
         elif "RecvTensorAsync" in name:
-            threadId = 96 
+            threadId = 96
         elif "LoggingAsync" in name:
-            threadId = 97 
+            threadId = 97
         elif "TracingAsync" in name:
             threadId = 98
     else:
         # print("Warning, no tid set to the event", name)
         threadId = 99999
 
-    # threadId += int("7" + str(threadId)[1:]) # only on the second computer to make the difference
+    # threadId = int("7" + str(threadId)[1:]) # only on the second computer to make the difference
     events[event_time] = [w_event, threadId]
 
 # Append events to the stream
