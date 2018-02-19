@@ -349,34 +349,53 @@ for r_event in collection.events:
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
     if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
-        threadId = 9991
+        threadId = 1
     elif "operation" in name:
         if "gpu" in r_event["placement"]:
             if "async" not in name:
-                threadId = 99931
+                threadId = 31
             else:
-                threadId = 99932
+                threadId = 32
         else:
             if "async" not in name:
-                threadId = 99921
+                threadId = 21
             else:
-                threadId = 99922
+                threadId = 22
     elif "hsaTracer" in name:
-        threadId = 9994
+        threadId = 4
     elif "hipTracer" in name:
-        threadId = 9995
+        threadId = 5
     elif "hccTracer" in name:
         if "unpinned_memory_engine_copy" in name:
-            threadId = 9996
+            threadId = 6
         else:
-            threadId = 9997
+            threadId = 7
     elif "alloc" in name:
-        threadId = 9998
+        threadId = 8
     elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
-        threadId = 9999
+        threadId = 9
+    elif "grpcTracer" in name:
+        if "GetStatusAsync" in name:
+            threadId = 90
+        elif "RegisterGraphAsync" in name:
+            threadId = 91 
+        elif "DeregisterGraphAsync" in name:
+            threadId = 92 
+        elif "RunGraphAsync" in name:
+            threadId = 93 
+        elif "CleanupGraphAsync" in name:
+            threadId = 94 
+        elif "CleanupAllAsync" in name:
+            threadId = 95 
+        elif "RecvTensorAsync" in name:
+            threadId = 96 
+        elif "LoggingAsync" in name:
+            threadId = 97 
+        elif "TracingAsync" in name:
+            threadId = 98
     else:
         # print("Warning, no tid set to the event", name)
-        threadId = 999999999
+        threadId = 99999
 
     events[event_time] = [w_event, threadId]
 
