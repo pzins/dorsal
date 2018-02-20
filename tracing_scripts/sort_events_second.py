@@ -16,7 +16,7 @@ path = max([os.path.join(directory,d) for d in os.listdir(directory)], key=os.pa
 collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
 
 # Set the output trace
-out_path = "/home/pierre/out_traces"
+out_path = "/home/pierre/remote_traces"
 writer = btw.Writer(out_path)
 
 # Clock
@@ -42,8 +42,8 @@ main_stream = writer.create_stream(main_stream_class)
 
 
 events = {}
-# clock_offset = 1518196357777395130 # second computer
-clock_offset = 1519068172317468359 # first computer
+# clock_offset = 1519068172317468359 # first computer
+clock_offset = 1518196357777395130 # second computer
 
 for r_event in collection.events:
     name = r_event.name
@@ -112,6 +112,10 @@ for r_event in collection.events:
     else:
         threadId = 99999
 
+    # add a "7" before all the tid to distinguish second computer rows
+    # except for grpcTracer as they should be merge with the others
+    if "grpcTracer" not in name:
+        threadId = int("7" + str(threadId)[1:]) # only on the second computer to make the difference
     events[event_time] = [w_event, threadId]
 
 # Append events to the stream
