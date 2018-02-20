@@ -375,23 +375,23 @@ for r_event in collection.events:
     elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
         threadId = 9
     elif "grpcTracer" in name:
-        if "GetStatusAsync" in name:
+        if "GetStatusAsync" in r_event["name"]:
             threadId = 90
-        elif "RegisterGraphAsync" in name:
+        elif "RegisterGraphAsync" in r_event["name"]:
             threadId = 91
-        elif "DeregisterGraphAsync" in name:
+        elif "DeregisterGraphAsync" in r_event["name"]:
             threadId = 92
-        elif "RunGraphAsync" in name:
+        elif "RunGraphAsync" in r_event["name"]:
             threadId = 93
-        elif "CleanupGraphAsync" in name:
+        elif "CleanupGraphAsync" in r_event["name"]:
             threadId = 94
-        elif "CleanupAllAsync" in name:
+        elif "CleanupAllAsync" in r_event["name"]:
             threadId = 95
-        elif "RecvTensorAsync" in name:
+        elif "RecvTensorAsync" in r_event["name"]:
             threadId = 96
-        elif "LoggingAsync" in name:
+        elif "LoggingAsync" in r_event["name"]:
             threadId = 97
-        elif "TracingAsync" in name:
+        elif "TracingAsync" in r_event["name"]:
             threadId = 98
         else:
             threadId = 99
