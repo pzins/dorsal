@@ -375,6 +375,8 @@ for r_event in collection.events:
     elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
         threadId = 9
     elif "grpcTracer" in name:
+        if "request" in r_event["name"] or "just" in r_event["name"]:
+            continue
         if "GetStatus" in r_event["name"]:
             threadId = 90
         elif "RegisterGraph" in r_event["name"]:
