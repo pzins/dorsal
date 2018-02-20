@@ -50,7 +50,9 @@
 					
 					<transition event="grpcTracer:send_request" target="loop" action="entry" />
 					<transition event="grpcTracer:receive_request" target="loop" action="exit" />
-					
+					<transition event="grpcTracer:receive_RecvTensor_request" target="loop" action="entry" />
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="exit" />
+				
 					<transition event="tensorflowTracer:*_entry" target="loop" action="entry" />
 					<transition event="tensorflowTracer:*_exit" target="loop" action="exit" />
 					<transition event="tensorflowTracer:*_start" target="loop" action="entry" />

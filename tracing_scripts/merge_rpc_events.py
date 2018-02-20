@@ -69,8 +69,6 @@ event_classes['grpcTracer:send_RecvTensor_request'].add_field(string_fd, 'dst_de
 event_classes['grpcTracer:send_RecvTensor_request'].add_field(string_fd, 'request')
 event_classes['grpcTracer:send_RecvTensor_request'].add_field(string_fd, 'response')
 
-
-
 # hccTracer
 event_classes['hccTracer:kernel_begin'] = btw.EventClass('hccTracer:kernel_begin')
 event_classes['hccTracer:kernel_begin'].add_field(uint64_fd, 'timestamp')
@@ -309,13 +307,18 @@ event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total
 
 # Add the input trace to the collection
 collection = btr.TraceCollection()
-directory = "/home/pierre/lttng-traces"
-path = max([os.path.join(directory,d) for d in os.listdir(directory)], key=os.path.getmtime)
+directory = "/home/pierre/out_traces"
+collection.add_trace(directory, 'ctf')
 
-collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
+
+# Add the input trace to the collection
+collection_remote = btr.TraceCollection()
+directory = "/home/pierre/receive_traces/out_traces"
+collection_remote.add_trace(directory, 'ctf')
+
 
 # Set the output trace
-out_path = "/home/pierre/out_traces"
+out_path = "/home/pierre/merged_traces"
 writer = btw.Writer(out_path)
 
 clock = btw.Clock('monotonic')
@@ -342,7 +345,7 @@ main_stream = writer.create_stream(main_stream_class)
 init_time = None
 events = {}
 clock_offset = 1518196357777395130 # second computer
-clock_offset = 1519068172317468359 #first computer
+clock_offset_remote = 1519068172317468359 # first computer
 
 for r_event in collection.events:
     name = r_event.name
@@ -353,66 +356,26 @@ for r_event in collection.events:
     w_event = btw.Event(event_classes[name])
 
     for f in fields:
+        w_event.payload(f).value = r_event[f]
+    threadId = r_event["vtid"]
+    events[event_time] = [w_event, threadId]
+
+
+for r_event in collection_remote.events:
+    name = r_event.name
+    event_time = r_event.timestamp
+    w_event = btw.Event(event_classes[name])
+
+    fields = r_event.field_list_with_scope(babeltrace.common.CTFScope.EVENT_FIELDS)
+    w_event = btw.Event(event_classes[name])
+    
+    # for now just merge grpc calls
+    if "grpc" not in name:
+        continue
+    for f in fields:
         # print(name, f, r_event[f])
         w_event.payload(f).value = r_event[f]
-
-    if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
-        event_time = r_event["timestamp"] + clock_offset
-
-    # organize threads
-    threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
-    if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
-        threadId = 1
-    elif "operation" in name:
-        if "gpu" in r_event["placement"]:
-            if "async" not in name:
-                threadId = 31
-            else:
-                threadId = 32
-        else:
-            if "async" not in name:
-                threadId = 21
-            else:
-                threadId = 22
-    elif "hsaTracer" in name:
-        threadId = 4
-    elif "hipTracer" in name:
-        threadId = 5
-    elif "hccTracer" in name:
-        if "unpinned_memory_engine_copy" in name:
-            threadId = 6
-        else:
-            threadId = 7
-    elif "alloc" in name:
-        threadId = 8
-    elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
-        threadId = 9
-    elif "grpcTracer" in name:
-        if "RecvTensor" in name:
-            threadId = 98
-        elif "GetStatus" in r_event["name"]:
-            threadId = 90
-        elif "RegisterGraph" in r_event["name"]:
-            threadId = 91
-        elif "DeregisterGraph" in r_event["name"]:
-            threadId = 92
-        elif "RunGraph" in r_event["name"]:
-            threadId = 93
-        elif "CleanupGraph" in r_event["name"]:
-            threadId = 94
-        elif "CleanupAll" in r_event["name"]:
-            threadId = 95
-            elif "Logging" in r_event["name"]:
-            threadId = 96
-        elif "Tracing" in r_event["name"]:
-            threadId = 97
-        else:
-            threadId = 99
-    else:
-        # print("Warning, no tid set to the event", name)
-        threadId = 99999
-
-    # threadId = int("7" + str(threadId)[1:]) # only on the second computer to make the difference
+    threadId = r_event["vtid"]
     events[event_time] = [w_event, threadId]
 
 # Append events to the stream
