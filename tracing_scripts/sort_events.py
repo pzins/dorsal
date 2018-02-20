@@ -393,6 +393,8 @@ for r_event in collection.events:
             threadId = 97
         elif "TracingAsync" in name:
             threadId = 98
+        else:
+            threadId = 99
     else:
         # print("Warning, no tid set to the event", name)
         threadId = 99999
