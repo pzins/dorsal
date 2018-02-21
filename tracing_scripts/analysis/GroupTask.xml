@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../org.eclipse.tracecompass.tmf.analysis.xml.core/src/org/eclipse/tracecompass/tmf/analysis/xml/core/module/xmlDefinition.xsd">
-  <callstack id="org.eclipse.tracecompass.incubator.tracecompass.grouped.threads">
+  <callstack id="org.eclipse.tracecompass.incubator.tracecompass.grouped.threadsOl">
 	<callstackGroup name="Per component callstack">
 		<level path="Views/*" /> 
-		<level path="Threads/*"/> 
-		<thread cpu="cpu" />
+		<level path="Threads/*"/>
+		<!-- <thread cpu="cpu" /> -->
 	</callstackGroup>
 	<!-- callstack process="Views/*" thread="Threads/*" callstack="callstack" / -->
 	
-    <pattern version="1" id="org.eclipse.tracecompass.incubator.tracecompass.grouped.threads.pattern">
+    <pattern version="1" id="org.eclipse.tracecompass.incubator.tracecompass.grouped.threadsOL.pattern">
         <head>
             <traceType id="org.eclipse.tracecompass.incubator.tracecompass.trace.jul" />
-            <label value="Trace Compass Thread by Component" />
+            <label value="OL Trace Compass Thread by Component" />
         </head>   
         
         <location id="CurrentThread">
@@ -111,11 +111,11 @@
 	                    <stateAttribute type="constant" value="CallStack" />
 						<stateValue type="eventField" value="evName" stack="push"/>
 	            </stateChange>
-	            <stateChange>
+	            <!-- <stateChange>
 	                    <stateAttribute type="location" value="CurrentThread" />
 	                    <stateAttribute type="constant" value="cpu" />
 						<stateValue type="eventField" value="cpu" />
-	            </stateChange>
+	            </stateChange> -->
 			</action>
 	
 			<action id="pop_event_type">

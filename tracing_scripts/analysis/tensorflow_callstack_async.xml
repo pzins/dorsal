@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="Tensorflow Callstack">
+        <level path="call_stack/*" />
+		<thread level="0"/>
+    </callstackGroup>
+	<pattern version="0" id="tensorflow_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="Tensorflow" />
+		</head>
+
+		<patternHandler initial="call_stack">
+			<action id="entry">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="push" />
+				</stateChange>
+			</action>
+
+			<action id="exit">
+				<stateChange>
+					<stateAttribute type="constant" value="call_stack" />
+					<stateAttribute type="eventField" value="context._vtid" />
+					<stateAttribute type="constant" value="CallStack" />
+					<stateValue type="eventField" value="name" stack="pop" />
+				</stateChange>
+			</action>
+
+			<fsm id="call_stack" multiple="false" initial="loop">
+				<state id="loop">
+					<transition event="hsaTracer:function_entry" target="loop" action="entry" />
+					<transition event="hsaTracer:function_exit" target="loop" action="exit" />
+					
+					<transition event="hipTracer:function_entry" target="loop" action="entry" />
+					<transition event="hipTracer:function_exit" target="loop" action="exit" />
+					
+					<transition event="hccTracer:*begin" target="loop" action="entry" />
+					<transition event="hccTracer:*end" target="loop" action="exit" />
+					<transition event="hccTracer:*entry" target="loop" action="entry" />
+					<transition event="hccTracer:*exit" target="loop" action="exit" />
+					
+					<transition event="eigenTracer:schedule_entry" target="loop" action="entry" />
+					<transition event="eigenTracer:schedule_exit" target="loop" action="exit" />
+
+					
+					<!-- <transition event="grpcTracer:send_request" target="loop" action="entry" />
+					<transition event="grpcTracer:receive_request" target="loop" action="exit" />
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entry" />
+					<transition event="grpcTracer:receive_RecvTensor_request" target="loop" action="exit" />
+				 	
+					# just add sync events
+					<transition event="tensorflowTracer:*_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:*_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:*_start" target="loop" action="entry" />
+					<transition event="tensorflowTracer:*_end" target="loop" action="exit" /> -->
+
+				</state>
+			</fsm>
+
+			<fsm id="call_stack_async" multiple="false" initial="loop">
+				<state id="loop">
+
+					
+					<transition event="grpcTracer:send_request" target="loop" action="entry" />
+					<transition event="grpcTracer:receive_request" target="loop" action="exit" />
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entry" />
+					<transition event="grpcTracer:receive_RecvTensor_request" target="loop" action="exit" />
+				 
+					<transition event="tensorflowTracer:*_entry" target="loop" action="entry" />
+					<transition event="tensorflowTracer:*_exit" target="loop" action="exit" />
+					<transition event="tensorflowTracer:*_start" target="loop" action="entry" />
+					<transition event="tensorflowTracer:*_end" target="loop" action="exit" />
+
+				</state>
+			</fsm>
+		</patternHandler>
+
+	</pattern>
+</callstack>
+
+	<timeGraphView id="tensorflow_cs_view">
+		<head>
+			<analysis id="tensorflow_cs_pattern" />
+			<label value="tensorflow call stack view" />
+		</head>
+
+		<entry path="call_stack/*">
+			<display type="self" />
+			<entry path="*">
+				<display type="self" />
+			</entry>
+		</entry>
+	</timeGraphView>
+</tmfxml>

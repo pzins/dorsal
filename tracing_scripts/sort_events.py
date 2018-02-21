@@ -60,8 +60,14 @@ for r_event in collection.events:
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
 
+
+
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
+    
+    # events[event_time] = [w_event, threadId]
+    # continue
+    
     if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
         threadId = 1
     elif "operation" in name:
