@@ -43,7 +43,7 @@ main_stream = writer.create_stream(main_stream_class)
 
 events = {}
 # clock_offset = 1518196357777395130 # second computer
-clock_offset = 1519068172317468359 # first computer
+clock_offset = 1519157918746548550 # first computer
 
 for r_event in collection.events:
     name = r_event.name
