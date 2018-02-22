@@ -40,10 +40,10 @@ with open(filename, "r") as f:
             after_accolade = lines[cnt].find("{")+1
             tmp = lines[cnt][:after_accolade]
             core = lines[cnt][after_accolade:].split()[1:][0]
-            core += "\ntracepoint(hsaTracer, function_entry, \"" + name + "\");\n"
+            core += "\ntracepoint(hsaTracer, function_entry, \"hsa_api\", \"" + name + "\");\n"
             core = "\n" + returnType + " tmp = " + core
             tmp += core
-            core += "\ntracepoint(hsaTracer, function_exit, \"" + name + "\");\n"
+            core += "\ntracepoint(hsaTracer, function_exit, \"hsa_api\", \"" + name + "\");\n"
             tmp += "\nreturn tmp;}"
             outLines.append("\n"+tmp)
         else:

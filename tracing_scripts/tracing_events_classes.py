@@ -30,14 +30,18 @@ event_classes = {}
 
 # hsaTracer
 event_classes['hsaTracer:function_entry'] = btw.EventClass('hsaTracer:function_entry')
+event_classes['hsaTracer:function_entry'].add_field(string_fd, 'cat')
 event_classes['hsaTracer:function_entry'].add_field(string_fd, 'name')
 event_classes['hsaTracer:function_exit'] = btw.EventClass('hsaTracer:function_exit')
+event_classes['hsaTracer:function_exit'].add_field(string_fd, 'cat')
 event_classes['hsaTracer:function_exit'].add_field(string_fd, 'name')
 
 # hipTracer
 event_classes['hipTracer:function_entry'] = btw.EventClass('hipTracer:function_entry')
+event_classes['hipTracer:function_entry'].add_field(string_fd, 'cat')
 event_classes['hipTracer:function_entry'].add_field(string_fd, 'name')
 event_classes['hipTracer:function_exit'] = btw.EventClass('hipTracer:function_exit')
+event_classes['hipTracer:function_exit'].add_field(string_fd, 'cat')
 event_classes['hipTracer:function_exit'].add_field(string_fd, 'name')
 
 # grpcTracer
@@ -63,6 +67,7 @@ event_classes['grpcTracer:send_RecvTensor_request'].add_field(string_fd, 'respon
 
 # hccTracer
 event_classes['hccTracer:kernel_begin'] = btw.EventClass('hccTracer:kernel_begin')
+event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:kernel_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'name')
 event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'long_name')
@@ -71,6 +76,7 @@ event_classes['hccTracer:kernel_begin'].add_field(uint32_fd, 'private_segment_si
 event_classes['hccTracer:kernel_begin'].add_field(uint32_fd, 'workitem_vgpr_count')
 
 event_classes['hccTracer:kernel_end'] = btw.EventClass('hccTracer:kernel_end')
+event_classes['hccTracer:kernel_end'].add_field(string_fd, 'cat')
 event_classes['hccTracer:kernel_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:kernel_end'].add_field(string_fd, 'name')
 event_classes['hccTracer:kernel_end'].add_field(string_fd, 'long_name')
@@ -79,13 +85,16 @@ event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'private_segment_size
 event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'workitem_vgpr_count')
 
 event_classes['hccTracer:unpinned_memory_engine_copy_entry'] = btw.EventClass('hccTracer:unpinned_memory_engine_copy_entry')
+event_classes['hccTracer:unpinned_memory_engine_copy_entry'].add_field(string_fd, 'cat')
 event_classes['hccTracer:unpinned_memory_engine_copy_entry'].add_field(string_fd, 'name')
 event_classes['hccTracer:unpinned_memory_engine_copy_entry'].add_field(int64_fd, 'size_bytes')
 event_classes['hccTracer:unpinned_memory_engine_copy_exit'] = btw.EventClass('hccTracer:unpinned_memory_engine_copy_exit')
+event_classes['hccTracer:unpinned_memory_engine_copy_exit'].add_field(string_fd, 'cat')
 event_classes['hccTracer:unpinned_memory_engine_copy_exit'].add_field(string_fd, 'name')
 event_classes['hccTracer:unpinned_memory_engine_copy_exit'].add_field(int64_fd, 'size_bytes')
 
 event_classes['hccTracer:async_memcpy_begin'] = btw.EventClass('hccTracer:async_memcpy_begin')
+event_classes['hccTracer:async_memcpy_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:async_memcpy_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpy_begin'].add_field(string_fd, 'name')
 event_classes['hccTracer:async_memcpy_begin'].add_field(int64_fd, 'size_bytes')
@@ -93,6 +102,7 @@ event_classes['hccTracer:async_memcpy_begin'].add_field(float_fd, 'size_megabyte
 event_classes['hccTracer:async_memcpy_begin'].add_field(float_fd, 'throughput')
 
 event_classes['hccTracer:async_memcpy_end'] = btw.EventClass('hccTracer:async_memcpy_end')
+event_classes['hccTracer:async_memcpy_end'].add_field(string_fd, 'cat')
 event_classes['hccTracer:async_memcpy_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpy_end'].add_field(string_fd, 'name')
 event_classes['hccTracer:async_memcpy_end'].add_field(int64_fd, 'size_bytes')
@@ -100,6 +110,7 @@ event_classes['hccTracer:async_memcpy_end'].add_field(float_fd, 'size_megabytes'
 event_classes['hccTracer:async_memcpy_end'].add_field(float_fd, 'throughput')
 
 event_classes['hccTracer:async_memcpyslo_begin'] = btw.EventClass('hccTracer:async_memcpy_begin')
+event_classes['hccTracer:async_memcpyslo_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(string_fd, 'name')
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(int64_fd, 'size_bytes')
@@ -107,6 +118,7 @@ event_classes['hccTracer:async_memcpyslo_begin'].add_field(float_fd, 'size_megab
 event_classes['hccTracer:async_memcpyslo_begin'].add_field(float_fd, 'throughput')
 
 event_classes['hccTracer:async_memcpyslo_end'] = btw.EventClass('hccTracer:async_memcpy_end')
+event_classes['hccTracer:async_memcpyslo_end'].add_field(string_fd, 'cat')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(string_fd, 'name')
 event_classes['hccTracer:async_memcpyslo_end'].add_field(int64_fd, 'size_bytes')
@@ -115,6 +127,7 @@ event_classes['hccTracer:async_memcpyslo_end'].add_field(float_fd, 'throughput')
 
 
 event_classes['hccTracer:barrier_begin'] = btw.EventClass('hccTracer:barrier_begin')
+event_classes['hccTracer:barrier_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:barrier_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:barrier_begin'].add_field(string_fd, 'name')
 event_classes['hccTracer:barrier_begin'].add_field(uint32_fd, 'dep_count')
@@ -122,6 +135,7 @@ event_classes['hccTracer:barrier_begin'].add_field(uint32_fd, 'acquire')
 event_classes['hccTracer:barrier_begin'].add_field(uint32_fd, 'release')
 
 event_classes['hccTracer:barrier_end'] = btw.EventClass('hccTracer:barrier_end')
+event_classes['hccTracer:barrier_end'].add_field(string_fd, 'cat')
 event_classes['hccTracer:barrier_end'].add_field(string_fd, 'name')
 event_classes['hccTracer:barrier_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:barrier_end'].add_field(uint32_fd, 'dep_count')

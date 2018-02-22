@@ -23,7 +23,7 @@ with open(filename, "r") as f:
         elif return_type != "":
             if "return" in line:
                 print("------", line)
-                tp_entry = "tracepoint(hsaTracer, function_entry, \"" + getName(line) + "\");\n"
+                tp_entry = "tracepoint(hsaTracer, function_entry, \"hsa_api\", \"" + getName(line) + "\");\n"
                 if return_type == "void":
                     call = "".join(line.split()[1:]) + "\n"
                 else:
@@ -33,7 +33,7 @@ with open(filename, "r") as f:
                 while "}" not in lines[i+offset]:
                     call += lines[i]
                     offset += 1
-                tp_exit = "tracepoint(hsaTracer, function_exit, \"" + getName(line) + "\");\n"
+                tp_exit = "tracepoint(hsaTracer, function_exit, \"hsa_api\", \"" + getName(line) + "\");\n"
                 line = tp_entry + call + tp_exit  + "\n"
                 if return_type != "void":
                     line += "return tmp;\n"

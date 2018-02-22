@@ -12,9 +12,11 @@ TRACEPOINT_EVENT(
 	hsaTracer,
 	function_entry,
 	TP_ARGS(
+		const char*, cat_arg,
 		char*, name
 	),
 	TP_FIELDS(
+		ctf_string(cat, cat_arg)
 		ctf_string(name, name)
 	)
 )
@@ -23,9 +25,11 @@ TRACEPOINT_EVENT(
     hsaTracer,
 	function_exit,
 	TP_ARGS(
+		const char*, cat_arg,
 		char*, name
 	),
 	TP_FIELDS(
+		ctf_string(cat, cat_arg)
 		ctf_string(name, name)
 	)
 )
