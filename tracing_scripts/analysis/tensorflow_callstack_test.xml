@@ -66,10 +66,10 @@
 			<test id="grpctest">
 				<if>
 					<condition>
-						<stateValue type="eventField" value="name"/>
+						<stateValue type="eventField" value="rendezvous_key"/>
 						<stateValue type="query">
 							<stateAttribute type="constant" value="#CurrentScenario" />
-							<stateAttribute type="constant" value="name" />
+							<stateAttribute type="constant" value="rendezvous_key" />
 						</stateValue>
 					</condition>
 				</if>
@@ -137,7 +137,31 @@
 				</stateChange>
 			</action>
 
+			<action id="entering_thread_grpc">
+				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="threadID" />
+					<stateValue type="eventField" value="context._vtid"/>
+				</stateChange>
 			
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="component" />
+					<stateValue type="eventField" value="cat"/>
+				</stateChange>
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="name" />
+					<stateValue type="eventField" value="name"/>
+				</stateChange>
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="rendezvous_key" />
+					<stateValue type="eventField" value="rendezvous_key"/>
+				</stateChange>
+			</action>
+
 			<action id="push_event_type">
 				<!-- Push the current event to the thread's callstack -->
 				<stateChange>
@@ -321,14 +345,14 @@
 				<state id="Wait_thread_start">
 					<!-- The state will stay here until we have a thread start event -->
 					
-					<transition event="tensorflowTracer:grpc*RecvTensor_request" target="loop" action="entering_thread:push_event_type"/>
+					<transition event="grpcTracer:*RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type"/>
 
 				</state>
 				<state id="loop">
 
-					<transition event="tensorflowTracer:grpc*RecvTensor_request" cond="async_name" target="loop" action="push_event_type" />
-					<transition event="tensorflowTracer:grpc*RecvTensor_request" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
-					<transition event="tensorflowTracer:grpc*RecvTensor_request" cond="async_name" target="loop" action="pop_event_type" />
+					<transition event="grpcTracer:*RecvTensor_request" cond="grpctest" target="loop" action="push_event_type" />
+					<transition event="grpcTracer:*RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="grpcTracer:*RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type" />
 						
 				</state>
 				<final id="end_thread"/>
