@@ -62,6 +62,19 @@
 					</condition>
 				</if>
 			</test>
+			
+			<test id="grpctest">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="name"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="name" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
+			
 			<test id="last_out">
 				<if>
 					<condition>
@@ -297,6 +310,25 @@
 					<transition event="tensorflowTracer:async_operation_start" cond="async_name" target="loop" action="push_event_type" />
 					<transition event="tensorflowTracer:async_operation_end" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
 					<transition event="tensorflowTracer:async_operation_end" cond="async_name" target="loop" action="pop_event_type" />
+						
+				</state>
+				<final id="end_thread"/>
+
+			</fsm>
+			
+			<fsm id="tgcall_stack6" multiple="true" initial="Wait_thread_start">
+			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
+				<state id="Wait_thread_start">
+					<!-- The state will stay here until we have a thread start event -->
+					
+					<transition event="tensorflowTracer:grpc*RecvTensor_request" target="loop" action="entering_thread:push_event_type"/>
+
+				</state>
+				<state id="loop">
+
+					<transition event="tensorflowTracer:grpc*RecvTensor_request" cond="async_name" target="loop" action="push_event_type" />
+					<transition event="tensorflowTracer:grpc*RecvTensor_request" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="tensorflowTracer:grpc*RecvTensor_request" cond="async_name" target="loop" action="pop_event_type" />
 						
 				</state>
 				<final id="end_thread"/>
