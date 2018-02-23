@@ -56,7 +56,7 @@ for r_event in collection.events:
     for f in fields:
         # print(name, f, r_event[f])
         w_event.payload(f).value = r_event[f]
-
+        
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
 
