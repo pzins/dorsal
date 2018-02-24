@@ -338,3 +338,48 @@ event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total
 event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total_bytes_in_bin')
 event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total_bytes_in_use')
 event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total_requested_bytes_in_use')
+
+
+
+# cuptiTracer
+event_classes['cuptiTracer:runtime_api_entry'] = btw.EventClass('cuptiTracer:runtime_api_entry')
+event_classes['cuptiTracer:runtime_api_entry'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:runtime_api_entry'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:runtime_api_entry'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:runtime_api_exit'] = btw.EventClass('cuptiTracer:runtime_api_exit')
+event_classes['cuptiTracer:runtime_api_exit'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:runtime_api_exit'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:runtime_api_exit'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:driver_api_entry'] = btw.EventClass('cuptiTracer:driver_api_entry')
+event_classes['cuptiTracer:driver_api_entry'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:driver_api_entry'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:driver_api_entry'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:driver_api_exit'] = btw.EventClass('cuptiTracer:driver_api_exit')
+event_classes['cuptiTracer:driver_api_exit'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:driver_api_exit'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:driver_api_exit'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:kernel_begin'] = btw.EventClass('cuptiTracer:kernel_begin')
+event_classes['cuptiTracer:kernel_begin'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:kernel_begin'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:kernel_begin'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:kernel_end'] = btw.EventClass('cuptiTracer:kernel_end')
+event_classes['cuptiTracer:kernel_end'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:kernel_end'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:kernel_end'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:memcpy_begin'] = btw.EventClass('cuptiTracer:memcpy_begin')
+event_classes['cuptiTracer:memcpy_begin'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:memcpy_begin'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:memcpy_begin'].add_field(string_fd, 'details')
+event_classes['cuptiTracer:memcpy_begin'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:memcpy_end'] = btw.EventClass('cuptiTracer:memcpy_end')
+event_classes['cuptiTracer:memcpy_end'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:memcpy_end'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:memcpy_end'].add_field(string_fd, 'details')
+event_classes['cuptiTracer:memcpy_end'].add_field(uint64_fd, 'timestamp')

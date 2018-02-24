@@ -56,7 +56,7 @@ for r_event in collection.events:
     for f in fields:
         # print(name, f, r_event[f])
         w_event.payload(f).value = r_event[f]
-        
+
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
 
@@ -71,7 +71,7 @@ for r_event in collection.events:
     # do not change vtid
     events[event_time] = [w_event, threadId]
     continue
-    
+
     if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
         threadId = 1
     elif "operation" in name:
