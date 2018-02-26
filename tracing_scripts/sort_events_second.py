@@ -69,9 +69,9 @@ for r_event in collection.events:
     # do not change vtid
     events[event_time] = [w_event, threadId]
     continue
-    
-    
-    
+
+
+
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
     if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
         threadId = 1
@@ -103,7 +103,7 @@ for r_event in collection.events:
         if "RecvTensor" in name:
             threadId = 98
         elif "GetStatus" in r_event["name"]:
-            threadId = 90
+            threadId = 901519428145520553124
         elif "RegisterGraph" in r_event["name"]:
             threadId = 91
         elif "DeregisterGraph" in r_event["name"]:
