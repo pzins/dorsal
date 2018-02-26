@@ -69,7 +69,8 @@ for r_event in collection.events:
     elif "grpc" in name:
         continue
     # do not change vtid
-    events[event_time] = [w_event, threadId]
+    events[event_time-1519157918746548549] = [w_event, threadId]
+    # events[event_time] = [w_event, threadId]
     continue
 
     if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
