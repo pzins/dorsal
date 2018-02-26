@@ -150,11 +150,7 @@
 					<stateAttribute type="constant" value="component" />
 					<stateValue type="eventField" value="cat"/>
 				</stateChange>
-				<stateChange>
-					<stateAttribute type="constant" value="#CurrentScenario" />
-					<stateAttribute type="constant" value="name" />
-					<stateValue type="eventField" value="name"/>
-				</stateChange>
+
 				<stateChange>
 					<stateAttribute type="constant" value="#CurrentScenario" />
 					<stateAttribute type="constant" value="rendezvous_key" />
@@ -345,14 +341,14 @@
 				<state id="Wait_thread_start">
 					<!-- The state will stay here until we have a thread start event -->
 					
-					<transition event="grpcTracer:*RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type"/>
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type"/>
 
 				</state>
 				<state id="loop">
 
-					<transition event="grpcTracer:*RecvTensor_request" cond="grpctest" target="loop" action="push_event_type" />
-					<transition event="grpcTracer:*RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type"/>
-					<transition event="grpcTracer:*RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type" />
+					<transition event="grpcTracer:send_RecvTensor_request" cond="grpctest" target="loop" action="push_event_type" />
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type" />
 						
 				</state>
 				<final id="end_thread"/>
