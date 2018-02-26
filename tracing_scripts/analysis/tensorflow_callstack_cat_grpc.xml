@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="Tensorflow GRPC Callstack">
+        <!-- <level path="call_stack/*" /> -->
+		<level path="Views/*" /> 
+		<!-- <thread cpu="cpu" /> -->
+		<!-- <thread level="0"/> -->
+    </callstackGroup>
+	<pattern version="0" id="tensorflow_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="Tensorflow GRPC" />
+		</head>
+		
+		<location id="CurrentThread">
+			<stateAttribute type="constant" value="Views" />
+			<stateAttribute type="query">
+				<stateAttribute type="constant" value="#CurrentScenario" />
+				<stateAttribute type="constant" value="component" />
+			</stateAttribute>
+
+		</location>
+
+		<patternHandler>
+			
+			
+			
+
+			<test id="name_name">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="cat"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="component" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
+		
+			<test id="grpctest">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="rendezvous_key"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="rendezvous_key" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
+			
+			<test id="last_out">
+				<if>
+					<condition>
+						<stateValue type="query">
+							<stateAttribute type="location" value="CurrentThread" />
+							<stateAttribute type="constant" value="CallStack" />
+						</stateValue>
+						<stateValue type="int" value="1" />
+					</condition>
+				</if>
+			</test>
+			
+			
+			<action id="entering_thread_grpc">
+				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+
+			
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="component" />
+					<stateValue type="eventField" value="cat"/>
+				</stateChange>
+
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="rendezvous_key" />
+					<stateValue type="eventField" value="rendezvous_key"/>
+				</stateChange>
+			</action>
+
+			<action id="push_event_type">
+				<!-- Push the current event to the thread's callstack -->
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="name" stack="push"/>
+				</stateChange>
+				<!-- <stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="cpu" />
+						<stateValue type="eventField" value="cpu" />
+				</stateChange> -->
+			</action>
+			<action id="pop_event_type">
+				<!-- Pop the current event from the callstack -->
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="name" stack="pop"/>
+				</stateChange>
+			</action>
+			
+			
+			<fsm id="tgcall_stack" multiple="true" initial="Wait_thread_start">
+
+				<state id="Wait_thread_start">				
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type"/>
+				</state>
+				<state id="loop">
+
+					<transition event="grpcTracer:send_RecvTensor_request" cond="grpctest" target="loop" action="push_event_type" />
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type" />
+						
+				</state>
+				<final id="end_thread"/>
+
+			</fsm>
+		</patternHandler>
+
+	</pattern>
+</callstack>
+
+
+</tmfxml>
