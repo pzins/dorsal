@@ -339,6 +339,15 @@ event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total
 event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total_bytes_in_use')
 event_classes['tensorflowTracer:cpu_bfc_bins_stats'].add_field(uint64_fd, 'total_requested_bytes_in_use')
 
+event_classes['lttng_python:event'] = btw.EventClass('lttng_python:event')
+event_classes['lttng_python:event'].add_field(string_fd, 'asctime')
+event_classes['lttng_python:event'].add_field(string_fd, 'msg')
+event_classes['lttng_python:event'].add_field(string_fd, 'logger_name')
+event_classes['lttng_python:event'].add_field(string_fd, 'funcName')
+event_classes['lttng_python:event'].add_field(uint32_fd, 'lineno')
+event_classes['lttng_python:event'].add_field(uint32_fd, 'int_loglevel')
+event_classes['lttng_python:event'].add_field(uint64_fd, 'thread')
+event_classes['lttng_python:event'].add_field(string_fd, 'threadName')
 
 
 # cuptiTracer

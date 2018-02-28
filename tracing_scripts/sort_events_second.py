@@ -67,8 +67,8 @@ for r_event in collection.events:
     elif "grpc" in name:
         continue
     # do not change vtid
-    events[event_time-1518196357777395130] = [w_event, threadId]
-    # events[event_time] = [w_event, threadId]
+    # events[event_time-1518196357777395130] = [w_event, threadId]
+    events[event_time] = [w_event, threadId]
     continue
 
 
