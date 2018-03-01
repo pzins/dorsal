@@ -63,6 +63,28 @@
 				</if>
 			</test>
 
+
+
+
+			<test id="python_start">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="logger_name"/>
+						<stateValue type="string" value="my-begin-logger"/>
+
+					</condition>
+				</if>
+			</test>
+
+			<test id="python_end">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="logger_name"/>
+						<stateValue type="string" value="my-end-logger"/>
+
+					</condition>
+				</if>
+			</test>
 			<test id="grpctest">
 				<if>
 					<condition>
@@ -137,6 +159,25 @@
 				</stateChange>
 			</action>
 
+			<action id="entering_thread_python">
+				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="threadID" />
+					<stateValue type="eventField" value="context._vtid"/>
+				</stateChange>
+
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="component" />
+					<stateValue type="string" value="python"/>
+				</stateChange>
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="name" />
+					<stateValue type="eventField" value="name"/>
+				</stateChange>
+			</action>
 			<action id="entering_thread_grpc">
 				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
 				<stateChange>
@@ -179,13 +220,13 @@
 						<stateValue type="eventField" value="name" stack="pop"/>
 				</stateChange>
 			</action>
-			
-			<action id="push_event_type_grpc">
+
+			<action id="push_python">
 				<!-- Push the current event to the thread's callstack -->
 				<stateChange>
 						<stateAttribute type="location" value="CurrentThread" />
 						<stateAttribute type="constant" value="CallStack" />
-						<stateValue type="eventField" value="rendezvous_key" stack="push"/>
+						<stateValue type="eventField" value="msg" stack="push"/>
 				</stateChange>
 				<!-- <stateChange>
 						<stateAttribute type="location" value="CurrentThread" />
@@ -193,15 +234,16 @@
 						<stateValue type="eventField" value="cpu" />
 				</stateChange> -->
 			</action>
-			<action id="pop_event_type_grpc">
+			<action id="pop_python">
 				<!-- Pop the current event from the callstack -->
 				<stateChange>
 						<stateAttribute type="location" value="CurrentThread" />
 						<stateAttribute type="constant" value="CallStack" />
-						<stateValue type="eventField" value="rendezvous_key" stack="pop"/>
+						<stateValue type="eventField" value="msg" stack="pop"/>
 				</stateChange>
 			</action>
-			
+
+
 			<!-- <action id="entry">
 				<stateChange>
 					<stateAttribute type="constant" value="call_stack" />
@@ -361,16 +403,39 @@
 			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
 				<state id="Wait_thread_start">
 					<!-- The state will stay here until we have a thread start event -->
-					
-					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type_grpc"/>
+
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type"/>
 
 				</state>
 				<state id="loop">
 
-					<transition event="grpcTracer:send_RecvTensor_request" cond="grpctest" target="loop" action="push_event_type_grpc" />
-					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type_grpc"/>
-					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type_grpc" />
-						
+					<transition event="grpcTracer:send_RecvTensor_request" cond="grpctest" target="loop" action="push_event_type" />
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type" />
+
+				</state>
+				<final id="end_thread"/>
+
+			</fsm>
+
+
+
+			<fsm id="tgcall_stack7" multiple="true" initial="Wait_thread_start">
+			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
+				<state id="Wait_thread_start">
+					<!-- The state will stay here until we have a thread start event -->
+
+					<transition event="lttng_python:event" cond="python_start" target="loop" action="entering_thread_python:push_python"/>
+
+				</state>
+				<state id="loop">
+
+					<transition event="lttng_python:event" cond="python_start" target="loop" action="push_python" />
+					<transition event="lttng_python:event" cond="python_end:last_out" target="end_thread" action="pop_python"/>
+					<transition event="lttng_python:event" cond="python_end" target="loop" action="pop_python" />
+
+
+
 				</state>
 				<final id="end_thread"/>
 
