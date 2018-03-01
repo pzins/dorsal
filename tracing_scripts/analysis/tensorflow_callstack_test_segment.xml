@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="GRPS stats">
+        <!-- <level path="call_stack/*" /> -->
+		<level path="Views/*" /> 
+		<level path="Threads/*"/>
+		<!-- <thread cpu="cpu" /> -->
+		<!-- <thread level="0"/> -->
+    </callstackGroup>
+	<pattern version="0" id="grpc_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="GRPC stats" />
+		</head>
+		
+
+		<patternHandler>			
+			<test id="grpctest">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="rendezvous_key"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="rendezvous_key" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
+			
+			<!-- 	Generates three state changes in the state system -->
+		<action id="sys_x_founded">
+<!-- 		Save the name of the system call executed under the current scenario path-->
+			<stateChange>
+				<stateAttribute type="constant" value="#CurrentScenario" />
+				<stateAttribute type="constant" value="rendezvous_key" />
+				<stateAttribute type="eventField" value="rendezvous_key" />
+				<stateValue type="eventName"/>
+			</stateChange>
+		</action>
+		
+			<!-- 	Generate a pattern segment -->
+		<action id="exit_syscall_founded">
+<!-- 		Generate a pattern segment with the name of the system call  of the current scenario-->
+			<segment>
+				<segType>
+					<segName>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="rendezvous_key" />
+							<stateAttribute type="eventField" value="rendezvous_key" />
+						</stateValue>
+					</segName>
+				</segType>
+			</segment>
+		</action>
+		
+		
+		
+		<!-- 	System call FSM
+		Declare an FSM to match all the system calls on thread 1311.
+		The FSM will generate pattern segments that will represent the system calls found
+-->
+		<fsm id="syscall" initial="wait_syscall_entry_x">
+<!-- 		Validate that PID == 1311 before going to the initial state -->
+			<!-- <initial>
+				<transition event="grpcTracer:send_RecvTensor_request"  target="wait_syscall_entry_x" />
+			</initial> -->
+			<state id="wait_syscall_entry_x">
+<!-- 				The state will stay here until we have a "syscall_entry_*" event -->
+				<transition event="grpcTracer:send_RecvTensor_request" target="syscall_entry_x" action="sys_x_founded" saveStoredFields="true"/>
+			</state>
+			<state id="syscall_entry_x" >
+<!-- 				The state will stay here until we have a "syscall_exit_*" event -->
+				<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="syscall_exit_x" action="exit_syscall_founded" saveStoredFields="true" clearStoredFields="true"/>
+			</state>
+<!-- 				The state will stay here forever -->
+			<final id="syscall_exit_x"/>
+		</fsm>
+		
+		
+
+		</patternHandler>
+
+	</pattern>
+</callstack>
+
+</tmfxml>

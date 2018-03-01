@@ -180,6 +180,27 @@
 				</stateChange>
 			</action>
 			
+			<action id="push_event_type_grpc">
+				<!-- Push the current event to the thread's callstack -->
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="rendezvous_key" stack="push"/>
+				</stateChange>
+				<!-- <stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="cpu" />
+						<stateValue type="eventField" value="cpu" />
+				</stateChange> -->
+			</action>
+			<action id="pop_event_type_grpc">
+				<!-- Pop the current event from the callstack -->
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="rendezvous_key" stack="pop"/>
+				</stateChange>
+			</action>
 			
 			<!-- <action id="entry">
 				<stateChange>
@@ -341,14 +362,14 @@
 				<state id="Wait_thread_start">
 					<!-- The state will stay here until we have a thread start event -->
 					
-					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type"/>
+					<transition event="grpcTracer:send_RecvTensor_request" target="loop" action="entering_thread_grpc:push_event_type_grpc"/>
 
 				</state>
 				<state id="loop">
 
-					<transition event="grpcTracer:send_RecvTensor_request" cond="grpctest" target="loop" action="push_event_type" />
-					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type"/>
-					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type" />
+					<transition event="grpcTracer:send_RecvTensor_request" cond="grpctest" target="loop" action="push_event_type_grpc" />
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest:last_out" target="end_thread" action="pop_event_type_grpc"/>
+					<transition event="grpcTracer:receive_RecvTensor_request" cond="grpctest" target="loop" action="pop_event_type_grpc" />
 						
 				</state>
 				<final id="end_thread"/>
