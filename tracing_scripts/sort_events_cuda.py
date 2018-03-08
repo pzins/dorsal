@@ -7,6 +7,9 @@ from tracing_events_classes import event_classes
 from collections import defaultdict
 import time
 import os
+from collections import defaultdict
+
+
 
 # Add the input trace to the collection
 collection = btr.TraceCollection()
@@ -118,6 +121,7 @@ for timestamp in timestamps:
     clock.time = timestamp
     ev = events[timestamp][0]
     ev.tid(events[timestamp][1])
+    # print(timestamp)
     main_stream.append_event(ev)
     # input()
 
