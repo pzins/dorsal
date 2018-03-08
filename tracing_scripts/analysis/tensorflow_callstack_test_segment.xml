@@ -2,22 +2,17 @@
 <tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
-<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
-    <callstackGroup name="GRPS stats">
-        <!-- <level path="call_stack/*" /> -->
-		<level path="Views/*" /> 
-		<level path="Threads/*"/>
-		<!-- <thread cpu="cpu" /> -->
-		<!-- <thread level="0"/> -->
-    </callstackGroup>
+
 	<pattern version="0" id="grpc_cs_pattern">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
 			<label value="GRPC stats" />
 		</head>
 		
+		<storedField id="name"/>
+		<storedField id="rendezvous_key" alias="rdv"/>
 
-		<patternHandler>			
+		<patternHandler initial="syscall">			
 			<test id="grpctest">
 				<if>
 					<condition>
@@ -65,9 +60,9 @@
 -->
 		<fsm id="syscall" initial="wait_syscall_entry_x">
 <!-- 		Validate that PID == 1311 before going to the initial state -->
-			<!-- <initial>
-				<transition event="grpcTracer:send_RecvTensor_request"  target="wait_syscall_entry_x" />
-			</initial> -->
+			<initial>
+				<transition target="wait_syscall_entry_x" />
+			</initial>
 			<state id="wait_syscall_entry_x">
 <!-- 				The state will stay here until we have a "syscall_entry_*" event -->
 				<transition event="grpcTracer:send_RecvTensor_request" target="syscall_entry_x" action="sys_x_founded" saveStoredFields="true"/>
@@ -85,6 +80,5 @@
 		</patternHandler>
 
 	</pattern>
-</callstack>
 
 </tmfxml>

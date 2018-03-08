@@ -7,8 +7,7 @@ from tracing_events_classes import event_classes
 from collections import defaultdict
 import time
 import os
-from collections import defaultdict
-
+import threading
 
 
 # Add the input trace to the collection
@@ -84,10 +83,6 @@ for r_event in collection.events:
 
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
-    
-    # if "grpcTracer:test" in name:
-        # threadId = 1111
-    
     # if "RecvTensor" in name:
     #     threadId = 1111
     # elif "grpc" in name:
@@ -152,17 +147,47 @@ for r_event in collection.events:
         threadId = 99999
 
     events[event_time] = [w_event, threadId]
+# # Append events to the stream
+# timestamps = list(events.keys())
+# timestamps.sort()
+# 
+# for timestamp in timestamps:
+#     clock.time = timestamp
+#     for i in range(len(events[timestamp])):
+#         ev = events[timestamp][i][0]
+#         ev.tid(events[timestamp][i][1])
+#         # print(timestamp)
+#         main_stream.append_event(ev)
+# 
+# # Flush the stream
+# main_stream.flush()
+
+def worker(begin, end): 
+    print('Worker')
+    main_stream = writer.create_stream(main_stream_class)
+    for timestamp in timestamps[begin:end]:
+        clock.time = timestamp
+        for i in range(len(events[timestamp])):
+            ev = events[timestamp][i][0]
+            ev.tid(events[timestamp][i][1])
+            # print(timestamp)
+            main_stream.append_event(ev)
+    main_stream.flush()
+    
+NB_THREADS = 16
+
 # Append events to the stream
 timestamps = list(events.keys())
 timestamps.sort()
+middle = int(len(timestamps)/NB_THREADS)
 
-for timestamp in timestamps:
-    clock.time = timestamp
-    for i in range(len(events[timestamp])):
-        ev = events[timestamp][i][0]
-        ev.tid(events[timestamp][i][1])
-        # print(timestamp)
-        main_stream.append_event(ev)
 
-# Flush the stream
-main_stream.flush()
+threads = []
+for i in range(NB_THREADS):
+    if i == NB_THREADS-1:
+        t = threading.Thread(target=worker, args=(middle*i, len(timestamps)))
+    else:
+        t = threading.Thread(target=worker, args=(middle*i, middle*(i+1)))
+    threads.append(t)
+    t.start()
+

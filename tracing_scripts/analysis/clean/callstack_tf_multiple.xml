@@ -55,30 +55,7 @@
 					</condition>
 				</if>
 			</test>
-			<test id="async_name">
-				<if>
-					<condition>
-						<stateValue type="eventField" value="name"/>
-						<stateValue type="query">
-							<stateAttribute type="constant" value="#CurrentScenario" />
-							<stateAttribute type="constant" value="name" />
-						</stateValue>
-					</condition>
-				</if>
-			</test>
-
-			<test id="grpctest">
-				<if>
-					<condition>
-						<stateValue type="eventField" value="rendezvous_key"/>
-						<stateValue type="query">
-							<stateAttribute type="constant" value="#CurrentScenario" />
-							<stateAttribute type="constant" value="rendezvous_key" />
-						</stateValue>
-					</condition>
-				</if>
-			</test>
-
+			
 			<test id="last_out">
 				<if>
 					<condition>
@@ -88,35 +65,6 @@
 						</stateValue>
 						<stateValue type="int" value="1" />
 					</condition>
-				</if>
-			</test>
-
-			<test id="is_start">
-				<if>
-					<or>
-						<condition>
-							<stateValue type="eventName"/>
-							<stateValue type="string" value="tensorflowTracer:*_start"/>
-						</condition>
-						<condition>
-							<stateValue type="eventName"/>
-							<stateValue type="string" value="tensorflowTracer:*_entry"/>
-						</condition>
-					</or>
-				</if>
-			</test>
-			<test id="is_end">
-				<if>
-					<or>
-						<condition>
-							<stateValue type="eventName"/>
-							<stateValue type="string" value="tensorflowTracer:*_end"/>
-						</condition>
-						<condition>
-							<stateValue type="eventName"/>
-							<stateValue type="string" value="tensorflowTracer:*_exit"/>
-						</condition>
-					</or>
 				</if>
 			</test>
 
@@ -141,27 +89,6 @@
 				</stateChange>
 			</action>
 
-			<action id="entering_thread_grpc">
-				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
-				<stateChange>
-					<stateAttribute type="constant" value="#CurrentScenario" />
-					<stateAttribute type="constant" value="threadID" />
-					<stateValue type="eventField" value="context._vtid"/>
-				</stateChange>
-
-				<stateChange>
-					<stateAttribute type="constant" value="#CurrentScenario" />
-					<stateAttribute type="constant" value="component" />
-					<stateValue type="eventField" value="cat"/>
-				</stateChange>
-
-				<stateChange>
-					<stateAttribute type="constant" value="#CurrentScenario" />
-					<stateAttribute type="constant" value="rendezvous_key" />
-					<stateValue type="eventField" value="rendezvous_key"/>
-				</stateChange>
-			</action>
-
 			<action id="push_event_type">
 				<!-- Push the current event to the thread's callstack -->
 				<stateChange>
@@ -169,11 +96,6 @@
 						<stateAttribute type="constant" value="CallStack" />
 						<stateValue type="eventField" value="name" stack="push"/>
 				</stateChange>
-				<!-- <stateChange>
-						<stateAttribute type="location" value="CurrentThread" />
-						<stateAttribute type="constant" value="cpu" />
-						<stateValue type="eventField" value="cpu" />
-				</stateChange> -->
 			</action>
 			<action id="pop_event_type">
 				<!-- Pop the current event from the callstack -->
@@ -184,126 +106,54 @@
 				</stateChange>
 			</action>
 			
-			<action id="push_event_type_grpc">
-				<!-- Push the current event to the thread's callstack -->
-				<stateChange>
-						<stateAttribute type="location" value="CurrentThread" />
-						<stateAttribute type="constant" value="CallStack" />
-						<stateValue type="eventField" value="rendezvous_key" stack="push"/>
-				</stateChange>
-				<!-- <stateChange>
-						<stateAttribute type="location" value="CurrentThread" />
-						<stateAttribute type="constant" value="cpu" />
-						<stateValue type="eventField" value="cpu" />
-				</stateChange> -->
-			</action>
-			<action id="pop_event_type_grpc">
-				<!-- Pop the current event from the callstack -->
-				<stateChange>
-						<stateAttribute type="location" value="CurrentThread" />
-						<stateAttribute type="constant" value="CallStack" />
-						<stateValue type="eventField" value="rendezvous_key" stack="pop"/>
-				</stateChange>
-			</action>
 			
-
-
 			<fsm id="tgcall_stack" multiple="true" initial="Wait_thread_start">
-			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
 				<state id="Wait_thread_start">
-					<!-- The state will stay here until we have a thread start event -->
-
 					<transition event="*_entry" target="loop" action="entering_thread:push_event_type"/>
 				</state>
 				<state id="loop">
 					<transition event="*_entry" cond="thread_thread:name_name" target="loop" action="push_event_type" />
 					<transition event="*_exit" cond="thread_thread:name_name:last_out" target="end_thread" action="pop_event_type"/>
 					<transition event="*_exit" cond="thread_thread:name_name" target="loop" action="pop_event_type" />
-
 				</state>
 				<final id="end_thread"/>
-
 			</fsm>
 
 			<fsm id="tgcall_stack2" multiple="true" initial="Wait_thread_start">
-			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
 				<state id="Wait_thread_start">
-					<!-- The state will stay here until we have a thread start event -->
-
 					<transition event="hcc*_begin" target="loop" action="entering_thread:push_event_type"/>
-
 				</state>
 				<state id="loop">
-
 					<transition event="hcc*_begin" cond="thread_thread:name_name" target="loop" action="push_event_type" />
 					<transition event="hcc*_end" cond="thread_thread:name_name:last_out" target="end_thread" action="pop_event_type"/>
 					<transition event="hcc*_end" cond="thread_thread:name_name" target="loop" action="pop_event_type" />
-
 				</state>
 				<final id="end_thread"/>
-
 			</fsm>
 
-
 			<fsm id="tgcall_stack3" multiple="true" initial="Wait_thread_start">
-			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
 			    <state id="Wait_thread_start">
-			        <!-- The state will stay here until we have a thread start event -->
-
 			        <transition event="tensorflowTracer:session_start" target="loop" action="entering_thread:push_event_type"/>
-
 			    </state>
 			    <state id="loop">
-
 			        <transition event="tensorflowTracer:session_start" cond="thread_thread:name_name" target="loop" action="push_event_type" />
 			        <transition event="tensorflowTracer:session_end" cond="thread_thread:name_name:last_out" target="end_thread" action="pop_event_type"/>
 			        <transition event="tensorflowTracer:session_end" cond="thread_thread:name_name" target="loop" action="pop_event_type" />
-
 			    </state>
 			    <final id="end_thread"/>
-
 			</fsm>
 
-
 			<fsm id="tgcall_stack4" multiple="true" initial="Wait_thread_start">
-			<!-- <fsm id="tfcall_stck" initial="Wait_thread_start"> -->
 				<state id="Wait_thread_start">
-					<!-- The state will stay here until we have a thread start event -->
-
 					<transition event="tensorflowTracer:operation_start" target="loop" action="entering_thread:push_event_type"/>
-
 				</state>
 				<state id="loop">
-
 					<transition event="tensorflowTracer:operation_start" cond="thread_thread:name_name" target="loop" action="push_event_type" />
 					<transition event="tensorflowTracer:operation_end" cond="thread_thread:name_name:last_out" target="end_thread" action="pop_event_type"/>
 					<transition event="tensorflowTracer:operation_end" cond="thread_thread:name_name" target="loop" action="pop_event_type" />
-
 				</state>
 				<final id="end_thread"/>
-
 			</fsm>
-
-
-
-			<!-- <fsm id="tgcall_stack5" multiple="true" initial="Wait_thread_start">
-				<state id="Wait_thread_start">
-
-					<transition event="tensorflowTracer:async_operation_start" target="loop" action="entering_thread:push_event_type"/>
-
-				</state>
-				<state id="loop">
-
-					<transition event="tensorflowTracer:async_operation_start" cond="async_name" target="loop" action="push_event_type" />
-					<transition event="tensorflowTracer:async_operation_end" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
-					<transition event="tensorflowTracer:async_operation_end" cond="async_name" target="loop" action="pop_event_type" />
-
-				</state>
-				<final id="end_thread"/>
-
-			</fsm> -->
-
-
 		</patternHandler>
 
 	</pattern>

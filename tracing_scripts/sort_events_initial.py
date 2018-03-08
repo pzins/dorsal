@@ -84,10 +84,6 @@ for r_event in collection.events:
 
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
-    
-    # if "grpcTracer:test" in name:
-        # threadId = 1111
-    
     # if "RecvTensor" in name:
     #     threadId = 1111
     # elif "grpc" in name:
