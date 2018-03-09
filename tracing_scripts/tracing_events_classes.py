@@ -51,6 +51,12 @@ event_classes['hipTracer:function_entry'].add_field(string_fd, 'name')
 event_classes['hipTracer:function_exit'] = btw.EventClass('hipTracer:function_exit')
 event_classes['hipTracer:function_exit'].add_field(string_fd, 'cat')
 event_classes['hipTracer:function_exit'].add_field(string_fd, 'name')
+event_classes['hipTracer:wait_begin'] = btw.EventClass('hipTracer:wait_begin')
+event_classes['hipTracer:wait_begin'].add_field(string_fd, 'cat')
+event_classes['hipTracer:wait_begin'].add_field(string_fd, 'name')
+event_classes['hipTracer:wait_end'] = btw.EventClass('hipTracer:wait_end')
+event_classes['hipTracer:wait_end'].add_field(string_fd, 'cat')
+event_classes['hipTracer:wait_end'].add_field(string_fd, 'name')
 
 # grpcTracer
 event_classes['grpcTracer:receive_request'] = btw.EventClass('grpcTracer:receive_request')
@@ -196,6 +202,12 @@ event_classes['hccTracer:barrier_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:barrier_end'].add_field(uint32_fd, 'dep_count')
 event_classes['hccTracer:barrier_end'].add_field(uint32_fd, 'acquire')
 event_classes['hccTracer:barrier_end'].add_field(uint32_fd, 'release')
+
+
+event_classes['hccTracer:queue_stats'] = btw.EventClass('hccTracer:queue_stats')
+event_classes['hccTracer:queue_stats'].add_field(string_fd, 'queue_id')
+event_classes['hccTracer:queue_stats'].add_field(uint64_fd, 'size')
+# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
 
 # event_classes['hccTracer:aql_packet_submitted'] = btw.EventClass('hccTracer:aql_packet_submitted')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'packet_id')

@@ -250,6 +250,19 @@ TRACEPOINT_EVENT(
 )
 
 
+TRACEPOINT_EVENT(
+	hccTracer,
+	queue_stats,
+	TP_ARGS(
+		const char*, queue_id_arg,
+        uint64_t, size_arg
+	),
+	TP_FIELDS(
+		ctf_string(queue_id, queue_id_arg)
+        ctf_integer(uint64_t, size, size_arg)
+	)
+)
+
 
 // no more used, because profiling methods crash
 // TRACEPOINT_EVENT(
