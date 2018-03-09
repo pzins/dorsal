@@ -34,6 +34,35 @@ TRACEPOINT_EVENT(
 	)
 )
 
+TRACEPOINT_EVENT(
+	hsaTracer,
+	pool_memory_allocate,
+	TP_ARGS(
+		uint64_t, handle_arg,
+		uint64_t, ptr_arg,
+		uint64_t, size_arg
+	),
+	TP_FIELDS(
+		ctf_integer(uint64_t, handle, handle_arg)
+		ctf_integer(uint64_t, ptr, ptr_arg)
+		ctf_integer(uint64_t, size, size_arg)
+	)
+)
+
+TRACEPOINT_EVENT(
+	hsaTracer,
+	pool_memory_free,
+	TP_ARGS(
+		uint64_t, handle_arg,
+		uint64_t, ptr_arg,
+		uint64_t, size_arg
+	),
+	TP_FIELDS(
+		ctf_integer(uint64_t, handle, handle_arg)
+		ctf_integer(uint64_t, ptr, ptr_arg)
+		ctf_integer(uint64_t, size, size_arg)
+	)
+)
 
 #endif
 
