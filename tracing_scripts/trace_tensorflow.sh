@@ -1,4 +1,5 @@
 lttng create tensorflow
+lttng enable-event --userspace "hsa_runtime:*"
 lttng enable-event --userspace "hsaTracer:*"
 lttng enable-event --userspace "hccTracer:*"
 lttng enable-event --userspace "hipTracer:*"

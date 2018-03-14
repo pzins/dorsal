@@ -56,12 +56,17 @@ for r_event in collection.events:
     w_event = btw.Event(event_classes[name])
 
     for f in fields:
+        if f == "workgroup_size" or f == "grid_size":
+            for i in range(3):
+                tmp = w_event.payload(f).field(i)
+                tmp.value = r_event[f][i]
+            continue
         w_event.payload(f).value = r_event[f]
     threadId = r_event["vtid"]
     events[event_time] = [w_event, threadId]
-
 # add the traces of the second computer
 for r_event in collection_remote.events:
+    
     name = r_event.name
     event_time = r_event.timestamp
     w_event = btw.Event(event_classes[name])
@@ -77,7 +82,6 @@ for r_event in collection_remote.events:
         w_event.payload(f).value = r_event[f]
     threadId = r_event["vtid"]
     events[event_time] = [w_event, threadId]
-
 # Append events to the stream
 timestamps = list(events.keys())
 timestamps.sort()

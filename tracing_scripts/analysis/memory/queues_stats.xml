@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+* Copyright (c) 2014 École Polytechnique de Montréal
+*
+* All rights reserved. This program and the accompanying materials are
+* made available under the terms of the Eclipse Public License v1.0 which
+* accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* 	Geneviève Bastien - Initial API and implementation
+*************************************************************************** -->
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+	<xyView id="tensorflow.queue_stats">
+		<head>
+			<analysis id="queue_stats" />
+			<label value="Queue stats" />
+		</head>
+
+		<entry path="Allocations/*/*" displayType="absolute"> 
+			<display type="self" />
+		</entry>
+	</xyView>
+
+	<stateProvider id="queue_stats" version="1">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="Queue stats" />
+		</head>
+
+		<!-- case 1 : exit_syscall : Fields: int64 ret -->
+		<eventHandler eventName="hccTracer:queue_stats">
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="constant" value="size" />
+				<stateAttribute type="eventField" value="queue_id" />
+				<stateValue type="eventField" value="size" increment="false" />
+			</stateChange>
+		</eventHandler>
+	</stateProvider>
+</tmfxml>

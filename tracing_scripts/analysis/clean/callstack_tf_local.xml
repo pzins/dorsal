@@ -121,6 +121,18 @@
 				</state>
 				<final id="end_thread"/>
 			</fsm>
+			
+			<fsm id="tgcall_stack20" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="hsa_runtime:kernel_start_nm" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="hsa_runtime:kernel_start_nm" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="hsa_runtime:kernel_end_nm" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="hsa_runtime:kernel_end_nm" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
 	
 			<fsm id="tgcall_stack3" multiple="true" initial="Wait_thread_start">
 			    <state id="Wait_thread_start">

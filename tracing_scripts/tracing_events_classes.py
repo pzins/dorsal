@@ -28,6 +28,84 @@ dim_array_fd = btw.ArrayFieldDeclaration(uint32_fd, 3)
 # Create event classes
 event_classes = {}
 
+# Paul
+event_classes['hsa_runtime:kernel_start_nm'] = btw.EventClass('hsa_runtime:kernel_start_nm')
+event_classes['hsa_runtime:kernel_start_nm'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:kernel_start_nm'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:kernel_start_nm'].add_field(string_fd, 'name')
+event_classes['hsa_runtime:kernel_start_nm'].add_field(uint64_fd, 'agent_handle')
+event_classes['hsa_runtime:kernel_start_nm'].add_field(uint64_fd, 'queue_id')
+event_classes['hsa_runtime:kernel_start_nm'].add_field(uint64_fd, 'timestamp')
+
+event_classes['hsa_runtime:kernel_end_nm'] = btw.EventClass('hsa_runtime:kernel_end_nm')
+event_classes['hsa_runtime:kernel_end_nm'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:kernel_end_nm'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:kernel_end_nm'].add_field(string_fd, 'name')
+event_classes['hsa_runtime:kernel_end_nm'].add_field(uint64_fd, 'agent_handle')
+event_classes['hsa_runtime:kernel_end_nm'].add_field(uint64_fd, 'queue_id')
+event_classes['hsa_runtime:kernel_end_nm'].add_field(uint64_fd, 'timestamp')
+
+event_classes['hsa_runtime:runtime_initialized'] = btw.EventClass('hsa_runtime:runtime_initialized')
+event_classes['hsa_runtime:runtime_initialized'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:runtime_shut_down'] = btw.EventClass('hsa_runtime:runtime_shut_down')
+event_classes['hsa_runtime:runtime_shut_down'].add_field(string_fd, 'cat')
+
+event_classes['hsa_runtime:queue_created'] = btw.EventClass('hsa_runtime:queue_created')
+event_classes['hsa_runtime:queue_created'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:queue_created'].add_field(uint64_fd, 'agent_handle')
+event_classes['hsa_runtime:queue_created'].add_field(uint64_fd, 'queue_id')
+event_classes['hsa_runtime:queue_destroyed'] = btw.EventClass('hsa_runtime:queue_destroyed')
+event_classes['hsa_runtime:queue_destroyed'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:queue_destroyed'].add_field(uint64_fd, 'queue_id')
+
+event_classes['hsa_runtime:aql_packet_submitted'] = btw.EventClass('hsa_runtime:aql_packet_submitted')
+event_classes['hsa_runtime:aql_packet_submitted'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:aql_packet_submitted'].add_field(uint64_fd, 'packet_id')
+event_classes['hsa_runtime:aql_packet_submitted'].add_field(string_fd, 'packet_type')
+event_classes['hsa_runtime:aql_packet_submitted'].add_field(uint64_fd, 'agent_handle')
+event_classes['hsa_runtime:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
+
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'] = btw.EventClass('hsa_runtime:aql_kernel_dispatch_packet_submitted')
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'packet_id')
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'agent_handle')
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'queue_id')
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:aql_kernel_dispatch_packet_submitted'].add_field(string_fd, 'kernel_name')
+
+
+event_classes['hsa_runtime:perf_counter_uint32'] = btw.EventClass('hsa_runtime:perf_counter_uint32')
+event_classes['hsa_runtime:perf_counter_uint32'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:perf_counter_uint32'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:perf_counter_uint32'].add_field(uint32_fd, 'counter_index')
+event_classes['hsa_runtime:perf_counter_uint32'].add_field(string_fd, 'counter_name')
+event_classes['hsa_runtime:perf_counter_uint32'].add_field(uint32_fd, 'value')
+
+event_classes['hsa_runtime:perf_counter_uint64'] = btw.EventClass('hsa_runtime:perf_counter_uint64')
+event_classes['hsa_runtime:perf_counter_uint64'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:perf_counter_uint64'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:perf_counter_uint64'].add_field(uint32_fd, 'counter_index')
+event_classes['hsa_runtime:perf_counter_uint64'].add_field(string_fd, 'counter_name')
+event_classes['hsa_runtime:perf_counter_uint64'].add_field(uint64_fd, 'value')
+
+
+event_classes['hsa_runtime:perf_counter_float32'] = btw.EventClass('hsa_runtime:perf_counter_float32')
+event_classes['hsa_runtime:perf_counter_float32'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:perf_counter_float32'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:perf_counter_float32'].add_field(uint32_fd, 'counter_index')
+event_classes['hsa_runtime:perf_counter_float32'].add_field(string_fd, 'counter_name')
+event_classes['hsa_runtime:perf_counter_float32'].add_field(float_fd, 'value')
+
+event_classes['hsa_runtime:perf_counter_float64'] = btw.EventClass('hsa_runtime:perf_counter_float64')
+event_classes['hsa_runtime:perf_counter_float64'].add_field(string_fd, 'cat')
+event_classes['hsa_runtime:perf_counter_float64'].add_field(uint64_fd, 'kernel_object')
+event_classes['hsa_runtime:perf_counter_float64'].add_field(uint32_fd, 'counter_index')
+event_classes['hsa_runtime:perf_counter_float64'].add_field(string_fd, 'counter_name')
+event_classes['hsa_runtime:perf_counter_float64'].add_field(float_fd, 'value')
+    
+
+
+
 # hsaTracer
 event_classes['hsaTracer:function_entry'] = btw.EventClass('hsaTracer:function_entry')
 event_classes['hsaTracer:function_entry'].add_field(string_fd, 'cat')
@@ -207,11 +285,11 @@ event_classes['hccTracer:barrier_end'].add_field(uint32_fd, 'release')
 event_classes['hccTracer:queue_stats'] = btw.EventClass('hccTracer:queue_stats')
 event_classes['hccTracer:queue_stats'].add_field(string_fd, 'queue_id')
 event_classes['hccTracer:queue_stats'].add_field(uint64_fd, 'size')
-# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
 
 # event_classes['hccTracer:aql_packet_submitted'] = btw.EventClass('hccTracer:aql_packet_submitted')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'packet_id')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(string_fd, 'packet_type')
+# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'agent_handle')
 # event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
 #

@@ -15,7 +15,6 @@ from collections import defaultdict
 collection = btr.TraceCollection()
 directory = "/home/pierre/lttng-traces"
 path = max([os.path.join(directory,d) for d in os.listdir(directory)], key=os.path.getmtime)
-# path = "/home/pierre/lttng-traces/tensorflow-20180312-101756"
 collection.add_trace(path + "/ust/uid/1000/64-bit", 'ctf')
 
 # Set the output trace
@@ -51,7 +50,8 @@ clock_offset = 1520551794904150339 # first computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
-init_time = 0
+pool_memory_allocate_events = {}
+
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -62,9 +62,6 @@ for r_event in collection.events:
 
     for f in fields:
         # print(name, f, r_event[f])
-        if r_event[f] == "hsa_init":
-            init_time = event_time
-
         # if hccTracer:kernel_* : fill the grid and groupworker arrays
         if f == "workgroup_size" or f == "grid_size":
             for i in range(3):
@@ -73,12 +70,6 @@ for r_event in collection.events:
             continue
             
         w_event.payload(f).value = r_event[f]
-    
-    if "hsa_runtime:kernel" in name:
-        if init_time == 0:
-            print("Error, hsa_init not called before kernel")
-            exit(0)
-        event_time = r_event["timestamp"] + init_time
 
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
@@ -92,7 +83,13 @@ for r_event in collection.events:
                 continue
             save_barrier_time = r_event["timestamp"]
 
-
+    # save pool_memory_allocate events
+    if "hsaTracer:pool_memory_allocate" in name:
+        pool_memory_allocate_events[r_event["ptr"]] = [r_event["size"], r_event["handle"]]
+    if "hsaTracer:pool_memory_free" in name:
+        if r_event["ptr"] in pool_memory_allocate_events:
+            w_event.payload("size").value = pool_memory_allocate_events[r_event["ptr"]][0] * -1
+            w_event.payload("handle").value = pool_memory_allocate_events[r_event["ptr"]][1]
 
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
@@ -111,59 +108,9 @@ for r_event in collection.events:
         cntol += 1
 
     events[event_time].append([w_event, threadId])
-    continue
-
-    if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
-        threadId = 1
-    elif "operation" in name:
-        if "gpu" in r_event["placement"]:
-            if "async" not in name:
-                threadId = 31
-            else:
-                threadId = 32
-        else:
-            if "async" not in name:
-                threadId = 21
-            else:
-                threadId = 22
-    elif "hsaTracer" in name:
-        threadId = 4
-    elif "hipTracer" in name:
-        threadId = 5
-    elif "hccTracer" in name:
-        if "unpinned_memory_engine_copy" in name:
-            threadId = 6
-        else:
-            threadId = 7
-    elif "alloc" in name:
-        threadId = 8
-    elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
-        threadId = 9
-    elif "grpcTracer" in name:
-        if "RecvTensor" in name:
-            threadId = 98
-        elif "GetStatus" in r_event["name"]:
-            threadId = 90
-        elif "RegisterGraph" in r_event["name"]:
-            threadId = 91
-        elif "DeregisterGraph" in r_event["name"]:
-            threadId = 92
-        elif "RunGraph" in r_event["name"]:
-            threadId = 93
-        elif "CleanupGraph" in r_event["name"]:
-            threadId = 94
-        elif "CleanupAll" in r_event["name"]:
-            threadId = 95
-        elif "Logging" in r_event["name"]:
-            threadId = 96
-        elif "Tracing" in r_event["name"]:
-            threadId = 97
-        else:
-            threadId = 99
-    else:
-        threadId = 99999
-
-    events[event_time] = [w_event, threadId]
+    
+    
+    
 # Append events to the stream
 timestamps = list(events.keys())
 timestamps.sort()
