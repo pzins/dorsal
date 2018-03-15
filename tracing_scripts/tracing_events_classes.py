@@ -159,30 +159,54 @@ event_classes['grpcTracer:send_RecvTensor_request'].add_field(string_fd, 'reques
 event_classes['grpcTracer:send_RecvTensor_request'].add_field(string_fd, 'response')
 
 
-# TO DELETE
-event_classes['grpcTracer:test_start_parallel_executors'] = btw.EventClass('grpcTracer:test_start_parallel_executors')
-event_classes['grpcTracer:test_start_parallel_executors'].add_field(string_fd, 'cat')
-event_classes['grpcTracer:test_start_parallel_executors'].add_field(string_fd, 'name')
-event_classes['grpcTracer:test_end_parallel_executors'] = btw.EventClass('grpcTracer:test_end_parallel_executors')
-event_classes['grpcTracer:test_end_parallel_executors'].add_field(string_fd, 'cat')
-event_classes['grpcTracer:test_end_parallel_executors'].add_field(string_fd, 'name')
+# GOOD ONES
+event_classes['grpcTracer:set_proto_from_gpu_start'] = btw.EventClass('grpcTracer:set_proto_from_gpu_start')
+event_classes['grpcTracer:set_proto_from_gpu_start'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:set_proto_from_gpu_start'].add_field(string_fd, 'name')
+event_classes['grpcTracer:set_proto_from_gpu_end'] = btw.EventClass('grpcTracer:set_proto_from_gpu_end')
+event_classes['grpcTracer:set_proto_from_gpu_end'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:set_proto_from_gpu_end'].add_field(string_fd, 'name')
 
-event_classes['grpcTracer:test_start_SetProtoFromGPU'] = btw.EventClass('grpcTracer:test_start_SetProtoFromGPU')
-event_classes['grpcTracer:test_start_SetProtoFromGPU'].add_field(string_fd, 'cat')
-event_classes['grpcTracer:test_start_SetProtoFromGPU'].add_field(string_fd, 'name')
-event_classes['grpcTracer:test_end_SetProtoFromGPU'] = btw.EventClass('grpcTracer:test_end_SetProtoFromGPU')
-event_classes['grpcTracer:test_end_SetProtoFromGPU'].add_field(string_fd, 'cat')
-event_classes['grpcTracer:test_end_SetProtoFromGPU'].add_field(string_fd, 'name')
+event_classes['grpcTracer:prepare_response_tensor_start'] = btw.EventClass('grpcTracer:prepare_response_tensor_start')
+event_classes['grpcTracer:prepare_response_tensor_start'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:prepare_response_tensor_start'].add_field(string_fd, 'name')
+event_classes['grpcTracer:prepare_response_tensor_start'].add_field(string_fd, 'rendezvous_key')
+event_classes['grpcTracer:prepare_response_tensor_end'] = btw.EventClass('grpcTracer:prepare_response_tensor_end')
+event_classes['grpcTracer:prepare_response_tensor_end'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:prepare_response_tensor_end'].add_field(string_fd, 'name')
+event_classes['grpcTracer:prepare_response_tensor_end'].add_field(string_fd, 'rendezvous_key')
 
-event_classes['grpcTracer:test_start_RecvTensorAsync'] = btw.EventClass('grpcTracer:test_start_RecvTensorAsync')
-event_classes['grpcTracer:test_start_RecvTensorAsync'].add_field(string_fd, 'cat')
-event_classes['grpcTracer:test_start_RecvTensorAsync'].add_field(string_fd, 'name')
-event_classes['grpcTracer:test_end_RecvTensorAsync'] = btw.EventClass('grpcTracer:test_end_RecvTensorAsync')
-event_classes['grpcTracer:test_end_RecvTensorAsync'].add_field(string_fd, 'cat')
-event_classes['grpcTracer:test_end_RecvTensorAsync'].add_field(string_fd, 'name')
+event_classes['grpcTracer:send_request_tensor_start'] = btw.EventClass('grpcTracer:send_request_tensor_start')
+event_classes['grpcTracer:send_request_tensor_start'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:send_request_tensor_start'].add_field(string_fd, 'name')
+event_classes['grpcTracer:send_request_tensor_start'].add_field(string_fd, 'rendezvous_key')
+event_classes['grpcTracer:send_request_tensor_end'] = btw.EventClass('grpcTracer:send_request_tensor_end')
+event_classes['grpcTracer:send_request_tensor_end'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:send_request_tensor_end'].add_field(string_fd, 'name')
+event_classes['grpcTracer:send_request_tensor_end'].add_field(string_fd, 'rendezvous_key')
 
 
+# STREAM TRACERS
+event_classes['streamTracer:test_start_ThenMemcpy_host_to_device'] = btw.EventClass('grpcTracer:test_start_ThenMemcpy_host_to_device')
+event_classes['streamTracer:test_start_ThenMemcpy_host_to_device'].add_field(string_fd, 'cat')
+event_classes['streamTracer:test_start_ThenMemcpy_host_to_device'].add_field(string_fd, 'name')
+event_classes['streamTracer:test_end_ThenMemcpy_host_to_device'] = btw.EventClass('grpcTracer:test_end_ThenMemcpy_host_to_device')
+event_classes['streamTracer:test_end_ThenMemcpy_host_to_device'].add_field(string_fd, 'cat')
+event_classes['streamTracer:test_end_ThenMemcpy_host_to_device'].add_field(string_fd, 'name')
 
+event_classes['streamTracer:test_start_ThenMemcpy_device_to_host'] = btw.EventClass('grpcTracer:test_start_ThenMemcpy_device_to_host')
+event_classes['streamTracer:test_start_ThenMemcpy_device_to_host'].add_field(string_fd, 'cat')
+event_classes['streamTracer:test_start_ThenMemcpy_device_to_host'].add_field(string_fd, 'name')
+event_classes['streamTracer:test_end_ThenMemcpy_device_to_host'] = btw.EventClass('grpcTracer:test_end_ThenMemcpy_device_to_host')
+event_classes['streamTracer:test_end_ThenMemcpy_device_to_host'].add_field(string_fd, 'cat')
+event_classes['streamTracer:test_end_ThenMemcpy_device_to_host'].add_field(string_fd, 'name')
+
+event_classes['streamTracer:test_start_ThenMemcpy_device_to_device'] = btw.EventClass('grpcTracer:test_start_ThenMemcpy_device_to_device')
+event_classes['streamTracer:test_start_ThenMemcpy_device_to_device'].add_field(string_fd, 'cat')
+event_classes['streamTracer:test_start_ThenMemcpy_device_to_device'].add_field(string_fd, 'name')
+event_classes['streamTracer:test_end_ThenMemcpy_device_to_device'] = btw.EventClass('grpcTracer:test_end_ThenMemcpy_device_to_device')
+event_classes['streamTracer:test_end_ThenMemcpy_device_to_device'].add_field(string_fd, 'cat')
+event_classes['streamTracer:test_end_ThenMemcpy_device_to_device'].add_field(string_fd, 'name')
 
 # hccTracer
 event_classes['hccTracer:kernel_begin'] = btw.EventClass('hccTracer:kernel_begin')

@@ -50,6 +50,17 @@
 					</condition>
 				</if>
 			</test>
+			<test id="rdv_key">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="rendezvous_key"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="rendezvous_key" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
 			<test id="last_out">
 				<if>
 					<condition>
@@ -82,7 +93,25 @@
 					<stateValue type="eventField" value="name"/>
 				</stateChange>
 			</action>
-
+			<action id="entering_thread_key">
+				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="threadID" />
+					<stateValue type="eventField" value="context._vtid"/>
+				</stateChange>
+			
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="component" />
+					<stateValue type="eventField" value="cat"/>
+				</stateChange>
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="rendezvous_key" />
+					<stateValue type="eventField" value="rendezvous_key"/>
+				</stateChange>
+			</action>
 			<action id="push_event_type">
 				<stateChange>
 						<stateAttribute type="location" value="CurrentThread" />
@@ -97,7 +126,20 @@
 						<stateValue type="eventField" value="name" stack="pop"/>
 				</stateChange>
 			</action>
-			
+			<action id="push_event_type_key">
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="rendezvous_key" stack="push"/>
+				</stateChange>
+			</action>
+			<action id="pop_event_type_key">
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="rendezvous_key" stack="pop"/>
+				</stateChange>
+			</action>
 			<fsm id="tgcall_stack" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">
 					<transition event="*_entry" target="loop" action="entering_thread:push_event_type"/>
@@ -160,12 +202,12 @@
 		
 			<fsm id="tgcall_stack6" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">				
-					<transition event="grpcTracer:test_start*" target="loop" action="entering_thread:push_event_type"/>
+					<transition event="grpcTracer:*tensor_start" target="loop" action="entering_thread_key:push_event_type_key"/>
 				</state>
 				<state id="loop">
-					<transition event="grpcTracer:test_start*" cond="async_name" target="loop" action="push_event_type"/>
-					<transition event="grpcTracer:test_end*" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
-					<transition event="grpcTracer:test_end*" cond="async_name" target="loop" action="pop_event_type"/>
+					<transition event="grpcTracer:*tensor_start" cond="rdv_key" target="loop" action="push_event_type_key"/>
+					<transition event="grpcTracer:*tensor_end" cond="rdv_key:last_out" target="end_thread" action="pop_event_type_key"/>
+					<transition event="grpcTracer:*tensor_end" cond="rdv_key" target="loop" action="pop_event_type_key"/>
 				</state>
 				<final id="end_thread"/>
 			</fsm>

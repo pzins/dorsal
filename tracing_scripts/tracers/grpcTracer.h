@@ -74,10 +74,9 @@ TRACEPOINT_EVENT(
 )
 
 
-// TO DELETE
 TRACEPOINT_EVENT(
     grpcTracer,
-    test_start_parallel_executors,
+    set_proto_from_gpu_start,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -89,32 +88,7 @@ TRACEPOINT_EVENT(
 )
 TRACEPOINT_EVENT(
     grpcTracer,
-    test_end_parallel_executors,
-    TP_ARGS(
-        const char*, cat_arg,
-        const char*, name_arg
-    ),
-    TP_FIELDS(
-        ctf_string(cat, cat_arg)
-        ctf_string(name, name_arg)
-    )
-)
-
-TRACEPOINT_EVENT(
-    grpcTracer,
-    test_start_SetProtoFromGPU,
-    TP_ARGS(
-        const char*, cat_arg,
-        const char*, name_arg
-    ),
-    TP_FIELDS(
-        ctf_string(cat, cat_arg)
-        ctf_string(name, name_arg)
-    )
-)
-TRACEPOINT_EVENT(
-    grpcTracer,
-    test_end_SetProtoFromGPU,
+    set_proto_from_gpu_end,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -128,26 +102,59 @@ TRACEPOINT_EVENT(
 
 TRACEPOINT_EVENT(
     grpcTracer,
-    test_start_RecvTensorAsync,
+    prepare_response_tensor_start,
     TP_ARGS(
         const char*, cat_arg,
-        const char*, name_arg
+        const char*, name_arg,
+        const char*, rendezvous_key_arg
     ),
     TP_FIELDS(
         ctf_string(cat, cat_arg)
         ctf_string(name, name_arg)
+        ctf_string(rendezvous_key, rendezvous_key_arg)
     )
 )
 TRACEPOINT_EVENT(
     grpcTracer,
-    test_end_RecvTensorAsync,
+    prepare_response_tensor_end,
     TP_ARGS(
         const char*, cat_arg,
-        const char*, name_arg
+        const char*, name_arg,
+        const char*, rendezvous_key_arg
     ),
     TP_FIELDS(
         ctf_string(cat, cat_arg)
         ctf_string(name, name_arg)
+        ctf_string(rendezvous_key, rendezvous_key_arg)
+    )
+)
+
+TRACEPOINT_EVENT(
+    grpcTracer,
+    send_request_tensor_start,
+    TP_ARGS(
+        const char*, cat_arg,
+        const char*, name_arg,
+        const char*, rendezvous_key_arg
+    ),
+    TP_FIELDS(
+        ctf_string(cat, cat_arg)
+        ctf_string(name, name_arg)
+        ctf_string(rendezvous_key, rendezvous_key_arg)
+    )
+)
+TRACEPOINT_EVENT(
+    grpcTracer,
+    send_request_tensor_end,
+    TP_ARGS(
+        const char*, cat_arg,
+        const char*, name_arg,
+        const char*, rendezvous_key_arg
+    ),
+    TP_FIELDS(
+        ctf_string(cat, cat_arg)
+        ctf_string(name, name_arg)
+        ctf_string(rendezvous_key, rendezvous_key_arg)
     )
 )
 
