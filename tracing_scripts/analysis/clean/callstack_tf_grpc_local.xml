@@ -200,6 +200,18 @@
 				<final id="end_thread"/>
 			</fsm>
 		
+			<fsm id="tgcall_stack10" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="grpcTracer:set_proto*_start" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="grpcTracer:set_proto*_start" cond="rdv_key" target="loop" action="push_event_type" />
+					<transition event="grpcTracer:set_proto*_end" cond="rdv_key:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="grpcTracer:set_proto*_end" cond="rdv_key" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+			
 			<fsm id="tgcall_stack6" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">				
 					<transition event="grpcTracer:*tensor_start" target="loop" action="entering_thread_key:push_event_type_key"/>

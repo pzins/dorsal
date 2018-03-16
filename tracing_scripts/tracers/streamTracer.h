@@ -11,7 +11,7 @@
 
 TRACEPOINT_EVENT(
     streamTracer,
-    test_start_ThenMemcpy_host_to_device,
+    stream_then_memcpy_host_to_device_start,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -23,7 +23,7 @@ TRACEPOINT_EVENT(
 )
 TRACEPOINT_EVENT(
     streamTracer,
-    test_end_ThenMemcpy_host_to_device,
+    stream_then_memcpy_host_to_device_end,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -35,7 +35,7 @@ TRACEPOINT_EVENT(
 )
 TRACEPOINT_EVENT(
     streamTracer,
-    test_start_ThenMemcpy_device_to_host,
+    stream_then_memcpy_device_to_host_start,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -47,7 +47,7 @@ TRACEPOINT_EVENT(
 )
 TRACEPOINT_EVENT(
     streamTracer,
-    test_end_ThenMemcpy_device_to_host,
+    stream_then_memcpy_device_to_host_end,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -60,7 +60,7 @@ TRACEPOINT_EVENT(
 
 TRACEPOINT_EVENT(
     streamTracer,
-    test_start_ThenMemcpy_device_to_device,
+    stream_then_memcpy_device_to_device_start,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -72,7 +72,7 @@ TRACEPOINT_EVENT(
 )
 TRACEPOINT_EVENT(
     streamTracer,
-    test_end_ThenMemcpy_device_to_device,
+    stream_then_memcpy_device_to_device_end,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg
@@ -82,33 +82,6 @@ TRACEPOINT_EVENT(
         ctf_string(name, name_arg)
     )
 )
-
-
-/*
-GetStatusAsync
-RegisterGraphAsync
-DeregisterGraphAsync
-RunGraphAsync
-CleanupGraphAsync
-CleanupAllAsync
-RecvTensorAsync
-LoggingAsync
-TracingAsync
-
-
-GetStatusHandler
-CleanupAllHandler
-RegisterGraphHandler
-DeregisterGraphHandler
-RunGraphHandler
-RecvTensorHandlerRaw
-CleanupGraphHandler
-LoggingHandler
-TracingHandler
-*/
-
-
-
 
 #endif
 
