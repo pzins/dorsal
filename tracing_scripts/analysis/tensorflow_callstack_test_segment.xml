@@ -6,6 +6,7 @@
 	<pattern version="0" id="grpc_cs_pattern">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<traceType id="org.eclipse.linuxtools.tmf.core.experiment.generic" />
 			<label value="GRPC stats" />
 		</head>
 		
@@ -31,8 +32,8 @@
 			<stateChange>
 				<stateAttribute type="constant" value="#CurrentScenario" />
 				<stateAttribute type="constant" value="rendezvous_key" />
-				<stateAttribute type="eventField" value="rendezvous_key" />
-				<stateValue type="eventName"/>
+				<stateValue type="eventField" value="rendezvous_key" />
+				<!-- <stateValue type="eventName"/> -->
 			</stateChange>
 		</action>
 		
