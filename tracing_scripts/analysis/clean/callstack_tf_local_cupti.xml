@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+<callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
+    <callstackGroup name="Tensorflow Callstack">
+        <!-- <level path="call_stack/*" /> -->
+		<level path="Views/*" />
+		<level path="Threads/*"/>
+		<!-- <thread cpu="cpu" /> -->
+		<!-- <thread level="0"/> -->
+    </callstackGroup>
+	<pattern version="0" id="tensorflow_cs_pattern">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="Tensorflow" />
+		</head>
+
+		<location id="CurrentThread">
+			<stateAttribute type="constant" value="Views" />
+			<stateAttribute type="query">
+				<stateAttribute type="constant" value="#CurrentScenario" />
+				<stateAttribute type="constant" value="component" />
+			</stateAttribute>
+			<stateAttribute type="constant" value="Threads" />
+			<stateAttribute type="pool" />
+		</location>
+
+		<patternHandler>
+
+			<test id="name_name">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="cat"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="component" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
+			<test id="async_name">
+				<if>
+					<condition>
+						<stateValue type="eventField" value="name"/>
+						<stateValue type="query">
+							<stateAttribute type="constant" value="#CurrentScenario" />
+							<stateAttribute type="constant" value="name" />
+						</stateValue>
+					</condition>
+				</if>
+			</test>
+			<test id="last_out">
+				<if>
+					<condition>
+						<stateValue type="query">
+							<stateAttribute type="location" value="CurrentThread" />
+							<stateAttribute type="constant" value="CallStack" />
+						</stateValue>
+						<stateValue type="int" value="1" />
+					</condition>
+				</if>
+			</test>
+
+
+			<action id="entering_thread">
+				<!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="threadID" />
+					<stateValue type="eventField" value="context._vtid"/>
+				</stateChange>
+
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="component" />
+					<stateValue type="eventField" value="cat"/>
+				</stateChange>
+				<stateChange>
+					<stateAttribute type="constant" value="#CurrentScenario" />
+					<stateAttribute type="constant" value="name" />
+					<stateValue type="eventField" value="name"/>
+				</stateChange>
+			</action>
+
+			<action id="push_event_type">
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="name" stack="push"/>
+				</stateChange>
+			</action>
+			<action id="pop_event_type">
+				<stateChange>
+						<stateAttribute type="location" value="CurrentThread" />
+						<stateAttribute type="constant" value="CallStack" />
+						<stateValue type="eventField" value="name" stack="pop"/>
+				</stateChange>
+			</action>
+
+			<fsm id="tgcall_stack" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="*_entry" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="*_entry" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="*_exit" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="*_exit" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+
+			<fsm id="tgcall_stack2" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="hcc*_begin" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="hcc*_begin" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="hcc*_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="hcc*_end" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+
+			<fsm id="tgcall_stack20" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="hsa_runtime:kernel_start_nm" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="hsa_runtime:kernel_start_nm" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="hsa_runtime:kernel_end_nm" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="hsa_runtime:kernel_end_nm" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+
+			<fsm id="tgcall_stack3" multiple="true" initial="Wait_thread_start">
+			    <state id="Wait_thread_start">
+			        <transition event="tensorflowTracer:session_start" target="loop" action="entering_thread:push_event_type"/>
+			    </state>
+			    <state id="loop">
+			        <transition event="tensorflowTracer:session_start" cond="name_name" target="loop" action="push_event_type" />
+			        <transition event="tensorflowTracer:session_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+			        <transition event="tensorflowTracer:session_end" cond="name_name" target="loop" action="pop_event_type" />
+			    </state>
+			    <final id="end_thread"/>
+			</fsm>
+
+			<fsm id="tgcall_stack4" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="tensorflowTracer:operation_start" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="tensorflowTracer:operation_start" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="tensorflowTracer:operation_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="tensorflowTracer:operation_end" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+
+			<fsm id="tgcall_stack5" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="tensorflowTracer:async_operation_start" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="tensorflowTracer:async_operation_start" cond="async_name" target="loop" action="push_event_type" />
+					<transition event="tensorflowTracer:async_operation_end" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="tensorflowTracer:async_operation_end" cond="async_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+
+			<fsm id="tgcall_stack8" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="cuptiTracer:*_begin" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="cuptiTracer:*_begin" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="cuptiTracer:*_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="cuptiTracer:*_end" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+		</patternHandler>
+	</pattern>
+</callstack>
+</tmfxml>
