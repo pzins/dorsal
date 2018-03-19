@@ -112,12 +112,24 @@
 			
 			<fsm id="tgcall_stack2" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">
-					<transition event="hcc*_begin" target="loop" action="entering_thread:push_event_type"/>
+					<transition event="hcc*kernel_begin" target="loop" action="entering_thread:push_event_type"/>
 				</state>
 				<state id="loop">
-					<transition event="hcc*_begin" cond="name_name" target="loop" action="push_event_type" />
-					<transition event="hcc*_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
-					<transition event="hcc*_end" cond="name_name" target="loop" action="pop_event_type" />
+					<transition event="hcc*kernel_begin" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="hcc*kernel_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="hcc*kernel_end" cond="name_name" target="loop" action="pop_event_type" />
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+			
+			<fsm id="tgcall_stack22" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">
+					<transition event="hcc*barrier_begin" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="hcc*barrier_begin" cond="name_name" target="loop" action="push_event_type" />
+					<transition event="hcc*barrier_end" cond="name_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="hcc*barrier_end" cond="name_name" target="loop" action="pop_event_type" />
 				</state>
 				<final id="end_thread"/>
 			</fsm>

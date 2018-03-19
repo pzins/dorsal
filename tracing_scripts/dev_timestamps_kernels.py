@@ -69,9 +69,9 @@ for r_event in collection.events:
         session_tmp_times = [0, 0]
     
     
-# for i in kernels:
-#     print(i, kernels[i])
-#     input()
+for i in kernels:
+    print(i, kernels[i])
+    input()
 
 for i in sessions:
     print(i, end=" ")
