@@ -45,7 +45,8 @@ main_stream = writer.create_stream(main_stream_class)
 # Create events, based on event classes
 
 init_time = None
-events = {}
+cntol = 0
+events = defaultdict(list)
 
 for r_event in collection.events:
     name = r_event.name
@@ -69,8 +70,11 @@ for r_event in collection.events:
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
 
-    # do not change vtid
-    events[event_time] = [w_event, threadId]
+    if event_time in events:
+        print("timestamp already exists")
+        cntol += 1
+
+    events[event_time].append([w_event, threadId])
     continue
 
 
@@ -113,17 +117,17 @@ for r_event in collection.events:
     events[event_time] = [w_event, threadId]
 
 
-# Append events to the stream
+
 timestamps = list(events.keys())
 timestamps.sort()
 
 for timestamp in timestamps:
     clock.time = timestamp
-    ev = events[timestamp][0]
-    ev.tid(events[timestamp][1])
-    # print(timestamp)
-    main_stream.append_event(ev)
-    # input()
+    for i in range(len(events[timestamp])):
+        ev = events[timestamp][i][0]
+        ev.tid(events[timestamp][i][1])
+        # print(timestamp)
+        main_stream.append_event(ev)
 
 # Flush the stream
 main_stream.flush()

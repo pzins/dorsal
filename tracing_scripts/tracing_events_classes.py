@@ -102,7 +102,7 @@ event_classes['hsa_runtime:perf_counter_float64'].add_field(uint64_fd, 'kernel_o
 event_classes['hsa_runtime:perf_counter_float64'].add_field(uint32_fd, 'counter_index')
 event_classes['hsa_runtime:perf_counter_float64'].add_field(string_fd, 'counter_name')
 event_classes['hsa_runtime:perf_counter_float64'].add_field(float_fd, 'value')
-    
+
 
 
 
@@ -546,6 +546,11 @@ event_classes['cuptiTracer:kernel_end'] = btw.EventClass('cuptiTracer:kernel_end
 event_classes['cuptiTracer:kernel_end'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:kernel_end'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:kernel_end'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:kernel_queued'] = btw.EventClass('cuptiTracer:kernel_queued')
+event_classes['cuptiTracer:kernel_queued'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:kernel_queued'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:kernel_queued'].add_field(uint64_fd, 'timestamp')
 
 event_classes['cuptiTracer:memcpy_begin'] = btw.EventClass('cuptiTracer:memcpy_begin')
 event_classes['cuptiTracer:memcpy_begin'].add_field(string_fd, 'cat')

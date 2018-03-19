@@ -4,5 +4,6 @@ lttng enable-event --userspace "hccTracer:*"
 lttng enable-event --userspace "hipTracer:*"
 lttng enable-event --userspace "tensorflowTracer:*"
 lttng enable-event --userspace "cuptiTracer:*"
+lttng enable-event --userspace "streamTracer:*"
 lttng add-context -u -t vtid
 lttng start

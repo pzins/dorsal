@@ -71,9 +71,9 @@ for r_event in collection.events:
                 tmp = w_event.payload(f).field(i)
                 tmp.value = r_event[f][i]
             continue
-            
+
         w_event.payload(f).value = r_event[f]
-    
+
     if "hsa_runtime:kernel" in name:
         if init_time == 0:
             print("Error, hsa_init not called before kernel")
@@ -96,10 +96,10 @@ for r_event in collection.events:
 
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
-    
+
     # if "grpcTracer:test" in name:
         # threadId = 1111
-    
+
     # if "RecvTensor" in name:
     #     threadId = 1111
     # elif "grpc" in name:
