@@ -3,7 +3,7 @@
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
 
-	<pattern version="0" id="grpc_cs_pattern">
+	<pattern version="0" id="grpc_latencies_pattern">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
 			<traceType id="org.eclipse.linuxtools.tmf.core.experiment.generic" />
@@ -13,7 +13,7 @@
 		<storedField id="name"/>
 		<storedField id="rendezvous_key" alias="rdv"/>
 
-		<patternHandler initial="syscall">			
+		<patternHandler initial="grpc_call">			
 			<test id="grpctest">
 				<if>
 					<condition>
@@ -27,7 +27,7 @@
 			</test>
 			
 			<!-- 	Generates three state changes in the state system -->
-		<action id="sys_x_founded">
+		<action id="send_founded">
 <!-- 		Save the name of the system call executed under the current scenario path-->
 			<stateChange>
 				<stateAttribute type="constant" value="#CurrentScenario" />
@@ -38,7 +38,7 @@
 		</action>
 		
 			<!-- 	Generate a pattern segment -->
-		<action id="exit_syscall_founded">
+		<action id="receive_founded">
 <!-- 		Generate a pattern segment with the name of the system call  of the current scenario-->
 			<segment>
 				<segType>
@@ -55,29 +55,23 @@
 		
 		
 		
-		<!-- 	System call FSM
-		Declare an FSM to match all the system calls on thread 1311.
-		The FSM will generate pattern segments that will represent the system calls found
--->
-		<fsm id="syscall" initial="wait_syscall_entry_x">
+		<!-- 	System call FSM -->
+		<fsm id="grpc_call" initial="wait_grpc_call_entry_x">
 <!-- 		Validate that PID == 1311 before going to the initial state -->
 			<initial>
-				<transition target="wait_syscall_entry_x" />
+				<transition target="wait_grpc_call_entry_x" />
 			</initial>
-			<state id="wait_syscall_entry_x">
+			<state id="wait_grpc_call_entry_x">
 <!-- 				The state will stay here until we have a "syscall_entry_*" event -->
-				<transition event="grpcTracer:send_*request" target="syscall_entry_x" action="sys_x_founded" saveStoredFields="true"/>
+				<transition event="grpcTracer:send_*request" target="grpc_call_entry_x" action="send_founded" saveStoredFields="true"/>
 			</state>
-			<state id="syscall_entry_x" >
+			<state id="grpc_call_entry_x" >
 <!-- 				The state will stay here until we have a "syscall_exit_*" event -->
-				<transition event="grpcTracer:receive_*request" cond="grpctest" target="syscall_exit_x" action="exit_syscall_founded" saveStoredFields="true" clearStoredFields="true"/>
+				<transition event="grpcTracer:receive_*request" cond="grpctest" target="grpc_call_exit_x" action="receive_founded" saveStoredFields="true" clearStoredFields="true"/>
 			</state>
 <!-- 				The state will stay here forever -->
-			<final id="syscall_exit_x"/>
+			<final id="grpc_call_exit_x"/>
 		</fsm>
-		
-		
-
 		</patternHandler>
 
 	</pattern>
