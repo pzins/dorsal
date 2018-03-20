@@ -111,59 +111,8 @@ for r_event in collection.events:
         cntol += 1
 
     events[event_time].append([w_event, threadId])
-    continue
+    
 
-    if "tensorflowTracer:session" in name or "tensorflowTracer:process" in name or "tensorflowTracer:inline_ready" in name or "tensorflowTracer:push_succ" in name:
-        threadId = 1
-    elif "operation" in name:
-        if "gpu" in r_event["placement"]:
-            if "async" not in name:
-                threadId = 31
-            else:
-                threadId = 32
-        else:
-            if "async" not in name:
-                threadId = 21
-            else:
-                threadId = 22
-    elif "hsaTracer" in name:
-        threadId = 4
-    elif "hipTracer" in name:
-        threadId = 5
-    elif "hccTracer" in name:
-        if "unpinned_memory_engine_copy" in name:
-            threadId = 6
-        else:
-            threadId = 7
-    elif "alloc" in name:
-        threadId = 8
-    elif "tensorflowTracer:do_create" in name or "tensorflowTracer:cleanup" in name:
-        threadId = 9
-    elif "grpcTracer" in name:
-        if "RecvTensor" in name:
-            threadId = 98
-        elif "GetStatus" in r_event["name"]:
-            threadId = 90
-        elif "RegisterGraph" in r_event["name"]:
-            threadId = 91
-        elif "DeregisterGraph" in r_event["name"]:
-            threadId = 92
-        elif "RunGraph" in r_event["name"]:
-            threadId = 93
-        elif "CleanupGraph" in r_event["name"]:
-            threadId = 94
-        elif "CleanupAll" in r_event["name"]:
-            threadId = 95
-        elif "Logging" in r_event["name"]:
-            threadId = 96
-        elif "Tracing" in r_event["name"]:
-            threadId = 97
-        else:
-            threadId = 99
-    else:
-        threadId = 99999
-
-    events[event_time] = [w_event, threadId]
 # Append events to the stream
 timestamps = list(events.keys())
 timestamps.sort()
