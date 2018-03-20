@@ -1,3 +1,5 @@
 MNIST_data/
 *.o
 __pycache__/
+paul/obj/
+paul/lib/

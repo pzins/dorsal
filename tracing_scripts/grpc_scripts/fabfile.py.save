@@ -1,0 +1,231 @@
+from __future__ import with_statement
+from fabric.api import *
+from fabric.contrib.console import confirm
+from fabric.context_managers import cd
+import os
+
+
+"""
+_HOSTS = [ "132.207.72.31", "132.207.72.22" ] 
+
+env.hosts = "132.207.72.31"
+# env.passwords = {"pierre@132.207.72.31": "pierre", "pierre@132.207.72.22": "pierreol"}
+
+# env.password = 'pierreol'
+
+env.use_ssh_config = True
+env.use_shell = False
+
+env.shell = "/usr/bin/fish -l -i -c"
+env.env_name = 'pierre'
+# ssh.util.log_to_file("paramiko.log", 10)
+env.key_filename = '~/.ssh/id_rsa'
+
+
+@task
+def showHostnameSerial():
+    with settings(password="pierreol"):
+        run("sudo sh ~/trace_tensorflow_grpc.sh")
+    
+
+@task
+@parallel
+def showHostnameParallel():
+    path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
+    with cd(path_to_tf_script):
+        if env.host == "132.207.72.31":
+            with settings(hide('warnings'), warn_only=True):
+                run("sh ~/run_ditrib.sh")
+        else:
+            run("python3 mlp_master.py m")
+            with settings(host_string='132.207.72.31'):
+                prog_name=  "mlp_master"
+                run("ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}' | head -n1")
+                run("kill -SIGKILL (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
+    return False
+
+@task
+def processTraceLocal():
+    run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
+    
+@task
+def processTraceRemote():
+    run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
+    run("py sort_events_second.py")
+    run("py vtid_second.py")
+    
+    run("scp -r ~/remote_traces 132.207.72.22:~/")
+    directory = "/home/pierre/lttng-traces"
+    path = max([os.path.join(directory,d) for d in os.listdir(directory)], key=os.path.getmtime)
+    run("scp -r ~/lttng-traces/(ls -t lttng-traces/ | head -n1) 132.207.72.22:~/")
+
+@task
+def remote():
+    run("sudo sh ~/run_ditrib.sh &")
+
+@task
+def local():
+    path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
+    with cd(path_to_tf_script):
+        run("python3 mlp_master.py m")
+        prog_name=  "mlp_master"
+        run("kill -SIGKILL (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
+
+
+
+@task
+def test():
+    # local("sudo ls")
+    prog_name=  "mlp_master"
+    run("kill -SIGKILL (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
+
+    # run("sudo ls")
+
+
+@task
+def main(): 
+    # execute(test, hosts="132.207.72.31")
+    # input()
+    # results = execute(showHostnameSerial, hosts=_HOSTS)
+    # results = execute(remote, hosts="132.207.72.31")
+    # results = execute(local, hosts="132.207.72.22")
+    results = execute(showHostnameParallel, hosts=_HOSTS)
+    # results = execute(processTraceLocal, hosts="132.207.72.22")
+    # results = execute(processTraceRemote, hosts="132.207.72.31")
+
+
+"""
+"""
+env.hosts = ['132.207.72.31']
+
+# env.use_ssh_config = True
+env.shell = "/usr/bin/fish -l -i -c" 
+
+def list_files():
+    path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
+    with cd(path_to_tf_script):
+        run('pwd')
+    run('pwd')
+env.password = 'pierreol'
+
+
+
+@parallel
+def first():
+    local("set -x HIP_PROFILE_API 2")
+    local("set -x HCC_PROFILE 2")
+    # local("sudo sh ~/trace_tensorflow_grpc.sh")
+    path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
+    with lcd(path_to_tf_script):
+        local("python3 mlp_master.py m")
+        
+@parallel
+def second():
+    run("set -x HIP_PROFILE_API 2")
+    run("set -x HCC_PROFILE 2")
+    # run("sudo sh ~/trace_tensorflow_grpc.sh")
+    path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
+    with cd(path_to_tf_script):
+        run("py mlp_master.py w")
+
+result = execute(second, host="132.207.72.31")
+result = execute(first, host="132.207.72.22")
+
+def test():
+
+    
+    prog_name=  "mlp_master"
+    run("kill -SIGTERM (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
+    local("sudo lttng destroy")
+    run("sudo lttng destroy")
+    
+    local("sudo chown -R pierre:pierre ~/lttng-traces/")
+    run("sudo chown -R pierre:pierre ~/lttng-traces/")
+    
+    local("py sort_events.py")
+    local("py vtid.py")
+    run("py sort_events_second.py")
+    run("py vtid_second.py")
+    
+    run("scp -r ~/remote_traces 132.207.72.22:~/")
+    path = max([os.path.join(directory,d) for d in os.listdir(directory)], key=os.path.getmtime)
+    run("scp -r " + path + " 132.207.72.22:~/")
+    
+"""
+# @@@@@@ old working with inly thism but asking too often password, and killing Tf server not clean
+
+
+
+_HOSTS = [ "132.207.72.31", "132.207.72.22" ] 
+
+env.hosts = "132.207.72.31"
+# env.passwords = {"pierre@132.207.72.31": "pierre", "pierre@132.207.72.22": "pierreol"}
+
+env.password = 'pierreol'
+
+env.use_ssh_config = True
+env.use_shell = False
+
+env.shell = "/usr/bin/fish -l -i -c"
+env.env_name = 'pierre'
+# ssh.util.log_to_file("paramiko.log", 10)
+env.key_filename = '~/.ssh/id_rsa'
+
+
+@task
+def showHostnameSerial():
+    with settings(password="pierreol"):
+        run("sudo sh ~/trace_tensorflow_grpc.sh")
+    
+
+@task
+@parallel
+def showHostnameParallel():
+    with settings(user="pierre"):
+        path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
+        with cd(path_to_tf_script):
+            if env.host == "132.207.72.31":
+                with settings(hide('warnings'), warn_only=True):
+                    run("python3 mlp_master.py w")
+            else:
+                run("python3 mlp_master.py m")
+                with settings(host_string='132.207.72.31'):
+                    prog_name=  "mlp_master"
+                    run("ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}' | head -n1")
+                    run("kill -SIGKILL (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
+    return False
+
+@task
+def processTraceLocal():
+    run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
+    
+@task
+def processTraceRemote():
+    run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
+    run("py sort_events_second.py")
+    run("py vtid_second.py")
+    
+    run("scp -r ~/remote_traces 132.207.72.22:~/")
+    directory = "/home/pierre/lttng-traces"
+    path = max([os.path.join(directory,d) for d in os.listdir(directory)], key=os.path.getmtime)
+    run("scp -r ~/lttng-traces/(ls -t lttng-traces/ | head -n1) 132.207.72.22:~/")
+
+@task
+def test():
+    # local("sudo ls")
+    prog_name=  "mlp_master"
+    run("kill -SIGKILL (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
+
+    # run("sudo ls")
+
+
+@task
+def main(): 
+    # execute(test, hosts="132.207.72.31")
+    # input()
+    results = execute(showHostnameSerial, hosts=_HOSTS)
+    results = execute(showHostnameParallel, hosts=_HOSTS)
+    results = execute(processTraceLocal, hosts="132.207.72.22")
+    results = execute(processTraceRemote, hosts="132.207.72.31")
+
+
