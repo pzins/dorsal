@@ -17,6 +17,7 @@ TRACEPOINT_EVENT(
         uint64_t, timestamp_arg,
         const char*, name_arg,
         const char*, long_name_arg,
+        const char*, tf_name_arg,
         uint32_t*, workgroup_size_arg,
         uint32_t*, grid_size_arg,
         uint64_t, static_group_segment_size_arg,
@@ -28,6 +29,7 @@ TRACEPOINT_EVENT(
         ctf_integer(uint64_t, timestamp, timestamp_arg)
         ctf_string(name, name_arg)
         ctf_string(long_name, long_name_arg)
+        ctf_string(tf_name, tf_name_arg)
         ctf_array(uint32_t, workgroup_size, workgroup_size_arg, 3)
         ctf_array(uint32_t, grid_size, grid_size_arg, 3)
         ctf_integer(uint64_t, static_group_segment_size, static_group_segment_size_arg)
@@ -43,6 +45,7 @@ TRACEPOINT_EVENT(
         uint64_t, timestamp_arg,
         const char*, name_arg,
         const char*, long_name_arg,
+        const char*, tf_name_arg,
         uint32_t*, workgroup_size_arg,
         uint32_t*, grid_size_arg,
         uint64_t, static_group_segment_size_arg,
@@ -54,6 +57,7 @@ TRACEPOINT_EVENT(
         ctf_integer(uint64_t, timestamp, timestamp_arg)
         ctf_string(name, name_arg)
         ctf_string(long_name, long_name_arg)
+        ctf_string(tf_name, tf_name_arg)
         ctf_array(uint32_t, workgroup_size, workgroup_size_arg, 3)
         ctf_array(uint32_t, grid_size, grid_size_arg, 3)
         ctf_integer(uint64_t, static_group_segment_size, static_group_segment_size_arg)

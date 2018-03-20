@@ -202,7 +202,7 @@
 		
 			<fsm id="tgcall_stack10" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">
-					<transition event="grpcTracer:set_proto*_start" target="loop" action="entering_thread:push_event_type"/>
+					<transition event="grpcTracer:set_proto*_start" target="loop" action="entering_thread_key:push_event_type"/>
 				</state>
 				<state id="loop">
 					<transition event="grpcTracer:set_proto*_start" cond="rdv_key" target="loop" action="push_event_type" />

@@ -102,7 +102,7 @@ event_classes['hsa_runtime:perf_counter_float64'].add_field(uint64_fd, 'kernel_o
 event_classes['hsa_runtime:perf_counter_float64'].add_field(uint32_fd, 'counter_index')
 event_classes['hsa_runtime:perf_counter_float64'].add_field(string_fd, 'counter_name')
 event_classes['hsa_runtime:perf_counter_float64'].add_field(float_fd, 'value')
-    
+
 
 
 
@@ -187,24 +187,24 @@ event_classes['grpcTracer:send_request_tensor_end'].add_field(string_fd, 'rendez
 
 
 # STREAM TRACERS
-event_classes['streamTracer:stream_then_memcpy_host_to_device_start'] = btw.EventClass('grpcTracer:test_start_ThenMemcpy_host_to_device')
+event_classes['streamTracer:stream_then_memcpy_host_to_device_start'] = btw.EventClass('streamTracer:stream_then_memcpy_host_to_device_start')
 event_classes['streamTracer:stream_then_memcpy_host_to_device_start'].add_field(string_fd, 'cat')
 event_classes['streamTracer:stream_then_memcpy_host_to_device_start'].add_field(string_fd, 'name')
-event_classes['streamTracer:stream_then_memcpy_host_to_device_end'] = btw.EventClass('grpcTracer:test_end_ThenMemcpy_host_to_device')
+event_classes['streamTracer:stream_then_memcpy_host_to_device_end'] = btw.EventClass('streamTracer:stream_then_memcpy_host_to_device_end')
 event_classes['streamTracer:stream_then_memcpy_host_to_device_end'].add_field(string_fd, 'cat')
 event_classes['streamTracer:stream_then_memcpy_host_to_device_end'].add_field(string_fd, 'name')
 
-event_classes['streamTracer:stream_then_memcpy_device_to_host_start'] = btw.EventClass('grpcTracer:test_start_ThenMemcpy_device_to_host')
+event_classes['streamTracer:stream_then_memcpy_device_to_host_start'] = btw.EventClass('streamTracer:stream_then_memcpy_device_to_host_start')
 event_classes['streamTracer:stream_then_memcpy_device_to_host_start'].add_field(string_fd, 'cat')
 event_classes['streamTracer:stream_then_memcpy_device_to_host_start'].add_field(string_fd, 'name')
-event_classes['streamTracer:stream_then_memcpy_device_to_host_end'] = btw.EventClass('grpcTracer:test_end_ThenMemcpy_device_to_host')
+event_classes['streamTracer:stream_then_memcpy_device_to_host_end'] = btw.EventClass('streamTracer:stream_then_memcpy_device_to_host_end')
 event_classes['streamTracer:stream_then_memcpy_device_to_host_end'].add_field(string_fd, 'cat')
 event_classes['streamTracer:stream_then_memcpy_device_to_host_end'].add_field(string_fd, 'name')
 
-event_classes['streamTracer:stream_then_memcpy_device_to_device_start'] = btw.EventClass('grpcTracer:test_start_ThenMemcpy_device_to_device')
+event_classes['streamTracer:stream_then_memcpy_device_to_device_start'] = btw.EventClass('streamTracer:stream_then_memcpy_device_to_device_start')
 event_classes['streamTracer:stream_then_memcpy_device_to_device_start'].add_field(string_fd, 'cat')
 event_classes['streamTracer:stream_then_memcpy_device_to_device_start'].add_field(string_fd, 'name')
-event_classes['streamTracer:stream_then_memcpy_device_to_device_end'] = btw.EventClass('grpcTracer:test_end_ThenMemcpy_device_to_device')
+event_classes['streamTracer:stream_then_memcpy_device_to_device_end'] = btw.EventClass('streamTracer:stream_then_memcpy_device_to_device_end')
 event_classes['streamTracer:stream_then_memcpy_device_to_device_end'].add_field(string_fd, 'cat')
 event_classes['streamTracer:stream_then_memcpy_device_to_device_end'].add_field(string_fd, 'name')
 
@@ -214,6 +214,7 @@ event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:kernel_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'name')
 event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'long_name')
+event_classes['hccTracer:kernel_begin'].add_field(string_fd, 'tf_name')
 event_classes['hccTracer:kernel_begin'].add_field(dim_array_fd, 'workgroup_size')
 event_classes['hccTracer:kernel_begin'].add_field(dim_array_fd, 'grid_size')
 event_classes['hccTracer:kernel_begin'].add_field(uint32_fd, 'static_group_segment_size')
@@ -225,6 +226,7 @@ event_classes['hccTracer:kernel_end'].add_field(string_fd, 'cat')
 event_classes['hccTracer:kernel_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:kernel_end'].add_field(string_fd, 'name')
 event_classes['hccTracer:kernel_end'].add_field(string_fd, 'long_name')
+event_classes['hccTracer:kernel_end'].add_field(string_fd, 'tf_name')
 event_classes['hccTracer:kernel_end'].add_field(dim_array_fd, 'workgroup_size')
 event_classes['hccTracer:kernel_end'].add_field(dim_array_fd, 'grid_size')
 event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'static_group_segment_size')
@@ -546,6 +548,11 @@ event_classes['cuptiTracer:kernel_end'] = btw.EventClass('cuptiTracer:kernel_end
 event_classes['cuptiTracer:kernel_end'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:kernel_end'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:kernel_end'].add_field(uint64_fd, 'timestamp')
+
+event_classes['cuptiTracer:kernel_queued'] = btw.EventClass('cuptiTracer:kernel_queued')
+event_classes['cuptiTracer:kernel_queued'].add_field(string_fd, 'cat')
+event_classes['cuptiTracer:kernel_queued'].add_field(string_fd, 'name')
+event_classes['cuptiTracer:kernel_queued'].add_field(uint64_fd, 'timestamp')
 
 event_classes['cuptiTracer:memcpy_begin'] = btw.EventClass('cuptiTracer:memcpy_begin')
 event_classes['cuptiTracer:memcpy_begin'].add_field(string_fd, 'cat')
