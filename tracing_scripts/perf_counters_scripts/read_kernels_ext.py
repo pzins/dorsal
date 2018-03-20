@@ -1,4 +1,5 @@
 # read ctf traces and read perf counter output file of RCP
+# more complete than the read_kernel.py
 
 
 #!/usr/bin/python3

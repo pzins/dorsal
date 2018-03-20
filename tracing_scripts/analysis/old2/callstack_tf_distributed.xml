@@ -1,3 +1,10 @@
+<!-- callstack clean but using send and receive events between both computers
+to display latencies as states, 
+do not work in an experiment, but work if use merge script in order to have 
+the grpc of both conputer in one trace.
+
+NOT A GOOD WAY TO DISPLAY LATENCIES
+-->
 <?xml version="1.0" encoding="UTF-8"?>
 <tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">

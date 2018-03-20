@@ -1,4 +1,5 @@
-
+# script used to generate graph, representing the flow of operations
+# output file can be visualized with sigmaJS
 class Outputs:
     
     def __init__(self, node):
