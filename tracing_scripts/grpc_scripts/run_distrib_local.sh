@@ -1,9 +1,9 @@
 # script to run on the first computer
 # and run
-# ssh -A 132.207.72.31 sh run_ditrib_remote.sh
+# ssh -A 132.207.72.31 sh run_distrib_remote.sh
 # simultaneoulsy in another terminal
 
-sudo sh ~/trace_tensorflow_grpc.sh
+sh ~/trace_tensorflow_grpc.sh
 cd /home/pierre/Dropbox/dev/distributed/in_model_parallelism/
 python3 mlp_master.py m
 ssh -A 132.207.72.31 "kill -9 (ps -aux | grep mlp_master | grep -v grep | awk '{print \$2}' | head -n1)"
