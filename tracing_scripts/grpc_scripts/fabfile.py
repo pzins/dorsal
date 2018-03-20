@@ -18,9 +18,9 @@ def runProgramTF():
     with cd(path_to_tf_script):
         if env.host == "132.207.72.31":
             with settings(hide('warnings'), warn_only=True):
-                run("python3 mlp_master.py w")
+                run("set -x HIP_PROFILE_API 2; set -x HCC_PROFILE 2; python3 mlp_master.py w")
         else:
-            run("python3 mlp_master.py m")
+            run("set -x HIP_PROFILE_API 2; set -x HCC_PROFILE 2; python3 mlp_master.py m")
             with settings(host_string='132.207.72.31'):
                 prog_name=  "mlp_master"
                 run("kill -SIGKILL (ps -aux | grep " + prog_name + " | grep -v grep | awk '{print $2}')")
@@ -30,10 +30,12 @@ def runProgramTF():
 def stopTracing():
     if env.host == "132.207.72.22":
         run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
+        run("python3 ~/sort_events.py")
+        run("python3 ~/vtid.py")
     elif env.host == "132.207.72.31":
         run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
-        run("py sort_events_second.py")
-        run("py vtid_second.py")
+        run("python3 ~/sort_events_second.py")
+        run("python3 ~/vtid_second.py")
         run("scp -r ~/remote_traces 132.207.72.22:~/")
         run("scp -r ~/lttng-traces/(ls -t lttng-traces/ | head -n1) 132.207.72.22:~/")
 

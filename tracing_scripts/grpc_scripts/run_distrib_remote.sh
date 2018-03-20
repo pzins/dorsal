@@ -1,5 +1,7 @@
 sh ~/trace_tensorflow_grpc.sh
 cd /home/pierre/Dropbox/dev/distributed/in_model_parallelism/
+set -x HIP_PROFILE_API 2
+set -x HCC_PROFILE 2
 python3 mlp_master.py w
 sudo lttng destroy
 sudo chown -R pierre:pierre ~/lttng-traces

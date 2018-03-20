@@ -5,6 +5,8 @@
 
 sh ~/trace_tensorflow_grpc.sh
 cd /home/pierre/Dropbox/dev/distributed/in_model_parallelism/
+set -x HIP_PROFILE_API 2
+set -x HCC_PROFILE 2
 python3 mlp_master.py m
 ssh -A 132.207.72.31 "kill -9 (ps -aux | grep mlp_master | grep -v grep | awk '{print \$2}' | head -n1)"
 sudo lttng destroy
