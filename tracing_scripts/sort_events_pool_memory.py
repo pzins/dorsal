@@ -90,7 +90,6 @@ for r_event in collection.events:
         if r_event["ptr"] in pool_memory_allocate_events:
             w_event.payload("size").value = pool_memory_allocate_events[r_event["ptr"]][0] * -1
             w_event.payload("handle").value = pool_memory_allocate_events[r_event["ptr"]][1]
-
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
     
@@ -108,8 +107,6 @@ for r_event in collection.events:
         cntol += 1
 
     events[event_time].append([w_event, threadId])
-    
-    
     
 # Append events to the stream
 timestamps = list(events.keys())

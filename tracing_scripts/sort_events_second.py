@@ -52,6 +52,8 @@ save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
 init_time = 0
+pool_memory_allocate_events = {}
+
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -91,6 +93,14 @@ for r_event in collection.events:
                 cnt_incoherent_barrier += 1
                 continue
             save_barrier_time = r_event["timestamp"]
+
+    # save pool_memory_allocate events
+    if "hsaTracer:pool_memory_allocate" in name:
+        pool_memory_allocate_events[r_event["ptr"]] = [r_event["size"], r_event["handle"]]
+    if "hsaTracer:pool_memory_free" in name:
+        if r_event["ptr"] in pool_memory_allocate_events:
+            w_event.payload("size").value = pool_memory_allocate_events[r_event["ptr"]][0] * -1
+            w_event.payload("handle").value = pool_memory_allocate_events[r_event["ptr"]][1]
 
 
 
