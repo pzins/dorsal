@@ -1,6 +1,6 @@
 === TRACING ===
 hiptensorflow
-    
+
     // tensorflowTracer
     direct_session.cc
         session_start session_end   : begin and end of a session.run call. Only work for DirectSession
@@ -146,6 +146,9 @@ python script profiling
     view in old2 with python, but based on an old version of my views
 
 
+Linux kernel : everything already exist with lttng and Tracecompass
+               give huge traces
+
 === SCRIPTS ===
 
     compute statistics from ctf trace : states durations, for events with only 1 threads (hc kernels, sessions run, operation sync GPU, ...)
@@ -185,6 +188,10 @@ python script profiling
     just need to destroy the session at the end : (sudo) lttng destroy
     
 
+
+
+
+
 === XML analysis ===
     Callstack views
         callstack_tf_local.xml          : basic view for a TF program executing locally
@@ -209,9 +216,39 @@ python script profiling
                                                         - 3 for memory transfers : H2D, D2H, D2D
                
 
+
+
+
+
 === FEATURES ===
 Tensorflow on ROCM      : tensorflowTracer, hsaTracer, hipTracer, hccTracer, streamTracer, grpcTracer, python tracing, hsa_runtime tracer, eigenTracer (not used) 
-perfcounters ok but limited, two possibilities
+                          perfcounters ok but limited, two possibilities
 
 Tensorflow with CUDA    : tensorflowTracer, cuptiTracer, streamTracer, python tracing, eigenTracer (not used)
-perfounters : inside TF device_tracer but limited or with nvidia profiler nvprof
+                          perfounters : inside TF device_tracer but limited or with nvidia profiler nvprof
+                          
+                          
+=== OTHERS ===
+
+libraries API tracing:
+    ROCR runtime HSA : two possibilities, one less intrusive
+    HIP              : intrusive for now, could imagine having a ld_preloaded library to intercept calls like paul's lib but probably harder to do with HIP (grid launch kernel, ...)
+    CUDA             : integrated inside device_tracer
+    
+kernel, memcpy, barrier : HC instrumentation intrusive
+                          kernels times LD_PRELOAD : non instrusive but cannot profile the queue at the same time
+
+queue profiling : non instrusive, but cannot use non intrusive method to collect kernel time together
+
+TF level instrumentation : instrusive but necessary, can be a patch
+TF level instrumentation : for kernel and memcpy with CUDA/CUPTI
+
+
+hipeigen instrumentation
+python script instrumentation    
+
+Linux kernel tracing : lttng + Tracecompass, non instrusive
+
+limited but non instrusive except my changes into TF CUDA device_tracer
+perf counters ROCM : paul GPA or RCP
+perf counters CUDA : my work inside device_tracer or nvprof
