@@ -13,48 +13,53 @@
 <tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
-	<xyView id="tensorflow.gpu_bfc_chunks_stats">
+	<xyView id="tensorflow.bfc_chunks_stats">
 		<head>
-			<analysis id="gpu_bfc_chunks_stats" />
-			<label value="GPU BFC Chunks Stats" />
+			<analysis id="bfc_chunks_stats" />
+			<label value="BFC Chunks Stats" />
 		</head>
 
-		<entry path="Allocations/*" displayType="absolute"> 
+		<entry path="Allocations/*/*" displayType="absolute"> 
 			<display type="self" />
 		</entry>
 	</xyView>
 
-	<stateProvider id="gpu_bfc_chunks_stats" version="1">
+	<stateProvider id="bfc_chunks_stats" version="1">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
-			<label value="GPU BFC Chunks Stats" />
+			<label value="BFC Chunks Stats" />
 		</head>
 
 		<!-- case 1 : exit_syscall : Fields: int64 ret -->
-		<eventHandler eventName="tensorflowTracer:gpu_bfc_chunks_stats">
+		<eventHandler eventName="tensorflowTracer:bfc_chunks_stats">
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_bytes_in_use" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="total_bytes_in_use" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_requested_bytes_in_use" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="total_requested_bytes_in_use" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_wasted_bytes_in_use" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="total_wasted_bytes_in_use" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_bytes" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="total_bytes" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_requested_bytes" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="total_requested_bytes" increment="false" />
 			</stateChange>
 			<stateChange>

@@ -252,3 +252,23 @@ Linux kernel tracing : lttng + Tracecompass, non instrusive
 limited but non instrusive except my changes into TF CUDA device_tracer
 perf counters ROCM : paul GPA or RCP
 perf counters CUDA : my work inside device_tracer or nvprof
+
+
+
+=== EXAMPLES ===
+autoencoder
+autoencoder_queue
+cnn
+cnn_inference
+convolutional_network_raw
+matrix_multiplication
+mlp_memory
+mlp_memory_queue
+deep_mlp_memory
+dynamic_rnn
+recurrent_network
+dcgan
+nearest_neighbor
+
+
+=== USE CASES ===
