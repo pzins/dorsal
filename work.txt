@@ -269,6 +269,53 @@ dynamic_rnn
 recurrent_network
 dcgan
 nearest_neighbor
+neural_network_raw
+
+linear_regression
+softmax
+softmax_queue
+logistic_regression
+
+# work only on laptop, need newest version of TF
+fully_connected_feed
+fully_connected_preloaded
+fully_connected_preloaded_var
+mnist_estimator_experiment_dataset
+
+
+antoniol
+age_gender_prediction
+
+
+distributed : 
+between-model parallelism :
+    distrib_fifo
+    distrib_mnist
+    model_parallelism
+in-model parallelism
+    mlp_master : works quite well
+    autoencoder_master
+    
+ex with queue as input pipeline
+ex with dataset as input pipeline
+ex with several session in parallel
+ex with several tf prog simultaneously
+ex with very deep or big model
+
+
+
+# configuration
+TF session config : intra inter
+TF session gpu config : allow growth
+HIP env var
+HCC env var
+batch size
+
+
 
 
 === USE CASES ===
+
+using queues instead of feed_dict : input_pipeline_medium_tutorial
+distributed tracing : placement of nodes
+if GPU not used much => between model parallelism and traiing several model simultaneously but with different parameters
