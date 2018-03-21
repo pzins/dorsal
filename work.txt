@@ -1,0 +1,217 @@
+=== TRACING ===
+hiptensorflow
+    
+    // tensorflowTracer
+    direct_session.cc
+        session_start session_end   : begin and end of a session.run call. Only work for DirectSession
+
+    executor.cc:
+        process_entry process_exit                  : Process function entry and exit => several node can be processed inside
+        inline_ready_entry inline_ready_exit        : process node from inline_ready, they are all executed within 1 Process call
+        push_succ_entry push_succ_exit              : push successive ready node, they go into ready queue
+        operation_start operation_end               : begin and end time of a synchronous TF operation (cpu or gpu), a TF operation is code exec on the cpu, which can launch code that will run on the GPU
+        async_operation_start async_operation_end   : same but for asynchronous operations. Mostly concern wait for Tensor. Begin time is when the callback is set, not really when the operation start
+                                                      some code will run to set a callback (containing the end event) to a rendezvous table, and when the tensor will arrive, the callback will be called
+
+    bfc_allocator.cc
+        allocate_chunk_entry allocate_chunk_exit                    : allocate a chunck
+        allocate_raw_internal_entry allocate_raw_internal_exit      : basic function to allocate memory within the allocator, looks for chunk, extends if needed, ...
+        deallocate_raw_internal_entry deallocate_raw_internal_exit  : same but for deallocations
+    
+        bfc_allocator_stats     : follow memory allocation inside the allocator (num alloc, bytes in use, max nb bytes in use, max alloc size)
+        called twice, when looking for a chunk, and when free and maybe coalescing
+        gpu_bfc_chunks_stats    : summary of the chunks memory for gpu allocator (we have several bins and into each bins : several chunks of the same size)
+        cpu_bfc_chunks_stats    : summary of the chunks memory for cpu allocator
+        gpu_bfc_bins_stats      : summary of the bins memory for gpu allocator
+        cpu_bfc_bins_stats      : summary of the bins memory for cpu allocator
+    
+    gpu_bfc_allocator.h
+        gpu_bfc_alloc_entry gpu_bfc_alloc_exit  : basic function to allocate memory on the GPU
+        gpu_bfc_free_entry gpu_bfc_free_exit    : basic function to free memory on the GPU
+
+    resource_mgr.cc
+        do_create_entry do_create_exit  : creation of a named and type resource tracked by the resource_mgr
+        cleanup_entry cleanup_exit      : delete a resource
+
+    //streamTracer
+    moslty asynchronous so not the real execution time but still informative
+    stream_then_memcpy_host_to_device_start stream_then_memcpy_host_to_device_end       : in TF stream memory copy host to device
+    stream_then_memcpy_device_to_host_start stream_then_memcpy_device_to_host_end       : in TF stream memory copy device to host
+    stream_then_memcpy_device_to_device_start stream_then_memcpy_device_to_device_end   : in TF stream memory copy device to device
+
+    //eigenTracer
+    # not use for now, need review
+    # not sure it's useful
+    schedule_entry schedule_exit : scheduling of a new TF task, like a new Process function
+
+    //grpcTracer
+    send_request receive_request                                : sending / receiving basic request between computers. Used to compute latencies
+    send_RecvTensor_request receive_RecvTensor_request          : same but for the specific case when it's tensor. Majority of request / receive
+    set_proto_from_gpu_start set_proto_from_gpu_end             : transfer tensors from GPU into protobuf
+    prepare_response_tensor_start prepare_response_tensor_end   : time between receiving a tensor request and sending the response
+    send_request_tensor_start send_request_tensor_end           : time between sending a tensor request and receiving the response from the other computer
+
+HIP
+    HIP API tracing implemented using existing profiling capabilities with AMD markers
+    function_entry function_exit
+    
+HC
+    
+    mcwamp_hsa.cc
+        kernel_begin kernel_end                     : kernel begin and end real execution time on the GPU (get with hsa_amd_profiling_get_dispatch_time and the associated signal)
+        async_memcpy_begin async_memcpy_end         : memory copy real execution time
+        async_memcpyslo_begin async_memcpyslo_end   : same for copy slow (the one that are specific and performed by the unpinned copy engine)
+        barrier_begin barrier_end                   : barrier real time
+        queue_stats                                 : get the number of element stored inside each HSAQueues. Collected only if printAsyncOps() is called
+                                                      => we have to activate the HC profiling by setting the env var HCC_DB
+                                                      to DB_WAIT (4) or DB_QUEUE(16) or BOTH = 20
+    
+    unpinned_copy_engine.cpp
+        unpinned_memory_engine_copy_entry unpinned_memory_engine_copy_exit : get specific type of the copy performed by the unpinned copy engine
+                                                                             CopyHostToDevicePinInPlace
+                                                                             CopyDeviceToHostPinInPlace
+                                                                             CopyHostToDeviceMemcpy
+                                                                             CopyHostToDeviceStaging
+                                                                             CopyDeviceToHostStaging
+                                                                             CopyPeerToPeer
+    
+ROCR-Runtime HSA
+    HSA API tracing
+    file hsa_table_interface.cpp : generated instrumented by the python script : generate_lttng_first.py
+    Need a few manual corrections, and there is a second script generate_lttng.py that can work too
+    function_entry function_exit
+    
+    for hsa_amd_memory_pool_allocate() and hsa_amd_memory_pool_free() : instrumentation
+    In TF : all allocations are performed with this AMD function
+    pool_memory_allocate : memory allocation in pool with amd function
+    pool_memory_free     : same but free
+    
+
+PAUL
+HSA API
+    runtime_initialized             : initialization of the HSA runtime
+    runtime_shut_down               : shutdown of the HSA runtime
+    function_entry function_exit    : api function tracing
+    
+    hsa_system_get_info() : cannot be traced, otherwise it crashes
+    
+    
+kernels times
+    kernel_start_nm kernel_end_nm : real kernel execution time on the GPU (use hsa_ext_tools_get_kernel_times)
+    requirements : profiled queue and HSA_TOOLS_LIB
+                   force queue removal in HC (mcwamp_hsa.cpp) removeRocrQueue force the if test to be true
+
+queue profiling
+    aql_packet_submitted                    : packets enqueued in a queue
+    aql_kernel_dispatch_packet_submitted    : more detailed version for kernel packets
+    Use aql callbacks : hsa_ext_tools_register_aql_trace_callback, called at the submission to the queue
+    requiremets : profiled queue and HSA_TOOLS_LIB and HSA_SERVICE_GET_KERNEL_TIMES => cannot be combine with kernels times
+    
+perf counters with LD_PRELOAD
+    perf_counter_uint32 perf_counter_uint64 perf_counter_float32 perf_counter_float64 : get perfcounter values
+    Use pre and post distpatch callbacks : hsa_ext_tools_set_callback_functions
+    callbacks will be called just before and after the execution of every kernels
+    work only with certain TF programs
+    requirements : HSA_EMULATE_AQL
+    
+perf counters with RCP + post processing with scripts
+    just compile python script (script compile_python) and use RCP with -C option to collect perfcounters
+    work only with certains TF programs
+    read_kernels_ext.py : post processing script to link perfcounters value with the kernel (time) from a correct execution without perfcounters collecting
+    
+perf counters CUDA : implemented inside TF device_tracer.cc
+    support events and metrics colleting
+    use env var to configure : 
+        - CUPTI : "metrics" or "events"
+        - CUPTI_METRICS : "m1 m2 m3 ..."; 
+        - CUPTI_EVENTS : "e1 e2 ...;e3 e4" : ';' to separate different domains
+    quite limited
+
+perf counter CUDA : using nvprof
+    work but need to test more
+    probably also limited
+
+CUPTI
+    runtime_api_entry runtime_api_exit  : CUDA runtime API tracing (only get code, need to do link the code with function name)
+    driver_api_entry driver_api_exit    : same for driver API
+    kernel_begin kernel_end             : real kernel execution time on the GPU
+    kernel_queued                       : time when a kernel is enqueued
+    memcpy_begin memcpy_end             : real memory copy time
+    
+
+python script profiling
+    instr_python.py : script which generate instrumented python script
+    instrumentation start after "tf.Session" or specific marker "python_instrument"
+    tracing should be performed in sudo, with script trace_tensorflow_python.sh
+    view in old2 with python, but based on an old version of my views
+
+
+=== SCRIPTS ===
+
+    compute statistics from ctf trace : states durations, for events with only 1 threads (hc kernels, sessions run, operation sync GPU, ...)
+    trace_analysis_multi_module.py
+    
+    generate new ctf traces with additional cat containing gpu kernels (hc) with the corresponding TF operation as a name, and the real kernel name in another field
+    only work if we used queue profiling
+    
+    compute stats on the TF operations from the ctf trace
+    stats.py
+    
+    GRPC :
+    fabfile.py : run fab main, to start the distributed TF program (in model parallelism), and get all the traces into the first computer
+                 be careful with the name of the script, the clustespec with the role of both computers and the arg ("w" or "m") when running the program
+    requirement : https://github.com/mathiasertl/fabric/ version for python3 
+                  "/usr/local/lib/python3.5/dist-packages/fabric/operations.py" line 675 : change " && " to " ; " to make it work with fish shell ()
+    run_distrib_local.sh run_distrib_remote.sh : shell script to launch easily distributed TF program
+    merge_rcp_events.py : merge all grpc events into the first trace. Better to use experiment than merging
+    
+    Perf counters :
+    read_kernels_ext.py : parse output file from RCP and a ctf trace of the same program but run without the profiler and link perfcounter lines to the corresponding kernel 
+    
+    Sorting script : to post process the trace, and set the correct timestamp to the events having the good timestamp into a field (kernel, barrier, memcpy, ...)
+    sort_events_cuda.py     : version dealing with cupti events
+    sort_event.py           : last version normal
+    sort_event_second.py    : version to use on the second computer because some path, name change
+    vtid.py vtid_second.py vtid_merged.py : script to add "_" to vtid into metadata, problem with babeltrace (different version because path, names change)
+
+    Python event class : tracing_events_classes.py
+    
+    start tensorflow tracing :
+    trace_tensorflow.sh         : normal version
+    trace_tensorflow_grpc.sh    : version with grpc and kernel network tracing
+    trace_tensorflow_cupti.sh   : version with cupti tracing
+    trace_tensorflow_python.sh  : version with python tracing
+    trace_tensorflow_channel.sh : trace with a custom buffer size : to use if we have a lot of missing events
+    just need to destroy the session at the end : (sudo) lttng destroy
+    
+
+=== XML analysis ===
+    Callstack views
+        callstack_tf_local.xml          : basic view for a TF program executing locally
+        callstack_tf_local_cupti.xml    : same but for CUDA
+        callstack_tf_grpc_local.xml     : view for distributed cases, with grpc tracing
+        callstack_tf_multiple.xml       : more adapted if we have several TF program that run together, and we are tracing all of them. Limited to only certains events (async operations are not possible for example)
+    
+    Latency
+        latency_grpc.xml : latency stats and graph for RCP requests (tensors and others) during a distributed TF programs
+    
+    Memory
+        bfc_allocations.xml                 : display the memory allocation size and number for each bfc allocator (gpu_bfc and cuda_host_bfc in my case)
+                                              As by default all available memory is allocated by TF (especillay for the GPU) this represents allocation within the bfc alloc context
+        gpu_bfc_allocate_raw_internal.xml   : follow all the allocations within allocators
+        gpu_bfc_bins_stats.xml              : bins stats
+        gpu_bfc_chunks_stats.xml            : chunks stats
+        hsa_amd_pool_allocate.xml           : all allocation at HSA levels (differentiate devices : cpu gpu)
+        memory_transfers.xml                : async memory copy (real time) at hsa level : show size and throughput of transfers
+        queue_stats.xml                     : follow the number of elements inside each HSA/ROCR Queues.
+                                              6 queues appears, but only 4 are used by TF : 
+                                                        - 1 for computations
+                                                        - 3 for memory transfers : H2D, D2H, D2D
+               
+
+=== FEATURES ===
+Tensorflow on ROCM      : tensorflowTracer, hsaTracer, hipTracer, hccTracer, streamTracer, grpcTracer, python tracing, hsa_runtime tracer, eigenTracer (not used) 
+perfcounters ok but limited, two possibilities
+
+Tensorflow with CUDA    : tensorflowTracer, cuptiTracer, streamTracer, python tracing, eigenTracer (not used)
+perfounters : inside TF device_tracer but limited or with nvidia profiler nvprof

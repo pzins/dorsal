@@ -5,6 +5,7 @@ lttng enable-event --userspace "hccTracer:*" --channel=mychannel
 lttng enable-event --userspace "hipTracer:*" --channel=mychannel
 lttng enable-event --userspace "cuptiTracer:*" --channel=mychannel
 lttng enable-event --userspace "tensorflowTracer:*" --channel=mychannel
+lttng enable-event --userspace "streamTracer:*" --channel=mychannel
 lttng add-context -u -t vtid
 lttng start
 
