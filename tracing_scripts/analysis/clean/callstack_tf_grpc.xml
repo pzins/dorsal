@@ -3,17 +3,17 @@
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
 <callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
-    <callstackGroup name="Tensorflow Callstack">
+    <callstackGroup name="Tensorflow GRPC Callstack">
         <!-- <level path="call_stack/*" /> -->
 		<level path="Views/*" /> 
 		<level path="Threads/*"/>
 		<!-- <thread cpu="cpu" /> -->
 		<!-- <thread level="0"/> -->
     </callstackGroup>
-	<pattern version="0" id="tensorflow_cs_pattern">
+	<pattern version="0" id="tensorflow_grpc_cs_pattern">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
-			<label value="Tensorflow" />
+			<label value="Tensorflow GRPC" />
 		</head>
 		
 		<location id="CurrentThread">

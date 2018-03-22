@@ -15,15 +15,13 @@ hiptensorflow
 
     bfc_allocator.cc
         allocate_chunk_entry allocate_chunk_exit                    : allocate a chunck
-        allocate_raw_internal_entry allocate_raw_internal_exit      : basic function to allocate memory within the allocator, looks for chunk, extends if needed, ...
+        allocate_raw_internal_entry allocate_raw_internal_exit      : basic function to allocate memory within the allocator, looks for chunk, extends if needed, ... (separate between cpu and gpu)
         deallocate_raw_internal_entry deallocate_raw_internal_exit  : same but for deallocations
     
         bfc_allocator_stats     : follow memory allocation inside the allocator (num alloc, bytes in use, max nb bytes in use, max alloc size)
         called twice, when looking for a chunk, and when free and maybe coalescing
-        gpu_bfc_chunks_stats    : summary of the chunks memory for gpu allocator (we have several bins and into each bins : several chunks of the same size)
-        cpu_bfc_chunks_stats    : summary of the chunks memory for cpu allocator
-        gpu_bfc_bins_stats      : summary of the bins memory for gpu allocator
-        cpu_bfc_bins_stats      : summary of the bins memory for cpu allocator
+        bfc_chunks_stats    : summary of the chunks memory for cpu/gpu allocator (we have several bins and into each bins : several chunks of the same size)
+        bfc_bins_stats      : summary of the bins memory for cpu/gpu allocator
     
     gpu_bfc_allocator.h
         gpu_bfc_alloc_entry gpu_bfc_alloc_exit  : basic function to allocate memory on the GPU
@@ -205,9 +203,9 @@ Linux kernel : everything already exist with lttng and Tracecompass
     Memory
         bfc_allocations.xml                 : display the memory allocation size and number for each bfc allocator (gpu_bfc and cuda_host_bfc in my case)
                                               As by default all available memory is allocated by TF (especillay for the GPU) this represents allocation within the bfc alloc context
-        gpu_bfc_allocate_raw_internal.xml   : follow all the allocations within allocators
-        gpu_bfc_bins_stats.xml              : bins stats
-        gpu_bfc_chunks_stats.xml            : chunks stats
+        bfc_allocate_raw_internal.xml       : follow all the allocations within allocators (separate between gpu and cpu)
+        bfc_bins_stats.xml                  : bins stats (separate between cpu and gpu) 
+        bfc_chunks_stats.xml                : chunks stats (separate between cpu and gpu)
         hsa_amd_pool_allocate.xml           : all allocation at HSA levels (differentiate devices : cpu gpu)
         memory_transfers.xml                : async memory copy (real time) at hsa level : show size and throughput of transfers
         queue_stats.xml                     : follow the number of elements inside each HSA/ROCR Queues.
@@ -259,12 +257,16 @@ perf counters CUDA : my work inside device_tracer or nvprof
 autoencoder
 autoencoder_queue
 cnn
+cnn_save_model
 cnn_inference
+mlp_memory_custom_mnist : require data from https://github.com/sorki/python-mnist
 convolutional_network_raw
 matrix_multiplication
 mlp_memory
 mlp_memory_queue
 deep_mlp_memory
+multilayer_perceptron
+multilayer_perceptron_intra_inter
 dynamic_rnn
 recurrent_network
 dcgan
@@ -303,7 +305,6 @@ ex with several tf prog simultaneously
 ex with very deep or big model
 
 
-
 # configuration
 TF session config : intra inter
 TF session gpu config : allow growth
@@ -319,3 +320,43 @@ batch size
 using queues instead of feed_dict : input_pipeline_medium_tutorial
 distributed tracing : placement of nodes
 if GPU not used much => between model parallelism and traiing several model simultaneously but with different parameters
+
+
+### clean 
+autoencoder
+cnn
+cnn_save_model
+cnn_inference
+convolutional_network_raw
+dcgan
+mlp_memory
+mlp_memory_queue
+deep_mlp_memory
+dynamic_rnn
+multilayer_perceptron
+multilayer_perceptron_intra_inter
+mlp_memory_custom_mnist : require data from https://github.com/sorki/python-mnist
+nearest_neighbor
+neural_network_raw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

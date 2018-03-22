@@ -164,6 +164,7 @@ for r_event in collection.events:
         # TF operation
         if f == "tf_name" and "hccTracer:kernel" in name and "Memset" not in r_event["name"]:
             # need to divide by 2, because we deal with start and end events
+            # print(int(cnt_kernel/2), len(kernel_tfop), r_event["name"] )
             w_event.payload(f).value = kernel_tfop[int(cnt_kernel/2)][0]
             cnt_kernel += 1
             continue
