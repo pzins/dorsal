@@ -8,7 +8,7 @@ from collections import defaultdict
 import time
 import os
 from collections import defaultdict
-
+from cbid_cuda import correlation_cbid
 
 
 # Add the input trace to the collection
@@ -48,6 +48,9 @@ init_time = None
 cntol = 0
 events = defaultdict(list)
 
+
+driver_dic, runtime_dic = correlation_cbid()
+
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -65,6 +68,12 @@ for r_event in collection.events:
     if "cuptiTracer:kernel" in name or "cuptiTracer:memcpy" in name:
         event_time = r_event["timestamp"] * 1000
 
+    if "cuptiTracer:runtime" in name:
+        w_event.payload("name").value = runtime_dic[r_event["name"]]
+        event_time = r_event["timestamp"]
+    if "cuptiTracer:driver" in name:
+        w_event.payload("name").value = driver_dic[r_event["name"]]
+        event_time = r_event["timestamp"]
 
 
     # organize threads
