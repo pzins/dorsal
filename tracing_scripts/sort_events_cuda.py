@@ -8,7 +8,7 @@ from collections import defaultdict
 import time
 import os
 from collections import defaultdict
-
+from cbid_cuda import correlation_cbid
 
 
 # Add the input trace to the collection
@@ -48,6 +48,9 @@ init_time = None
 cntol = 0
 events = defaultdict(list)
 
+
+driver_dic, runtime_dic = correlation_cbid()
+
 for r_event in collection.events:
     name = r_event.name
     event_time = r_event.timestamp
@@ -65,10 +68,19 @@ for r_event in collection.events:
     if "cuptiTracer:kernel" in name or "cuptiTracer:memcpy" in name:
         event_time = r_event["timestamp"] * 1000
 
-
-
     # organize threads
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
+
+    if "cuptiTracer:runtime" in name:
+        w_event.payload("name").value = runtime_dic[r_event["name"]]
+        event_time = r_event["timestamp"]
+        threadId = int(str(r_event["threadId"])[-4:])
+
+    if "cuptiTracer:driver" in name:
+        w_event.payload("name").value = driver_dic[r_event["name"]]
+        event_time = r_event["timestamp"]
+        threadId = int(str(r_event["threadId"])[-4:])
+
 
     if event_time in events:
         print("timestamp already exists")

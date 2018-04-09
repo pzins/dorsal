@@ -559,21 +559,25 @@ event_classes['cuptiTracer:runtime_api_entry'] = btw.EventClass('cuptiTracer:run
 event_classes['cuptiTracer:runtime_api_entry'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:runtime_api_entry'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:runtime_api_entry'].add_field(uint64_fd, 'timestamp')
+event_classes['cuptiTracer:runtime_api_entry'].add_field(uint64_fd, 'threadId')
 
 event_classes['cuptiTracer:runtime_api_exit'] = btw.EventClass('cuptiTracer:runtime_api_exit')
 event_classes['cuptiTracer:runtime_api_exit'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:runtime_api_exit'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:runtime_api_exit'].add_field(uint64_fd, 'timestamp')
+event_classes['cuptiTracer:runtime_api_exit'].add_field(uint64_fd, 'threadId')
 
 event_classes['cuptiTracer:driver_api_entry'] = btw.EventClass('cuptiTracer:driver_api_entry')
 event_classes['cuptiTracer:driver_api_entry'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:driver_api_entry'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:driver_api_entry'].add_field(uint64_fd, 'timestamp')
+event_classes['cuptiTracer:driver_api_entry'].add_field(uint64_fd, 'threadId')
 
 event_classes['cuptiTracer:driver_api_exit'] = btw.EventClass('cuptiTracer:driver_api_exit')
 event_classes['cuptiTracer:driver_api_exit'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:driver_api_exit'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:driver_api_exit'].add_field(uint64_fd, 'timestamp')
+event_classes['cuptiTracer:driver_api_exit'].add_field(uint64_fd, 'threadId')
 
 event_classes['cuptiTracer:kernel_begin'] = btw.EventClass('cuptiTracer:kernel_begin')
 event_classes['cuptiTracer:kernel_begin'].add_field(string_fd, 'cat')
