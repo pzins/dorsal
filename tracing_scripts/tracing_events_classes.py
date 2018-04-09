@@ -364,20 +364,6 @@ event_classes['hccTracer:queue_stats'] = btw.EventClass('hccTracer:queue_stats')
 event_classes['hccTracer:queue_stats'].add_field(string_fd, 'queue_id')
 event_classes['hccTracer:queue_stats'].add_field(uint64_fd, 'size')
 
-# event_classes['hccTracer:aql_packet_submitted'] = btw.EventClass('hccTracer:aql_packet_submitted')
-# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'packet_id')
-# event_classes['hccTracer:aql_packet_submitted'].add_field(string_fd, 'packet_type')
-# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
-# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'agent_handle')
-# event_classes['hccTracer:aql_packet_submitted'].add_field(uint64_fd, 'queue_id')
-#
-# event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'] = btw.EventClass('hccTracer:aql_packet_submitted')
-# event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'packet_id')
-# event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'agent_handle')
-# event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'queue_id')
-# event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(uint64_fd, 'kernel_object')
-# event_classes['hccTracer:aql_kernel_dispatch_packet_submitted'].add_field(string_fd, 'kernel_name')
-
 
 
 # tensorflowTracer
@@ -407,6 +393,7 @@ event_classes['tensorflowTracer:push_succ_exit'].add_field(string_fd, 'cat')
 event_classes['tensorflowTracer:push_succ_exit'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:push_succ_exit'].add_field(uint32_fd, 'is_ready')
 
+"""
 event_classes['tensorflowTracer:allocate_chunk_entry'] = btw.EventClass('tensorflowTracer:allocate_chunk_entry')
 event_classes['tensorflowTracer:allocate_chunk_entry'].add_field(string_fd, 'cat')
 event_classes['tensorflowTracer:allocate_chunk_entry'].add_field(string_fd, 'name')
@@ -466,7 +453,7 @@ event_classes['tensorflowTracer:gpu_bfc_free_exit'] = btw.EventClass('tensorflow
 event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(string_fd, 'cat')
 event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(string_fd, 'name')
 event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(int32_fd, 'num_bytes')
-
+"""
 
 # Tracepoints : start / end
 event_classes['tensorflowTracer:session_start'] = btw.EventClass('tensorflowTracer:session_start')
@@ -589,3 +576,15 @@ event_classes['cuptiTracer:memcpy_end'].add_field(string_fd, 'cat')
 event_classes['cuptiTracer:memcpy_end'].add_field(string_fd, 'name')
 event_classes['cuptiTracer:memcpy_end'].add_field(string_fd, 'details')
 event_classes['cuptiTracer:memcpy_end'].add_field(uint64_fd, 'timestamp')
+
+
+
+event_classes['tensorflowTracer:memory_allocate'] = btw.EventClass('tensorflowTracer:memory_allocate')
+event_classes['tensorflowTracer:memory_allocate'].add_field(string_fd, 'device')
+event_classes['tensorflowTracer:memory_allocate'].add_field(string_fd, 'ptr')
+event_classes['tensorflowTracer:memory_allocate'].add_field(uint64_fd, 'bytes')
+
+event_classes['tensorflowTracer:memory_deallocate'] = btw.EventClass('tensorflowTracer:memory_deallocate')
+event_classes['tensorflowTracer:memory_deallocate'].add_field(string_fd, 'device')
+event_classes['tensorflowTracer:memory_deallocate'].add_field(string_fd, 'ptr')
+event_classes['tensorflowTracer:memory_deallocate'].add_field(uint64_fd, 'bytes')

@@ -65,21 +65,25 @@
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="total_wasted_bytes" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="total_wasted_bytes" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="chunks" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="chunks" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="in_use_chunks" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="in_use_chunks" increment="false" />
 			</stateChange>
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="free_chunks" />
+				<stateAttribute type="eventField" value="allocator_name" />
 				<stateValue type="eventField" value="free_chunks" increment="false" />
 			</stateChange>
 		</eventHandler>
