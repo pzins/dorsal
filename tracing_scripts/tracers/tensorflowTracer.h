@@ -119,7 +119,7 @@ TRACEPOINT_EVENT(
 
 TRACEPOINT_EVENT(
     tensorflowTracer,
-    allocate_raw_internal_entry,
+    allocate_raw_internal,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg,
@@ -139,54 +139,10 @@ TRACEPOINT_EVENT(
         ctf_integer(int, bin_num, bin_num_arg)
     )
 )
-TRACEPOINT_EVENT(
-    tensorflowTracer,
-    allocate_raw_internal_exit,
-    TP_ARGS(
-        const char*, cat_arg,
-        const char*, name_arg,
-        const char*, alloc_name_arg,
-        const char*, ptr_arg,
-        int, num_bytes_arg,
-        int, rounded_bytes_arg,
-        int, bin_num_arg,
-        int, need_extend_arg,
-        int, success_arg
-    ),
-    TP_FIELDS(
-        ctf_string(cat, cat_arg)
-        ctf_string(name, name_arg)
-        ctf_string(alloc_name, alloc_name_arg)
-        ctf_string(ptr, ptr_arg)
-        ctf_integer(int, num_bytes, num_bytes_arg)
-        ctf_integer(int, rounded_bytes, rounded_bytes_arg)
-        ctf_integer(int, bin_num, bin_num_arg)
-        ctf_integer(int, need_extend, need_extend_arg)
-        ctf_integer(int, success, success_arg)
-    )
-)
 
 TRACEPOINT_EVENT(
     tensorflowTracer,
-    deallocate_raw_internal_entry,
-    TP_ARGS(
-        const char*, cat_arg,
-        const char*, name_arg,
-        const char*, alloc_name_arg,
-        const char*, ptr_arg,
-        int, num_bytes_arg
-    ),
-    TP_FIELDS(
-        ctf_string(cat, cat_arg)
-        ctf_string(name, name_arg)
-        ctf_string(alloc_name, alloc_name_arg)
-        ctf_string(ptr, ptr_arg)
-        ctf_integer(int, num_bytes, num_bytes_arg)
-    )
-)
-TRACEPOINT_EVENT(
-    tensorflowTracer,
-    deallocate_raw_internal_exit,
+    deallocate_raw_internal,
     TP_ARGS(
         const char*, cat_arg,
         const char*, name_arg,
