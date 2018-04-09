@@ -49,6 +49,7 @@ events = defaultdict(list)
 
 # clock_offset = 1518196357777395130 # second computer
 clock_offset = 1520551794904150339 # first computer
+clock_offset = 1523055627781584997 # third computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
@@ -74,7 +75,6 @@ for r_event in collection.events:
                 tmp = w_event.payload(f).field(i)
                 tmp.value = r_event[f][i]
             continue
-
         w_event.payload(f).value = r_event[f]
 
     if "hsa_runtime:kernel" in name:
@@ -82,6 +82,7 @@ for r_event in collection.events:
             print("Error, hsa_init not called before kernel")
             exit(0)
         event_time = r_event["timestamp"] + init_time
+
 
     if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
@@ -125,7 +126,7 @@ hc_kernels = []
 hc_copy = []
 hc_barrier = []
 
-with open("hc_out", "r") as f:
+with open("/home/pierre/tf_examples/hc_out", "r") as f:
     lines = f.readlines()
     for l in lines:
         if l[:7] == "profile":
@@ -133,12 +134,12 @@ with open("hc_out", "r") as f:
             element_type = fields[0].split()[-1]
             name = fields[1].strip()
             duration = float(fields[2].split()[0])
-            start = int(fields[3])
-            end = int(fields[4])
+            start = int(fields[3]) + clock_offset
+            end = int(fields[4]) + clock_offset
             id_ = fields[5]
-            if "kernel" in element_type:    
+            if "kernel" in element_type:
                 hc_kernels.append([name, duration, start, end, id_])
-            if "barrier" in element_type:    
+            if "barrier" in element_type:
                 hc_barrier.append([name, duration, start, end, id_])
             if "copy" in element_type:
                 size_bytes = int(fields[6].split()[0])
@@ -146,10 +147,10 @@ with open("hc_out", "r") as f:
                 bandwith = float(fields[8].split()[0])
                 hc_copy.append([element_type, name, duration, start, end, size_bytes, size_mb, bandwith])
 
-            
-            
 
-threadId = 18
+
+
+threadId = 181818
 for i in hc_kernels:
     w_event = btw.Event(event_classes["hccTracer:kernel2_begin"])
     w_event.payload("cat").value = "hcc"
@@ -179,7 +180,7 @@ for i in hc_barrier:
     w_event.payload("id").value = i[4]
     w_event.payload("timestamp").value = i[3]
     events[i[3]].append([w_event, threadId])
-    
+
 for i in hc_copy:
     if i[0] == "copy":
         w_event_begin = btw.Event(event_classes["hccTracer:async_memcpy2_begin"])
@@ -212,8 +213,8 @@ for timestamp in timestamps:
     clock.time = timestamp
     for i in range(len(events[timestamp])):
         ev = events[timestamp][i][0]
-        ev.tid(events[timestamp][i][1])
         # print(timestamp)
+        ev.tid(events[timestamp][i][1])
         main_stream.append_event(ev)
 
 # Flush the stream
