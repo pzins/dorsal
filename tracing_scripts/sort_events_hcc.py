@@ -48,8 +48,8 @@ cntol = 0
 events = defaultdict(list)
 
 # clock_offset = 1518196357777395130 # second computer
-clock_offset = 1523055627781584997 # third computer
 clock_offset = 1523380531878303029 # first computer
+clock_offset = 1523055627781584997 # third computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
@@ -80,6 +80,7 @@ for r_event in collection.events:
     if "hsa_runtime:kernel" in name:
         if init_time == 0:
             print("Error, hsa_init not called before kernel")
+            input()
             exit(0)
         event_time = r_event["timestamp"] + init_time
 
@@ -126,7 +127,7 @@ hc_kernels = []
 hc_copy = []
 hc_barrier = []
 
-with open("/home/pierre/tf_examples/hc_out", "r") as f:
+with open("/home/pierre/hc_out", "r") as f:
     lines = f.readlines()
     for l in lines:
         if l[:7] == "profile":

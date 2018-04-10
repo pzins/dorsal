@@ -1,10 +1,11 @@
 lttng create tensorflow
-lttng enable-event --userspace "hsa_runtime:*"
-lttng enable-event --userspace "hsaTracer:*"
+lttng enable-channel -u mychannel --num-subbuf=1000 --subbuf-size=131072
+lttng enable-event --userspace "hsa_runtime:*" --channel=mychannel
+lttng enable-event --userspace "hsaTracer:*" --channel=mychannel
 # lttng enable-event --userspace "hccTracer:*"
-lttng enable-event --userspace "hipTracer:*"
-lttng enable-event --userspace "tensorflowTracer:*"
-lttng enable-event --userspace "streamTracer:*"
+lttng enable-event --userspace "hipTracer:*" --channel=mychannel
+lttng enable-event --userspace "tensorflowTracer:*" --channel=mychannel
+lttng enable-event --userspace "streamTracer:*" --channel=mychannel
 lttng add-context -u -t vtid
 lttng start
 

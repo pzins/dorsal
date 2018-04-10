@@ -59,6 +59,14 @@ hsa_status_t hsa_executable_symbol_get_info(
     return my_hsa_executable_symbol_get_info(executable_symbol, attribute, value);
 }
 
+hsa_status_t hsa_shut_down()
+{
+    decltype(hsa_shut_down) *orig = (decltype(hsa_shut_down)*) dlsym(RTLD_NEXT, "hsa_shut_down");
+    gather_kernel_times();
+    hsa_status_t retval = orig();
+    return retval;
+}
+
 hsa_status_t hsa_queue_destroy(hsa_queue_t *queue)
 {
     decltype(hsa_queue_destroy) *orig = (decltype(hsa_queue_destroy)*) dlsym(RTLD_NEXT, "hsa_queue_destroy");

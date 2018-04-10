@@ -17,6 +17,7 @@ collection = btr.TraceCollection()
 directory = "/home/pierre/out_traces"
 collection.add_trace(directory, 'ctf')
 clock_offset = 1523311163488553312 # first computer
+clock_offset = 1523055627781584997 # third computer
 
 # save all the states of the trace
 states = []
@@ -32,7 +33,7 @@ enqueue_regex = re.compile("hipTracer:function_entry")
 # unique id also to link begin and end events together
 unique_id = "name"
 
-# list containing temporary State with only start event set, waiting for a 
+# list containing temporary State with only start event set, waiting for a
 # corresponding end event
 open_state = []
 
@@ -80,7 +81,7 @@ kernel_index = 0
 
 for r_event in collection.events:
     name = r_event.name
-    
+
     # begin event
     if re.match(begin_regex, name):
         s = State(r_event)
@@ -96,16 +97,16 @@ for r_event in collection.events:
                 open_state[i].setEndTimestamp(r_event.timestamp)
                 matching_index = i
                 break
-        
-        # if no waiting state correspond to an end event. Not possible, so 
+
+        # if no waiting state correspond to an end event. Not possible, so
         # we have errors
         if matching_index == -1:
             print("Error no matching event, for this end")
             exit(1)
-        
+
         states.append(open_state[matching_index])
         del open_state[matching_index]
-    
+
     # if we reach an enqueue call
     if re.match(enqueue_regex, name) and "hipLaunchKernel" in r_event["name"]:
         # print(open_state[0].begin_event["name"], name)
@@ -115,7 +116,7 @@ for r_event in collection.events:
         # Link with the just finished TF operation
         else:
             kernel_tfop.append((open_state[-1].begin_event["name"], kernel_index))
-            
+
         kernel_index += 1
 if  kernel_index != len(list_hcc_kernels):
     print("Error number of kernels")
@@ -157,7 +158,7 @@ events = defaultdict(list)
 
 # We have a list with all the enqueue call and the corresponding TF operation
 # to do the link between TF operation and kernel execution, just use the index
-# of the kernel_tfop list and the counter cnt_kernel when iterating over the 
+# of the kernel_tfop list and the counter cnt_kernel when iterating over the
 # hccTracer:kernel events
 cnt_kernel = 0
 for r_event in collection.events:
@@ -175,10 +176,10 @@ for r_event in collection.events:
                 tmp = w_event.payload(f).field(i)
                 tmp.value = r_event[f][i]
             continue
-        
-        # if we have a hccTracer:kernel_ event, get the name of the 
+
+        # if we have a hccTracer:kernel_ event, get the name of the
         # corresponding TF operation, and set it in the tf_name field
-        # again we need to skip Memset, because there are no corresponding 
+        # again we need to skip Memset, because there are no corresponding
         # TF operation
         if f == "tf_name" and "hccTracer:kernel2" in name and "Memset" not in r_event["name"]:
             # need to divide by 2, because we deal with start and end events
@@ -186,7 +187,7 @@ for r_event in collection.events:
             w_event.payload(f).value = kernel_tfop[int(cnt_kernel/2)][0]
             cnt_kernel += 1
             continue
-        
+
         w_event.payload(f).value = r_event[f]
 
     threadId = r_event.field_with_scope("vtid", babeltrace.common.CTFScope.STREAM_EVENT_CONTEXT)
