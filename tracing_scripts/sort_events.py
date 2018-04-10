@@ -47,6 +47,7 @@ cntol = 0
 events = defaultdict(list)
 
 # clock_offset = 1518196357777395130 # second computer
+clock_offset = 1523055627781584977 # third computer
 clock_offset = 1523380531878303029 # first computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
@@ -119,7 +120,7 @@ for r_event in collection.events:
         cntol += 1
 
     events[event_time].append([w_event, threadId])
-    
+
 # Append events to the stream
 timestamps = list(events.keys())
 timestamps.sort()
