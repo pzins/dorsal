@@ -48,8 +48,8 @@ cntol = 0
 events = defaultdict(list)
 
 # clock_offset = 1518196357777395130 # second computer
-clock_offset = 1520551794904150339 # first computer
 clock_offset = 1523055627781584997 # third computer
+clock_offset = 1523311163488553312 # first computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
@@ -155,6 +155,7 @@ for i in hc_kernels:
     w_event = btw.Event(event_classes["hccTracer:kernel2_begin"])
     w_event.payload("cat").value = "hcc"
     w_event.payload("name").value = i[0]
+    w_event.payload("tf_name").value = ""
     w_event.payload("id").value = i[4]
     w_event.payload("timestamp").value = i[2]
     events[i[2]].append([w_event, threadId])
@@ -162,6 +163,7 @@ for i in hc_kernels:
     w_event = btw.Event(event_classes["hccTracer:kernel2_end"])
     w_event.payload("cat").value = "hcc"
     w_event.payload("name").value = i[0]
+    w_event.payload("tf_name").value = ""
     w_event.payload("id").value = i[4]
     w_event.payload("timestamp").value = i[3]
     events[i[3]].append([w_event, threadId])

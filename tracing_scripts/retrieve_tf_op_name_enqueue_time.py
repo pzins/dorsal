@@ -16,7 +16,7 @@ import re
 collection = btr.TraceCollection()
 directory = "/home/pierre/out_traces"
 collection.add_trace(directory, 'ctf')
-clock_offset = 1519939145097366944 # first computer
+clock_offset = 1523311163488553312 # first computer
 
 # save all the states of the trace
 states = []

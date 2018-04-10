@@ -13,7 +13,7 @@ import re
 collection = btr.TraceCollection()
 directory = "/home/pierre/out_traces"
 collection.add_trace(directory, 'ctf')
-clock_offset = 1519939145097366944 # first computer
+clock_offset = 1523311163488553312 # first computer
 
 # represent one Analysis : like tf operations, hcc kernels, session runs, ...
 class Module():
@@ -57,7 +57,7 @@ class State():
 # define the modules we want
 modules =   [
             Module("tensorflowTracer:session_start", "tensorflowTracer:session_end", "count"),
-            Module("hccTracer:kernel_begin", "hccTracer:kernel_end", "name"),
+            Module("hccTracer:kernel2_begin", "hccTracer:kernel_end", "name"),
             Module("tensorflowTracer:operation_start", "tensorflowTracer:operation_end", "name")
             ]
 

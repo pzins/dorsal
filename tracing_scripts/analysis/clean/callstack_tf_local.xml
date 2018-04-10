@@ -138,12 +138,12 @@
 			
 			<fsm id="tgcall_stack33" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">
-					<transition event="hcc*kernel_begin" target="loop" action="entering_thread:push_event_type_tf"/>
+					<transition event="hcc*kernel2_begin" target="loop" action="entering_thread:push_event_type_tf"/>
 				</state>
 				<state id="loop">
-					<transition event="hcc*kernel_begin" cond="name_name" target="loop" action="push_event_type_tf" />
-					<transition event="hcc*kernel_end" cond="name_name:last_out" target="end_thread" action="pop_event_type_tf"/>
-					<transition event="hcc*kernel_end" cond="name_name" target="loop" action="pop_event_type_tf" />
+					<transition event="hcc*kernel2_begin" cond="name_name" target="loop" action="push_event_type_tf" />
+					<transition event="hcc*kernel2_end" cond="name_name:last_out" target="end_thread" action="pop_event_type_tf"/>
+					<transition event="hcc*kernel2_end" cond="name_name" target="loop" action="pop_event_type_tf" />
 				</state>
 				<final id="end_thread"/>
 			</fsm>

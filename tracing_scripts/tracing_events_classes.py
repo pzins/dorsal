@@ -234,16 +234,20 @@ event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'private_segment_size
 event_classes['hccTracer:kernel_end'].add_field(uint32_fd, 'workitem_vgpr_count')
 
 
-event_classes['hccTracer:kernel2_begin'] = btw.EventClass('hccTracer:kernel_begin')
+event_classes['hccTracer:kernel2_begin'] = btw.EventClass('hccTracer:kernel2_begin')
 event_classes['hccTracer:kernel2_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:kernel2_begin'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:kernel2_begin'].add_field(string_fd, 'name')
+event_classes['hccTracer:kernel2_begin'].add_field(string_fd, 'tf_name')
 event_classes['hccTracer:kernel2_begin'].add_field(string_fd, 'id')
-event_classes['hccTracer:kernel2_end'] = btw.EventClass('hccTracer:kernel_end')
+
+event_classes['hccTracer:kernel2_end'] = btw.EventClass('hccTracer:kernel2_end')
 event_classes['hccTracer:kernel2_end'].add_field(string_fd, 'cat')
 event_classes['hccTracer:kernel2_end'].add_field(uint64_fd, 'timestamp')
 event_classes['hccTracer:kernel2_end'].add_field(string_fd, 'name')
+event_classes['hccTracer:kernel2_end'].add_field(string_fd, 'tf_name')
 event_classes['hccTracer:kernel2_end'].add_field(string_fd, 'id')
+
 event_classes['hccTracer:barrier2_begin'] = btw.EventClass('hccTracer:barrier2_begin')
 event_classes['hccTracer:barrier2_begin'].add_field(string_fd, 'cat')
 event_classes['hccTracer:barrier2_begin'].add_field(uint64_fd, 'timestamp')
