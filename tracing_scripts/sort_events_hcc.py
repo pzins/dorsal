@@ -49,7 +49,7 @@ events = defaultdict(list)
 
 # clock_offset = 1518196357777395130 # second computer
 clock_offset = 1523055627781584997 # third computer
-clock_offset = 1523311163488553312 # first computer
+clock_offset = 1523380531878303029 # first computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
