@@ -17,7 +17,7 @@ collection = btr.TraceCollection()
 directory = "/home/pierre/out_traces"
 collection.add_trace(directory, 'ctf')
 clock_offset = 1523311163488553312 # first computer
-clock_offset = 1523055627781584997 # third computer
+clock_offset = 1523458334781392754 # third computer
 
 # save all the states of the trace
 states = []
@@ -28,7 +28,17 @@ end_event = 'tensorflowTracer:operation_end'
 
 begin_regex = re.compile(begin_event)
 end_regex = re.compile(end_event)
-enqueue_regex = re.compile("hipTracer:function_entry")
+
+# regex to collect tf op corresponding to a kernel launch command
+hip_kernel1_regex = re.compile("hipTracer:function_entry")
+hip_kernel2_regex = re.compile(".*hipLaunchKernel.*")
+hsa_runtime_regex = re.compile("hsa_runtime:aql_kernel_dispatch_packet_submitted")
+
+hcc_runtime_regex_1 = re.compile("hccTracer:kernel2_begin")
+hcc_runtime_regex_2 = re.compile("hccTracer:kernel_begin")
+hsa_runtime_regex = re.compile("hsa_runtime:kernel_start_nm")
+
+
 
 # unique id also to link begin and end events together
 unique_id = "name"
@@ -36,9 +46,6 @@ unique_id = "name"
 # list containing temporary State with only start event set, waiting for a
 # corresponding end event
 open_state = []
-
-# list of tuple (TF_operation_name, GPU_kernel_name)
-kernel_tfop = []
 
 class State():
     def __init__(self):
@@ -62,27 +69,20 @@ class State():
             return False
         return self.begin_event[unique_id] == end_event[unique_id]
 
+list_tf_op = []
 
-list_hip_launch_kernel = []
-list_hcc_kernels = []
-
-for r_event in collection.events:
-    name = r_event.name
-    if name == "hipTracer:function_entry" and "hipLaunchKernel" in r_event["name"]:
-        list_hip_launch_kernel.append(r_event)
-    if (name == "hccTracer:kernel2_begin" or name == "hsa_runtime:kernel_start_nm") and "Memset" not in r_event["name"]:
-        list_hcc_kernels.append(r_event)
-
-if len(list_hip_launch_kernel) != len(list_hcc_kernels):
-    print("Error number of hipLaunchKernel and kernels are different")
-    print(len(list_hip_launch_kernel), len(list_hcc_kernels))
-    input()
-    exit(-1)
-
-kernel_index = 0
 
 for r_event in collection.events:
     name = r_event.name
+
+
+    # add a new kernel launch command
+    if (re.match(hip_kernel1_regex, name) and re.match(hip_kernel2_regex, r_event["name"])) or re.match(hsa_runtime_regex, name):
+        # if there is an active tf operation, we add it in the list. Otherwise, just add None
+        if len(open_state) > 0:
+            list_tf_op.append(open_state[-1])
+        else:
+            list_tf_op.append(None)
 
     # begin event
     if re.match(begin_regex, name):
@@ -109,27 +109,8 @@ for r_event in collection.events:
         states.append(open_state[matching_index])
         del open_state[matching_index]
 
-    # if we reach an enqueue call
-    if re.match(enqueue_regex, name) and "hipLaunchKernel" in r_event["name"]:
-        # print(open_state[0].begin_event["name"], name)
-        # Link with the current TF operation
-        if len(open_state) == 0:
-            kernel_tfop.append((states[-1].begin_event["name"], kernel_index))
-        # Link with the just finished TF operation
-        else:
-            kernel_tfop.append((open_state[-1].begin_event["name"], kernel_index))
-
-        kernel_index += 1
-if  kernel_index != len(list_hcc_kernels):
-    print("Error number of kernels")
-    exit(-1)
-
-# sort the State according to their duration
-states.sort(key=lambda x: x.timestamps[1] - x.timestamps[0], reverse=True)
-
 # rewrite the trace by changing the tf_name field
 print("Start writing the traces")
-
 
 # Set the output trace
 out_path = "/home/pierre/queue_traces"
@@ -158,10 +139,7 @@ main_stream = writer.create_stream(main_stream_class)
 
 events = defaultdict(list)
 
-# We have a list with all the enqueue call and the corresponding TF operation
-# to do the link between TF operation and kernel execution, just use the index
-# of the kernel_tfop list and the counter cnt_kernel when iterating over the
-# hccTracer:kernel events
+
 cnt_kernel = 0
 for r_event in collection.events:
     name = r_event.name
@@ -179,16 +157,15 @@ for r_event in collection.events:
                 tmp.value = r_event[f][i]
             continue
 
-        # if we have a hccTracer:kernel_ event, get the name of the
-        # corresponding TF operation, and set it in the tf_name field
-        # again we need to skip Memset, because there are no corresponding
-        # TF operation
-        if f == "tf_name" and ("hccTracer:kernel2" in name or "hsa_runtime:kernel_" in name) and "Memset" not in r_event["name"]:
-            # need to divide by 2, because we deal with start and end events
-            # print(int(cnt_kernel/2), len(kernel_tfop), r_event["name"] )
-            w_event.payload(f).value = kernel_tfop[int(cnt_kernel/2)][0]
+        # if we have a kernel: change a field value (tf_name or name depending on the event) with the corresponding tf op
+        if (f == "tf_name" and (re.match(hcc_runtime_regex_1, name) or re.match(hsa_runtime_regex, name))) or \
+           (f == "name" and re.match(hsa_runtime_regex, name) and r_event["name"] == ""):
+            if list_tf_op[cnt_kernel] != None:
+                w_event.payload(f).value = list_tf_op[cnt_kernel].begin_event["name"]
+                cnt_kernel += 1
+                continue
             cnt_kernel += 1
-            continue
+
 
         w_event.payload(f).value = r_event[f]
 

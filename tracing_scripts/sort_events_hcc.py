@@ -49,7 +49,7 @@ events = defaultdict(list)
 
 # clock_offset = 1518196357777395130 # second computer
 clock_offset = 1523380531878303029 # first computer
-clock_offset = 1523055627781584997 # third computer
+clock_offset = 1523458334781392754 # third computer
 save_barrier_time = 0
 cnt_incoherent_barrier = 0
 
@@ -154,7 +154,7 @@ with open("/home/pierre/hc_out", "r") as f:
 threadId = 181818
 for i in hc_kernels:
     w_event = btw.Event(event_classes["hccTracer:kernel2_begin"])
-    w_event.payload("cat").value = "hcc"
+    w_event.payload("cat").value = "hcc_kernel"
     w_event.payload("name").value = i[0]
     w_event.payload("tf_name").value = ""
     w_event.payload("id").value = i[4]
@@ -162,7 +162,7 @@ for i in hc_kernels:
     events[i[2]].append([w_event, threadId])
 
     w_event = btw.Event(event_classes["hccTracer:kernel2_end"])
-    w_event.payload("cat").value = "hcc"
+    w_event.payload("cat").value = "hcc_kernel"
     w_event.payload("name").value = i[0]
     w_event.payload("tf_name").value = ""
     w_event.payload("id").value = i[4]
@@ -171,14 +171,14 @@ for i in hc_kernels:
 
 for i in hc_barrier:
     w_event = btw.Event(event_classes["hccTracer:barrier2_begin"])
-    w_event.payload("cat").value = "hcc"
+    w_event.payload("cat").value = "hcc_barrier"
     w_event.payload("name").value = i[0]
     w_event.payload("id").value = i[4]
     w_event.payload("timestamp").value = i[2]
     events[i[2]].append([w_event, threadId])
 
     w_event = btw.Event(event_classes["hccTracer:barrier2_end"])
-    w_event.payload("cat").value = "hcc"
+    w_event.payload("cat").value = "hcc_barrier"
     w_event.payload("name").value = i[0]
     w_event.payload("id").value = i[4]
     w_event.payload("timestamp").value = i[3]
@@ -192,7 +192,7 @@ for i in hc_copy:
         w_event_begin = btw.Event(event_classes["hccTracer:async_memcpyslo2_begin"])
         w_event_end = btw.Event(event_classes["hccTracer:async_memcpyslo2_end"])
 
-    w_event_begin.payload("cat").value = "hcc"
+    w_event_begin.payload("cat").value = "hcc_copy"
     w_event_begin.payload("name").value = i[1]
     w_event_begin.payload("timestamp").value = i[4]
     w_event_begin.payload("size_bytes").value = i[5]
@@ -200,7 +200,7 @@ for i in hc_copy:
     w_event_begin.payload("throughput").value = i[7]
     events[i[3]].append([w_event_begin, threadId])
 
-    w_event_end.payload("cat").value = "hcc"
+    w_event_end.payload("cat").value = "hcc_copy"
     w_event_end.payload("name").value = i[1]
     w_event_end.payload("timestamp").value = i[4]
     w_event_end.payload("size_bytes").value = i[5]
