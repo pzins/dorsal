@@ -70,11 +70,13 @@ for r_event in collection.events:
     name = r_event.name
     if name == "hipTracer:function_entry" and "hipLaunchKernel" in r_event["name"]:
         list_hip_launch_kernel.append(r_event)
-    if name == "hccTracer:kernel2_begin" and "Memset" not in r_event["name"]:
+    if (name == "hccTracer:kernel2_begin" or name == "hsa_runtime:kernel_start_nm") and "Memset" not in r_event["name"]:
         list_hcc_kernels.append(r_event)
 
 if len(list_hip_launch_kernel) != len(list_hcc_kernels):
     print("Error number of hipLaunchKernel and kernels are different")
+    print(len(list_hip_launch_kernel), len(list_hcc_kernels))
+    input()
     exit(-1)
 
 kernel_index = 0
@@ -181,7 +183,7 @@ for r_event in collection.events:
         # corresponding TF operation, and set it in the tf_name field
         # again we need to skip Memset, because there are no corresponding
         # TF operation
-        if f == "tf_name" and "hccTracer:kernel2" in name and "Memset" not in r_event["name"]:
+        if f == "tf_name" and ("hccTracer:kernel2" in name or "hsa_runtime:kernel_" in name) and "Memset" not in r_event["name"]:
             # need to divide by 2, because we deal with start and end events
             # print(int(cnt_kernel/2), len(kernel_tfop), r_event["name"] )
             w_event.payload(f).value = kernel_tfop[int(cnt_kernel/2)][0]
