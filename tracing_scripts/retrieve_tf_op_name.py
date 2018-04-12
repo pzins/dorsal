@@ -32,7 +32,7 @@ end_regex = re.compile(end_event)
 # regex to collect tf op corresponding to a kernel launch command
 hip_kernel1_regex = re.compile("hipTracer:function_entry")
 hip_kernel2_regex = re.compile(".*hipLaunchKernel.*")
-hsa_runtime_regex = re.compile("hsa_runtime:aql_kernel_dispatch_packet_submitted")
+hsa_runtime_aql_regex = re.compile("hsa_runtime:aql_kernel_dispatch_packet_submitted")
 
 hcc_runtime_regex_1 = re.compile("hccTracer:kernel2_begin")
 hcc_runtime_regex_2 = re.compile("hccTracer:kernel_begin")
@@ -45,7 +45,8 @@ unique_id = "name"
 
 # list containing temporary State with only start event set, waiting for a
 # corresponding end event
-open_state = []
+# open_state = []
+open_state = None
 
 class State():
     def __init__(self):
@@ -77,38 +78,49 @@ for r_event in collection.events:
 
 
     # add a new kernel launch command
-    if (re.match(hip_kernel1_regex, name) and re.match(hip_kernel2_regex, r_event["name"])) or re.match(hsa_runtime_regex, name):
+    if (re.match(hip_kernel1_regex, name) and re.match(hip_kernel2_regex, r_event["name"])) or re.match(hsa_runtime_aql_regex, name):
+
         # if there is an active tf operation, we add it in the list. Otherwise, just add None
-        if len(open_state) > 0:
-            list_tf_op.append(open_state[-1])
+        # print(len(open_state))
+        # input()
+        if open_state != None:
+        # if len(open_state) > 0:
+            # list_tf_op.append(open_state[-1])
+            list_tf_op.append(open_state)
         else:
             list_tf_op.append(None)
 
     # begin event
     if re.match(begin_regex, name):
         s = State(r_event)
-        open_state.append(s)
+        # open_state.append(s)
+        open_state = s
 
     # end event
     if re.match(end_regex, name):
-        matching_index = -1
+        # matching_index = -1
         # find a waiting state
-        for i in range(len(open_state)):
-            if open_state[i].isMatchingEndEvent(r_event, unique_id):
-                open_state[i].setEndEvent(r_event)
-                open_state[i].setEndTimestamp(r_event.timestamp)
-                matching_index = i
-                break
-
+        # for i in range(len(open_state)):
+        #     if open_state[i].isMatchingEndEvent(r_event, unique_id):
+        #         open_state[i].setEndEvent(r_event)
+        #         open_state[i].setEndTimestamp(r_event.timestamp)
+        #         matching_index = i
+        #         break
+        if open_state.isMatchingEndEvent(r_event, unique_id):
+            open_state.setEndEvent(r_event)
+            open_state.setEndTimestamp(r_event.timestamp)
+        
         # if no waiting state correspond to an end event. Not possible, so
         # we have errors
-        if matching_index == -1:
-            print("Error no matching event, for this end")
-            exit(1)
+        # if matching_index == -1:
+            # print("Error no matching event, for this end")
+            # exit(1)
 
-        states.append(open_state[matching_index])
-        del open_state[matching_index]
-
+        # states.append(open_state[matching_index])
+        # del open_state[matching_index]
+        open_state = None
+# print(len(list_tf_op))
+print(len(list_tf_op))
 # rewrite the trace by changing the tf_name field
 print("Start writing the traces")
 
@@ -158,9 +170,10 @@ for r_event in collection.events:
             continue
 
         # if we have a kernel: change a field value (tf_name or name depending on the event) with the corresponding tf op
-        if (f == "tf_name" and (re.match(hcc_runtime_regex_1, name) or re.match(hsa_runtime_regex, name))) or \
-           (f == "name" and re.match(hsa_runtime_regex, name) and r_event["name"] == ""):
+        if (f == "tf_name" and (re.match(hcc_runtime_regex_1, name) or re.match(hsa_runtime_regex, name)) and "Memset" not in r_event["name"]) or \
+           (f == "name" and re.match(hsa_runtime_regex, name) and "Memset" not in r_event["name"]):# and r_event["name"] == ""):
             if list_tf_op[cnt_kernel] != None:
+                # print(list_tf_op[cnt_kernel].begin_event["name"])
                 w_event.payload(f).value = list_tf_op[cnt_kernel].begin_event["name"]
                 cnt_kernel += 1
                 continue
