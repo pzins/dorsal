@@ -123,6 +123,33 @@ TRACEPOINT_EVENT(
     )
 )
 
+
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    session_test_start,
+    TP_ARGS(
+        const char*, cat_arg,
+        const char*, name_arg
+    ),
+    TP_FIELDS(
+        ctf_string(cat, cat_arg)
+        ctf_string(name, name_arg)
+    )
+)
+TRACEPOINT_EVENT(
+    tensorflowTracer,
+    session_test_end,
+    TP_ARGS(
+        const char*, cat_arg,
+        const char*, name_arg
+    ),
+    TP_FIELDS(
+        ctf_string(cat, cat_arg)
+        ctf_string(name, name_arg)
+    )
+)
+
+
 TRACEPOINT_EVENT(
     tensorflowTracer,
     operation_start,
