@@ -220,6 +220,19 @@
 				</state>
 				<final id="end_thread"/>
 			</fsm>
+			
+			<fsm id="tgcall_stack7" multiple="true" initial="Wait_thread_start">
+				<state id="Wait_thread_start">				
+					<transition event="tensorflowTracer:rdv_send" target="loop" action="entering_thread:push_event_type"/>
+				</state>
+				<state id="loop">
+					<transition event="tensorflowTracer:rdv_send" cond="async_name" target="loop" action="push_event_type"/>
+					<transition event="tensorflowTracer:rdv_recv" cond="async_name:last_out" target="end_thread" action="pop_event_type"/>
+					<transition event="tensorflowTracer:rdv_recv" cond="async_name" target="loop" action="pop_event_type"/>
+				</state>
+				<final id="end_thread"/>
+			</fsm>
+			
 		</patternHandler>
 	</pattern>
 </callstack>

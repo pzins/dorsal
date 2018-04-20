@@ -137,6 +137,16 @@ event_classes['hipTracer:wait_end'].add_field(string_fd, 'cat')
 event_classes['hipTracer:wait_end'].add_field(string_fd, 'name')
 
 # grpcTracer
+event_classes['grpcTracer:EncodeRecvTensorResponseToByteBuffer'] = btw.EventClass('grpcTracer:EncodeRecvTensorResponseToByteBuffer')
+event_classes['grpcTracer:EncodeRecvTensorResponseToByteBuffer'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:EncodeRecvTensorResponseToByteBuffer'].add_field(string_fd, 'name')
+event_classes['grpcTracer:EncodeRecvTensorResponseToByteBuffer'].add_field(uint64_fd, 'size')
+event_classes['grpcTracer:EncodeTensorToByteBuffer'] = btw.EventClass('grpcTracer:EncodeTensorToByteBuffer')
+event_classes['grpcTracer:EncodeTensorToByteBuffer'].add_field(string_fd, 'cat')
+event_classes['grpcTracer:EncodeTensorToByteBuffer'].add_field(string_fd, 'name')
+event_classes['grpcTracer:EncodeTensorToByteBuffer'].add_field(uint64_fd, 'size')
+
+
 event_classes['grpcTracer:receive_request'] = btw.EventClass('grpcTracer:receive_request')
 event_classes['grpcTracer:receive_request'].add_field(string_fd, 'name')
 event_classes['grpcTracer:send_request'] = btw.EventClass('grpcTracer:send_request')
@@ -460,6 +470,13 @@ event_classes['tensorflowTracer:gpu_bfc_free_exit'].add_field(int32_fd, 'num_byt
 """
 
 # Tracepoints : start / end
+event_classes['tensorflowTracer:rdv_send'] = btw.EventClass('tensorflowTracer:rdv_send')
+event_classes['tensorflowTracer:rdv_send'].add_field(string_fd, 'cat')
+event_classes['tensorflowTracer:rdv_send'].add_field(string_fd, 'name')
+event_classes['tensorflowTracer:rdv_recv'] = btw.EventClass('tensorflowTracer:rdv_recv')
+event_classes['tensorflowTracer:rdv_recv'].add_field(string_fd, 'cat')
+event_classes['tensorflowTracer:rdv_recv'].add_field(string_fd, 'name')
+
 
 event_classes['tensorflowTracer:session_test_start'] = btw.EventClass('tensorflowTracer:session_test_start')
 event_classes['tensorflowTracer:session_test_start'].add_field(string_fd, 'cat')
