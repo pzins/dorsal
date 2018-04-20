@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+* Copyright (c) 2014 École Polytechnique de Montréal
+*
+* All rights reserved. This program and the accompanying materials are
+* made available under the terms of the Eclipse Public License v1.0 which
+* accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* 	Geneviève Bastien - Initial API and implementation
+*************************************************************************** -->
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
+
+	<xyView id="tensorflow.tensor_coding">
+		<head>
+			<analysis id="tensor_coding" />
+			<label value="Tensor Coding" />
+		</head>
+
+		<entry path="Allocations/*" displayType="absolute"> 
+			<display type="self" />
+		</entry>
+	</xyView>
+
+	<stateProvider id="tensor_coding" version="1">
+		<head>
+			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+			<label value="Tensor Coding" />
+		</head>
+
+		<!-- case 1 : exit_syscall : Fields: int64 ret -->
+		<eventHandler eventName="grpcTracer:EncodeRecvTensorResponseToByteBuffer">
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="constant" value="size" />
+				<stateValue type="eventField" value="size" increment="false" />
+			</stateChange>
+			
+		</eventHandler>
+		<eventHandler eventName="grpcTracer:prepare_response_tensor_end">
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="constant" value="size" />
+				<stateValue type="eventField" value="0" increment="false" />
+			</stateChange>
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="constant" value="size2" />
+				<stateValue type="eventField" value="0" increment="false" />
+			</stateChange>
+		</eventHandler>
+		<eventHandler eventName="grpcTracer:EncodeTensorToByteBuffer">
+			<stateChange>
+				<stateAttribute type="constant" value="Allocations" />
+				<stateAttribute type="constant" value="size2" />
+				<stateValue type="eventField" value="size" increment="false" />
+			</stateChange>
+		</eventHandler>
+		
+	</stateProvider>
+</tmfxml>
