@@ -1,16 +1,16 @@
 #undef TRACEPOINT_PROVIDER
-#define TRACEPOINT_PROVIDER hccTracer
+#define TRACEPOINT_PROVIDER hcTracer
 
 #undef TRACEPOINT_INCLUDE
-#define TRACEPOINT_INCLUDE "./hccTracer.h"
+#define TRACEPOINT_INCLUDE "./hcTracer.h"
 
-#if !defined(_hccTRACER_H) || defined(TRACEPOINT_HEADER_MULTI_READ)
-#define _hccTRACER_H
+#if !defined(_hcTracer_H) || defined(TRACEPOINT_HEADER_MULTI_READ)
+#define _hcTracer_H
 
 #include <lttng/tracepoint.h>
 
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     kernel_begin,
     TP_ARGS(
         const char*, cat_arg,
@@ -38,7 +38,7 @@ TRACEPOINT_EVENT(
     )
 )
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     kernel_end,
     TP_ARGS(
         const char*, cat_arg,
@@ -68,7 +68,7 @@ TRACEPOINT_EVENT(
 
 
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     async_memcpy_begin,
     TP_ARGS(
         const char*, cat_arg,
@@ -96,7 +96,7 @@ TRACEPOINT_EVENT(
     )
 )
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     async_memcpy_end,
     TP_ARGS(
         const char*, cat_arg,
@@ -125,7 +125,7 @@ TRACEPOINT_EVENT(
 )
 
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     async_memcpyslo_begin,
     TP_ARGS(
         const char*, cat_arg,
@@ -153,7 +153,7 @@ TRACEPOINT_EVENT(
     )
 )
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     async_memcpyslo_end,
     TP_ARGS(
         const char*, cat_arg,
@@ -183,7 +183,7 @@ TRACEPOINT_EVENT(
 
 
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     barrier_begin,
     TP_ARGS(
         const char*, cat_arg,
@@ -204,7 +204,7 @@ TRACEPOINT_EVENT(
 )
 
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     barrier_end,
     TP_ARGS(
         const char*, cat_arg,
@@ -225,7 +225,7 @@ TRACEPOINT_EVENT(
 )
 
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     unpinned_memory_engine_copy_entry,
     TP_ARGS(
         const char*, cat_arg,
@@ -239,7 +239,7 @@ TRACEPOINT_EVENT(
     )
 )
 TRACEPOINT_EVENT(
-    hccTracer,
+    hcTracer,
     unpinned_memory_engine_copy_exit,
     TP_ARGS(
         const char*, cat_arg,
@@ -255,7 +255,7 @@ TRACEPOINT_EVENT(
 
 
 TRACEPOINT_EVENT(
-	hccTracer,
+	hcTracer,
 	queue_stats,
 	TP_ARGS(
 		const char*, queue_id_arg,
@@ -270,7 +270,7 @@ TRACEPOINT_EVENT(
 
 // no more used, because profiling methods crash
 // TRACEPOINT_EVENT(
-// 	hccTracer,
+// 	hcTracer,
 // 	aql_packet_submitted,
 // 	TP_ARGS(
 // 		uint64_t, packet_id,
@@ -289,7 +289,7 @@ TRACEPOINT_EVENT(
 // 
 // 
 // TRACEPOINT_EVENT(
-// 	hccTracer,
+// 	hcTracer,
 // 	aql_kernel_dispatch_packet_submitted,
 // 	TP_ARGS(
 // 		uint64_t, packet_id,

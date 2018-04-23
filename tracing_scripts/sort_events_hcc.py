@@ -69,7 +69,7 @@ for r_event in collection.events:
         if r_event[f] == "hsa_init":
             init_time = event_time
 
-        # if hccTracer:kernel_* : fill the grid and groupworker arrays
+        # if hcTracer:kernel_* : fill the grid and groupworker arrays
         if f == "workgroup_size" or f == "grid_size":
             for i in range(3):
                 tmp = w_event.payload(f).field(i)
@@ -85,7 +85,7 @@ for r_event in collection.events:
         event_time = r_event["timestamp"] + init_time
 
 
-    if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
+    if "hcTracer:kernel" in name or "hcTracer:async" in name or "hcTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
         if save_barrier_time == 0:
             save_barrier_time = r_event["timestamp"]
@@ -153,7 +153,7 @@ with open("/home/pierre/hc_out", "r") as f:
 
 threadId = 181818
 for i in hc_kernels:
-    w_event = btw.Event(event_classes["hccTracer:kernel2_begin"])
+    w_event = btw.Event(event_classes["hcTracer:kernel2_begin"])
     w_event.payload("cat").value = "hcc_kernel"
     w_event.payload("name").value = i[0]
     w_event.payload("tf_name").value = ""
@@ -161,7 +161,7 @@ for i in hc_kernels:
     w_event.payload("timestamp").value = i[2]
     events[i[2]].append([w_event, threadId])
 
-    w_event = btw.Event(event_classes["hccTracer:kernel2_end"])
+    w_event = btw.Event(event_classes["hcTracer:kernel2_end"])
     w_event.payload("cat").value = "hcc_kernel"
     w_event.payload("name").value = i[0]
     w_event.payload("tf_name").value = ""
@@ -170,14 +170,14 @@ for i in hc_kernels:
     events[i[3]].append([w_event, threadId])
 
 for i in hc_barrier:
-    w_event = btw.Event(event_classes["hccTracer:barrier2_begin"])
+    w_event = btw.Event(event_classes["hcTracer:barrier2_begin"])
     w_event.payload("cat").value = "hcc_barrier"
     w_event.payload("name").value = i[0]
     w_event.payload("id").value = i[4]
     w_event.payload("timestamp").value = i[2]
     events[i[2]].append([w_event, threadId])
 
-    w_event = btw.Event(event_classes["hccTracer:barrier2_end"])
+    w_event = btw.Event(event_classes["hcTracer:barrier2_end"])
     w_event.payload("cat").value = "hcc_barrier"
     w_event.payload("name").value = i[0]
     w_event.payload("id").value = i[4]
@@ -186,11 +186,11 @@ for i in hc_barrier:
 
 for i in hc_copy:
     if i[0] == "copy":
-        w_event_begin = btw.Event(event_classes["hccTracer:async_memcpy2_begin"])
-        w_event_end = btw.Event(event_classes["hccTracer:async_memcpy2_end"])
+        w_event_begin = btw.Event(event_classes["hcTracer:async_memcpy2_begin"])
+        w_event_end = btw.Event(event_classes["hcTracer:async_memcpy2_end"])
     else:
-        w_event_begin = btw.Event(event_classes["hccTracer:async_memcpyslo2_begin"])
-        w_event_end = btw.Event(event_classes["hccTracer:async_memcpyslo2_end"])
+        w_event_begin = btw.Event(event_classes["hcTracer:async_memcpyslo2_begin"])
+        w_event_end = btw.Event(event_classes["hcTracer:async_memcpyslo2_end"])
 
     w_event_begin.payload("cat").value = "hcc_copy"
     w_event_begin.payload("name").value = i[1]

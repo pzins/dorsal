@@ -57,7 +57,7 @@ class State():
 # define the modules we want
 modules =   [
             Module("tensorflowTracer:session_start", "tensorflowTracer:session_end", "count"),
-            Module("hccTracer:kernel2_begin", "hccTracer:kernel_end", "name"),
+            Module("hcTracer:kernel2_begin", "hcTracer:kernel_end", "name"),
             Module("tensorflowTracer:operation_start", "tensorflowTracer:operation_end", "name")
             ]
 

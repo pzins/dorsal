@@ -3,52 +3,21 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 from fabric.context_managers import cd, env
 
-computer_1_ip = "192.168.1.3"
-computer_1_ip = "132.207.72.22"
-computer_2_ip = "192.168.1.5"
-computer_2_ip = "132.207.72.31"
-tf_program_name = "cnn_distributed"
-
-_HOSTS = [ computer_1_ip, computer_2_ip ] 
-env.hosts = computer_1_ip
-env.shell = "/usr/bin/fish -l -i -c"
-
-@task
-def startTracing():
-    run("sh ~/trace_tensorflow_grpc.sh")
+# example of command
+# fab main:cnn_distributed.py,132.207.72.22,132.207.72.31
 
 @task
 @parallel
-def runProgramTF():
-    path_to_tf_script = "/home/pierre/Dropbox/dev/distributed/in_model_parallelism/"
-    with cd(path_to_tf_script):
-        if env.host == computer_1_ip:
-            with settings(hide('warnings'), warn_only=True):
-                run("set -x HIP_PROFILE_API 2; set -x HCC_PROFILE 2; python3 " + tf_program_name + ".py w > /dev/null 2>&1")
-        else:
-            run("set -x HIP_PROFILE_API 2; set -x HCC_PROFILE 2; python3 " + tf_program_name + ".py m  > /dev/null 2>&1")
-            with settings(host_string=computer_2_ip):
-                run("kill -SIGKILL (ps -aux | grep " + tf_program_name + " | grep -v grep | awk '{print $2}')")
+def startTracing(tf_file, ip_m, ip_w):
+    if env.host == ip_m:
+        run("cd ~/dev/tensorflow-profiler/scripts/ ; bash grpc_master.sh -f " + tf_file + " -i " + ip_w)
+    if env.host == ip_w:
+        run("cd ~/dev/tensorflow-profiler/scripts/ ; bash grpc_worker.sh -f " + tf_file + " -i " + ip_m)
 
 @task
-@parallel
-def stopTracing():
-    if env.host == computer_2_ip:
-        run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
-        run("python3 ~/sort_events.py")
-        run("python3 ~/vtid.py")
-    elif env.host == computer_1_ip:
-        run("sudo lttng destroy; sudo chown -R pierre:pierre ~/lttng-traces/")
-        run("python3 ~/sort_events_second.py")
-        run("python3 ~/vtid_second.py")
-        run("scp -r ~/remote_traces " + computer_1_ip + ":~/")
-        run("scp -r ~/lttng-traces/(ls -t lttng-traces/ | head -n1) " + computer_1_ip + ":~/")
-
-@task
-def main():
+def main(tf_file="cnn_distributed.py", ip_m="132.207.72.22", ip_w="132.207.72.31"):
+    
+    _HOSTS = [ ip_m, ip_w ] 
     with settings(password="pierreol"):
-        results = execute(startTracing, hosts=_HOSTS)
-        results = execute(runProgramTF, hosts=_HOSTS)
-        results = execute(stopTracing, hosts=_HOSTS)
-
+        results = execute(startTracing, tf_file, ip_m, ip_w, hosts=_HOSTS)
 

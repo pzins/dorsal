@@ -5,7 +5,7 @@ sudo lttng track --kernel --pid=6629
 
 # sudo lttng enable-event --userspace "hsa_runtime:*" --channel=mychannel
 # sudo lttng enable-event --userspace "hsaTracer:*" --channel=mychannel
-sudo lttng enable-event --userspace "hccTracer:*" --channel=mychannel
+sudo lttng enable-event --userspace "hcTracer:*" --channel=mychannel
 sudo lttng enable-event --userspace "hipTracer:*" --channel=mychannel
 sudo lttng enable-event --userspace "tensorflowTracer:*" --channel=mychannel
 # sudo lttng enable-event --userspace "streamTracer:*" --channel=mychannel

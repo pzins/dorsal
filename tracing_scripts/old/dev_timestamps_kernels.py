@@ -31,7 +31,7 @@ for r_event in collection.events:
     name = r_event.name
 
     # get kernel start event
-    if "hccTracer:kernel_begin" in name:
+    if "hcTracer:kernel_begin" in name:
         # check if it's coherent
         if kernel_tmp_times != [0, 0]:
             print("error state")
@@ -40,7 +40,7 @@ for r_event in collection.events:
         kernel_tmp_times[0] = r_event["timestamp"] + clock_offset
 
     # get kernel end event
-    if "hccTracer:kernel_end" in name:
+    if "hcTracer:kernel_end" in name:
         # check if it's coherent
         if kernel_tmp_times[1] != 0:
             print("error state")

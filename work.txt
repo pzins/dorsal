@@ -219,7 +219,7 @@ Linux kernel : everything already exist with lttng and Tracecompass
 
 
 === FEATURES ===
-Tensorflow on ROCM      : tensorflowTracer, hsaTracer, hipTracer, hccTracer, streamTracer, grpcTracer, python tracing, hsa_runtime tracer, eigenTracer (not used) 
+Tensorflow on ROCM      : tensorflowTracer, hsaTracer, hipTracer, hcTracer, streamTracer, grpcTracer, python tracing, hsa_runtime tracer, eigenTracer (not used) 
                           perfcounters ok but limited, two possibilities
 
 Tensorflow with CUDA    : tensorflowTracer, cuptiTracer, streamTracer, python tracing, eigenTracer (not used)

@@ -34,8 +34,8 @@ hip_kernel1_regex = re.compile("hipTracer:function_entry")
 hip_kernel2_regex = re.compile(".*hipLaunchKernel.*")
 hsa_runtime_aql_regex = re.compile("hsa_runtime:aql_kernel_dispatch_packet_submitted")
 
-hcc_runtime_regex_1 = re.compile("hccTracer:kernel2_begin")
-hcc_runtime_regex_2 = re.compile("hccTracer:kernel_begin")
+hcc_runtime_regex_1 = re.compile("hcTracer:kernel2_begin")
+hcc_runtime_regex_2 = re.compile("hcTracer:kernel_begin")
 hsa_runtime_regex = re.compile("hsa_runtime:kernel_start_nm")
 
 
@@ -162,7 +162,7 @@ for r_event in collection.events:
     w_event = btw.Event(event_classes[name])
 
     for f in fields:
-        # if hccTracer:kernel_* : fill the grid and groupworker arrays
+        # if hcTracer:kernel_* : fill the grid and groupworker arrays
         if f == "workgroup_size" or f == "grid_size":
             for i in range(3):
                 tmp = w_event.payload(f).field(i)

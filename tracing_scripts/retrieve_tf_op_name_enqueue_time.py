@@ -139,7 +139,7 @@ events = defaultdict(list)
 # We have a list with all the enqueue call and the corresponding TF operation
 # to do the link between TF operation and kernel execution, just use the index
 # of the kernel_tfop list and the counter cnt_kernel when iterating over the 
-# hccTracer:kernel events
+# hcTracer:kernel events
 cnt_kernel = 0
 
 for r_event in collection.events:
@@ -151,18 +151,18 @@ for r_event in collection.events:
     w_event = btw.Event(event_classes[name])
 
     for f in fields:
-        # if hccTracer:kernel_* : fill the grid and groupworker arrays
+        # if hcTracer:kernel_* : fill the grid and groupworker arrays
         if f == "workgroup_size" or f == "grid_size":
             for i in range(3):
                 tmp = w_event.payload(f).field(i)
                 tmp.value = r_event[f][i]
             continue
         
-        # if we have a hccTracer:kernel_ event, get the name of the 
+        # if we have a hcTracer:kernel_ event, get the name of the 
         # corresponding TF operation, and set it in the tf_name field
         # again we need to skip Memset, because there are no corresponding 
         # TF operation
-        if f == "tf_name" and "hccTracer:kernel" in name and "Memset" not in r_event["name"]:
+        if f == "tf_name" and "hcTracer:kernel" in name and "Memset" not in r_event["name"]:
             # need to divide by 2, because we deal with start and end events
             # print(int(cnt_kernel/2), len(kernel_tfop), r_event["name"] )
             w_event.payload(f).value = kernel_tfop[int(cnt_kernel/2)][0]

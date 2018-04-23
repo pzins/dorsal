@@ -62,7 +62,7 @@ for r_event in collection.events:
 
     for f in fields:
         # print(name, f, r_event[f])
-        # if hccTracer:kernel_* : fill the grid and groupworker arrays
+        # if hcTracer:kernel_* : fill the grid and groupworker arrays
         if f == "workgroup_size" or f == "grid_size":
             for i in range(3):
                 tmp = w_event.payload(f).field(i)
@@ -71,7 +71,7 @@ for r_event in collection.events:
             
         w_event.payload(f).value = r_event[f]
 
-    if "hccTracer:kernel" in name or "hccTracer:async" in name or "hccTracer:barrier" in name:
+    if "hcTracer:kernel" in name or "hcTracer:async" in name or "hcTracer:barrier" in name:
         event_time = r_event["timestamp"] + clock_offset
         if save_barrier_time == 0:
             save_barrier_time = r_event["timestamp"]

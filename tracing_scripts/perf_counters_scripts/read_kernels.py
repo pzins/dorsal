@@ -24,7 +24,7 @@ clock_offset = 1519939145097366944 # first computer
 # save timestamp and name of all kernels
 for r_event in collection.events:
     name = r_event.name
-    if "hccTracer:kernel_begin" in name:
+    if "hcTracer:kernel_begin" in name:
         tmp = str(r_event["timestamp"]+  clock_offset) + "|" + r_event["name"]
         ctf_traces.append(tmp)
 

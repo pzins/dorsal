@@ -186,10 +186,10 @@
 					<!-- <transition event="tensorflowTracer:operation_end" cond="thread_thread:last_out" target="end_thread" action="push_event_type"/> -->
 
 					<!-- 
-					<transition event="hccTracer:*begin" target="loop" action="entry" />
-					<transition event="hccTracer:*end" target="loop" action="exit" />
-					<transition event="hccTracer:*entry" target="loop" action="entry" />
-					<transition event="hccTracer:*exit" target="loop" action="exit" />
+					<transition event="hcTracer:*begin" target="loop" action="entry" />
+					<transition event="hcTracer:*end" target="loop" action="exit" />
+					<transition event="hcTracer:*entry" target="loop" action="entry" />
+					<transition event="hcTracer:*exit" target="loop" action="exit" />
 					
 					<transition event="eigenTracer:schedule_entry" target="loop" action="entry" />
 					<transition event="eigenTracer:schedule_exit" target="loop" action="exit" />

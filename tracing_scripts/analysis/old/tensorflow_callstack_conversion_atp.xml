@@ -70,8 +70,8 @@
 					<transition event="tensorflowTracer:gpu_device_compute_exit" target="loop" action="exit" />
 					<transition event="hipTracer:begin" target="loop" action="entry" />
 					<transition event="hipTracer:end" target="loop" action="exit" />
-					<transition event="hccTracer:*begin" target="loop" action="entry" />
-					<transition event="hccTracer:*end" target="loop" action="exit" />
+					<transition event="hcTracer:*begin" target="loop" action="entry" />
+					<transition event="hcTracer:*end" target="loop" action="exit" />
 
 				</state>
 			</fsm>

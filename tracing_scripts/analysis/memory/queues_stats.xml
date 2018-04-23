@@ -31,7 +31,7 @@
 		</head>
 
 		<!-- case 1 : exit_syscall : Fields: int64 ret -->
-		<eventHandler eventName="hccTracer:queue_stats">
+		<eventHandler eventName="hcTracer:queue_stats">
 			<stateChange>
 				<stateAttribute type="constant" value="Allocations" />
 				<stateAttribute type="constant" value="size" />
