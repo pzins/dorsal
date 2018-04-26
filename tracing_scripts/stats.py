@@ -16,7 +16,7 @@ ctf_traces = []
 
 # Add the input trace to the collection
 collection = btr.TraceCollection()
-directory = "/home/pierre/out_traces"
+directory = "/home/pierre/dev/tensorflow-profiler/results"
 collection.add_trace(directory, 'ctf')
 clock_offset = 1519157918746548550 # first computer
 
