@@ -3,17 +3,17 @@
 	xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
 
 <callstack id="org.eclipse.tracecompass.incubator.example.tracecompass.grouped.threads">
-    <callstackGroup name="Tensorflow Callstack">
+    <callstackGroup name="Multiple">
         <!-- <level path="call_stack/*" /> -->
 		<level path="Views/*" />
 		<level path="Threads/*"/>
 		<!-- <thread cpu="cpu" /> -->
 		<!-- <thread level="0"/> -->
     </callstackGroup>
-	<pattern version="0" id="tensorflow_cs_pattern">
+	<pattern version="0" id="tensorflow_multiple_cs_pattern">
 		<head>
 			<traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
-			<label value="Tensorflow" />
+			<label value="tensorflow_multiple" />
 		</head>
 
 		<location id="CurrentThread">
@@ -55,7 +55,7 @@
 					</condition>
 				</if>
 			</test>
-			
+
 			<test id="last_out">
 				<if>
 					<condition>
@@ -105,8 +105,8 @@
 						<stateValue type="eventField" value="name" stack="pop"/>
 				</stateChange>
 			</action>
-			
-			
+
+
 			<fsm id="tgcall_stack" multiple="true" initial="Wait_thread_start">
 				<state id="Wait_thread_start">
 					<transition event="*_entry" target="loop" action="entering_thread:push_event_type"/>
